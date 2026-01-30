@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7316cce01a4180346971b91e02087cca, type: 3}
   m_Name: DefaullrGeometry
   m_EditorClassIdentifier: 
-  roomGeometry: []
+  roomGeometry:
+  - {fileID: 6030234515085630287, guid: bb9e0d4753ae04a45986e28c7e169b4d, type: 3}
   horizontalWallGeometry:
   - {fileID: 2206248151943894543, guid: 78736c2bd180c7540a2948e6fcb7baad, type: 3}
   verticalWallGeometry:
