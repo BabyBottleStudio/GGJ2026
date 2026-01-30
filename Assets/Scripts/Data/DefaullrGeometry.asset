@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7316cce01a4180346971b91e02087cca, type: 3}
+  m_Name: DefaullrGeometry
+  m_EditorClassIdentifier: 
+  roomGeometry: []
+  horizontalWallGeometry:
+  - {fileID: 2206248151943894543, guid: 78736c2bd180c7540a2948e6fcb7baad, type: 3}
+  verticalWallGeometry:
+  - {fileID: 8485956091425292835, guid: b8ee7af9da185b44cb264f3da46ba180, type: 3}
+  horizontalPassageGeometry:
+  - {fileID: 9094879024495348963, guid: 3d07d4fb052ea9c4f90f1e3542bef3e6, type: 3}
+  verticalPassageGeometry:
+  - {fileID: 1273913706596426529, guid: 1b2194012c562a2438bb70de44edc2fe, type: 3}
+  pillarGeometry:
+  - {fileID: 1755735052439900366, guid: f36c37a57bf490d4ea3172fb617047b1, type: 3}
+  exitKeyGeometry:
+  - {fileID: 8487786355784178576, guid: b6a0f61e109728e40927f92acda5f607, type: 3}
+  pickupGeometry:
+  - {fileID: 7399236587531123679, guid: e038c1eb2b8a7234d9cef99fd28f43b5, type: 3}
