@@ -10,12 +10,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _input;
 
     CharacterController _characterController;
-    [SerializeField] float speed;
+    [SerializeField] float _movcementSpeed;
 
     private Vector3 _direction;
 
     [SerializeField] private float smoothTime = 0.05f;
     private float currentVelocity;
+
+    private const float _gravity = -9.81f;
+    [SerializeField] private float gravityMultiplier = 3f;
+    float _velocity;
 
 
     // Start is called before the first frame update
@@ -27,6 +31,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ApplyRotation();
+
+        ApplyMovement();
+        ApllyGravity();
+    }
+
+    private void ApplyMovement()
+    {
+        _characterController.Move(_direction * _movcementSpeed * Time.deltaTime);
+    }
+
+    private void ApplyRotation()
+    {
         if (_input.sqrMagnitude == 0)
             return;
         ////direction = new Vector3 ()
@@ -34,9 +51,21 @@ public class PlayerMovement : MonoBehaviour
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
 
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        _characterController.Move(_direction * speed * Time.deltaTime);
     }
 
+
+    private void ApllyGravity()
+    {
+        if (_characterController.isGrounded && _velocity < 0f)
+        {
+            _velocity = -1f;
+        }
+        else
+        {
+            _velocity += _gravity * gravityMultiplier * Time.deltaTime;
+        }
+        _direction.y = _velocity;
+    }
     public void Movement(InputAction.CallbackContext context)
     {
         _input = context.ReadValue<Vector2>();
