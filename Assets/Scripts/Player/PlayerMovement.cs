@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,10 +7,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    public Animator playerAnimation;
     private Vector2 _input;
 
     CharacterController _characterController;
-    [SerializeField] float _movcementSpeed;
+    [SerializeField] float _movementSpeed;
 
     private Vector3 _direction;
 
@@ -35,11 +36,12 @@ public class PlayerMovement : MonoBehaviour
 
         ApplyMovement();
         ApllyGravity();
+        ApplyAnimationMultiplier();
     }
 
     private void ApplyMovement()
     {
-        _characterController.Move(_direction * _movcementSpeed * Time.deltaTime);
+        _characterController.Move(_direction * _movementSpeed * Time.deltaTime);
     }
 
     private void ApplyRotation()
@@ -71,5 +73,28 @@ public class PlayerMovement : MonoBehaviour
         _input = context.ReadValue<Vector2>();
 
         _direction = new Vector3(_input.x, 0f, _input.y);
+    }
+
+
+    private void ApplyAnimationMultiplier()
+    {
+        // 1. Definišemo željenu brzinu (podrazumevano 1f, puna brzina)
+        float targetMultiplier = 1f;
+
+        // 2. Proveravamo da li se karakter trenutno kreće
+        // Koristimo _input.sqrMagnitude (kvadrat magnitude) jer je performantnije od magnitude
+        // i proveravamo da li je veće od nule (tj. da li ima inputa)
+        if (_input.sqrMagnitude == 0)
+        {
+            // Kada je idle (nema inputa), postavljamo usporenu vrednost (0.2f)
+            targetMultiplier = 0.2f;
+        }
+
+        // 3. Šaljemo izračunatu brzinu u Animator Controller
+        // Moras imati Float parametar u Animatoru koji se zove TACNO "AnimSpeedMultiplier"
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetFloat("AnimSpeedMultiplier", targetMultiplier);
+        }
     }
 }

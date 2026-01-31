@@ -189,6 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9aa26814617eb4bbc7f887886ce88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &158923456 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7752406221329944724, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
+  m_PrefabInstance: {fileID: 697634376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &175360340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1160,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7003575994717409607, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
+      propertyPath: _movementSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003575994717409607, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
+      propertyPath: playerAnimation
+      value: 
+      objectReference: {fileID: 158923456}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
