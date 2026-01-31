@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 3516938424457915455}
   - component: {fileID: 4452721495575350851}
   - component: {fileID: 4779889800973627211}
+  - component: {fileID: 6579462773915905139}
   m_Layer: 0
   m_Name: passage_Horizontal
   m_TagString: Untagged
@@ -413,6 +414,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 4, y: 0, z: 0}
+--- !u!65 &6579462773915905139
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094879024495348963}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 1, z: 1}
+  m_Center: {x: 2.5, y: -0.5, z: 0}
 --- !u!1001 &1896056478675072438
 PrefabInstance:
   m_ObjectHideFlags: 0
