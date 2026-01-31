@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravityMultiplier = 3f;
     float _velocity;
 
+    public ParticleSystem dustParticles;
+
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +90,15 @@ public class PlayerMovement : MonoBehaviour
         {
             // Kada je idle (nema inputa), postavljamo usporenu vrednost (0.2f)
             targetMultiplier = 0.2f;
+
+            if (dustParticles.isPlaying)
+                dustParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        }
+        else
+        {
+            if (!dustParticles.isPlaying)
+                dustParticles.Play();
+            
         }
 
         // 3. Šaljemo izračunatu brzinu u Animator Controller

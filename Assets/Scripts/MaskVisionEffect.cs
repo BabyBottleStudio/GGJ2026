@@ -4,27 +4,35 @@ using UnityEngine;
 
 public class MaskVisionEffect : MonoBehaviour
 {
-    Camera camera;
+    Camera mainCamera;
     public LayerMask ghostLayer;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main;
-        camera.cullingMask &= ~ghostLayer;
+        mainCamera = Camera.main;
+        mainCamera.cullingMask &= ~ghostLayer;
     }
 
     private void OnEnable()
     {
-        EventRepository.OnActionKeyPressed += ToggleGhostVision; // ili subskrajbovati kasnije
+        EventRepository.OnKeyCollected += SubscribeToEvent;
     }
 
     private void OnDisable()
     {
-        EventRepository.OnActionKeyPressed += ToggleGhostVision;
+        EventRepository.OnActionKeyPressed -= ToggleGhostVision;
         
     }
     // Update is called once per frame
+
+
+    void SubscribeToEvent(object sender, PickupCollectedEventArgs e)
+    {
+        EventRepository.OnActionKeyPressed += ToggleGhostVision;
+        EventRepository.OnKeyCollected -= SubscribeToEvent;
+
+    }
 
 
     void ToggleGhostVision(object sender, ActionPressedEventArgs e)
@@ -33,13 +41,13 @@ public class MaskVisionEffect : MonoBehaviour
         {
             // Kada je maska UKLJUČENA:
             // Uključi "Ghosts" layer u Culling Mask-u kamere (OR operacija)
-            camera.cullingMask |= ghostLayer;
+            mainCamera.cullingMask |= ghostLayer;
         }
         else
         {
             // Kada je maska ISKLJUČENA:
             // Isključi "Ghosts" layer iz Culling Mask-a kamere (AND NOT operacija)
-            camera.cullingMask &= ~ghostLayer;
+            mainCamera.cullingMask &= ~ghostLayer;
         }
     }
 
