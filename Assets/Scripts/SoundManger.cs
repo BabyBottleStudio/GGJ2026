@@ -7,12 +7,14 @@ public class SoundManger : MonoBehaviour
 {
     public Pickup coinData;
     public Pickup keyData;
+    public PlayerData playerData;
 
-    AudioSource audioSourceOne;
+    public AudioSource audioSourceOne;
+    public AudioSource audioSourceTwo;
 
     private void Start()
     {
-        audioSourceOne = this.GetComponent<AudioSource>();
+        //audioSourceOne = this.GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -21,6 +23,8 @@ public class SoundManger : MonoBehaviour
         // suskrajbuj se na eventove
         EventRepository.OnPickupCollected += CoinPickedUp;
         EventRepository.OnKeyCollected += KeyPickedUp;
+        //EventRepository.OnActionKeyPressed += MaskSwap; // registrovan je dole u metodi
+
     }
 
     private void OnDisable()
@@ -28,6 +32,7 @@ public class SoundManger : MonoBehaviour
         // unsuscribe
         EventRepository.OnPickupCollected -= CoinPickedUp;
         EventRepository.OnKeyCollected -= KeyPickedUp;
+        EventRepository.OnActionKeyPressed -= MaskSwap;
     }
 
     private void CoinPickedUp(object sender, PickupCollectedEventArgs e)
@@ -54,5 +59,12 @@ public class SoundManger : MonoBehaviour
         // odsviraj zvuk
         audioSourceOne.PlayOneShot(keyData.onPickedSFX);
 
+        EventRepository.OnActionKeyPressed += MaskSwap;
     }
+
+    void MaskSwap(object sender, ActionPressedEventArgs e)
+    {
+        audioSourceTwo.PlayOneShot(playerData.maskSwapSound);
+    }
+
 }

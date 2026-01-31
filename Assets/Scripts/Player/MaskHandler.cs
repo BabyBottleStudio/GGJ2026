@@ -12,7 +12,7 @@ public class MaskHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        isMaskOn = false;
+        isMaskOn = true; // ovo je opasno ostaviti ovako, ali je bagovala prva upotreba maske
         EventRepository.OnKeyCollected += SubscribeToTheEvent;
 
        // event 
@@ -35,7 +35,7 @@ public class MaskHandler : MonoBehaviour
 
     void ShowHideMask(object sender, ActionPressedEventArgs e)
     {
-        
+        isMaskOn = e.Value;
         maskGeometry.SetActive(isMaskOn);
     }
 

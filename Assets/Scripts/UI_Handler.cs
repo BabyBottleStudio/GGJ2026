@@ -16,9 +16,15 @@ public class UI_Handler : MonoBehaviour
 
     public GameObject[] arrowsIcons;
 
+    public GameObject gameOverCanvas;
+
+    //CanvasGroup gameOverCanvasGroup;
+
     private void Awake()
     {
         ChangeStateMaskUI(false);
+        gameOverCanvas.SetActive(false);
+        //gameOverCanvasGroup = gameOverCanvas.GetComponent<CanvasGroup>();
     }
 
 
@@ -28,12 +34,14 @@ public class UI_Handler : MonoBehaviour
     {
         EventRepository.OnPickupCollected += UpdateScore;
         EventRepository.OnKeyCollected += ActivateMaskUI;
+        EventRepository.OnLevelFinished += ActivateLevelCompleteCanvas;
     }
 
     private void OnDisable()
     {
         EventRepository.OnPickupCollected -= UpdateScore;
         EventRepository.OnActionKeyPressed -= ChangePlayerImage;
+        EventRepository.OnLevelFinished -= ActivateLevelCompleteCanvas;
     }
 
     private void UpdateScore(object sender, PickupCollectedEventArgs e)
@@ -71,6 +79,11 @@ public class UI_Handler : MonoBehaviour
             playerImage.sprite = playerData.playerIcon;
 
         }
+    }
+
+    void ActivateLevelCompleteCanvas()
+    {
+        gameOverCanvas.SetActive(true);
     }
 
 

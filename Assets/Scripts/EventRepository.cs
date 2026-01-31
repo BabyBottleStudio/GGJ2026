@@ -33,6 +33,7 @@ public static class EventRepository
 
     public static event EventHandler<ActionPressedEventArgs> OnActionKeyPressed;
 
+    public static Action OnLevelFinished;
 
     //public static Action OnKeyCollected;
 
@@ -57,5 +58,8 @@ public static class EventRepository
         OnActionKeyPressed?.Invoke(isMaskOn, new ActionPressedEventArgs(isMaskOn));
     }
 
-  
+  public static void InvokeOnLevelFinished()
+    {
+        OnLevelFinished?.Invoke();
+    }
 }

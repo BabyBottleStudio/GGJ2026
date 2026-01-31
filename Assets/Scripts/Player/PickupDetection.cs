@@ -15,6 +15,12 @@ public class PickupDetection : MonoBehaviour
         {
             EventRepository.InvokeOnKeyCollected(0, other.gameObject);
         }
+
+        if (other.CompareTag("Exit"))
+        {
+            Debug.Log("Level sucsess");
+            EventRepository.InvokeOnLevelFinished();
+        }
     }
 
 
