@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4853313541096137458}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3786333054459468649}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,9 +175,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9170933459180346541}
+  - component: {fileID: 3186713054934598675}
   m_Layer: 0
   m_Name: Anim
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,9 +191,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2398836545376553466}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.4663876, w: 0.88458055}
-  m_LocalPosition: {x: 0, y: 0.1414, z: 0}
-  m_LocalScale: {x: 2.2816, y: 2.2816, z: 2.2816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6660506787601196470}
@@ -202,7 +203,28 @@ Transform:
   - {fileID: 8435258394101600211}
   - {fileID: 7831872603642275319}
   m_Father: {fileID: 2467144808514196448}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 55.6}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3186713054934598675
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2398836545376553466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dac5cee859fabac44b3923cd7d97c725, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2479968191226489840
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +238,7 @@ GameObject:
   - component: {fileID: 7728876562758321828}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -299,7 +321,7 @@ GameObject:
   - component: {fileID: 6828574188165956941}
   m_Layer: 0
   m_Name: Cube (5)
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -382,7 +404,7 @@ GameObject:
   - component: {fileID: 1683987021476204430}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -465,7 +487,7 @@ GameObject:
   - component: {fileID: 7467843931373449111}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,7 +569,7 @@ GameObject:
   - component: {fileID: 6953496436344635246}
   m_Layer: 0
   m_Name: ExitKey
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,7 +605,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

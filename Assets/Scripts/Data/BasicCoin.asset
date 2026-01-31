@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601fe4faa84edfd4aab7a1dfbd6657a3, type: 3}
+  m_Name: BasicCoin
+  m_EditorClassIdentifier: 
+  geometry: {fileID: 7399236587531123679, guid: e038c1eb2b8a7234d9cef99fd28f43b5, type: 3}
+  onPickedVFX: {fileID: 6983523269558356349, guid: b3aba48aaaca283498dcc201daf11474, type: 3}
+  onPickedSFX: {fileID: 8300000, guid: 69583ef747bec5a47bf78c25801554d4, type: 3}
+  value: 1

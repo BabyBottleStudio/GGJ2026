@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 1165969602202941324}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35580254, y: 0.14737827, z: 0.27728996, w: 0.88022417}
-  m_LocalPosition: {x: 0, y: 0.251, z: 0}
-  m_LocalScale: {x: 0.43240502, y: 0.43240502, z: 0.43240497}
+  m_LocalPosition: {x: 0, y: 0.211, z: 0}
+  m_LocalScale: {x: 0.1505625, y: 0.1505625, z: 0.1505625}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3812815496323705311}
@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3812815496323705311}
+  - component: {fileID: 2630403514693389386}
   m_Layer: 0
   m_Name: Anim
   m_TagString: Untagged
@@ -108,13 +109,34 @@ Transform:
   m_GameObject: {fileID: 3374117968050172710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1414, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 873095879053584414}
   m_Father: {fileID: 4484974425305467452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2630403514693389386
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3374117968050172710}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dac5cee859fabac44b3923cd7d97c725, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7399236587531123679
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,10 +146,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4484974425305467452}
-  - component: {fileID: 3119734720462439367}
+  - component: {fileID: 8845723744674654578}
   m_Layer: 0
   m_Name: Coin_Pickup
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,8 +170,8 @@ Transform:
   - {fileID: 3812815496323705311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3119734720462439367
-BoxCollider:
+--- !u!136 &8845723744674654578
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -163,9 +185,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.25, y: 0.25, z: 0.25}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.19
+  m_Height: 0.34
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.21, z: 0}
