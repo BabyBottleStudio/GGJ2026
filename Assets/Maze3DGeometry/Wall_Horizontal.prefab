@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1843145806730720725}
   - component: {fileID: 8461253499799724958}
   - component: {fileID: 4819354558043839803}
-  - component: {fileID: 2949671265983618035}
   m_Layer: 0
   m_Name: Cube (10)
   m_TagString: Untagged
@@ -85,27 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2949671265983618035
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206609228208748793}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2206248151943894543
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +140,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 4, y: 3, z: 1}
-  m_Center: {x: 1.5, y: 0.5, z: 0}
+  m_Center: {x: 2.5, y: 0.5, z: 0}
 --- !u!1 &2953150880739316544
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +152,6 @@ GameObject:
   - component: {fileID: 7324852213325678867}
   - component: {fileID: 762435329952311205}
   - component: {fileID: 4840141447796105255}
-  - component: {fileID: 361554626991583694}
   m_Layer: 0
   m_Name: Cube (9)
   m_TagString: Untagged
@@ -248,27 +225,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &361554626991583694
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2953150880739316544}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7885101699256252342
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +236,6 @@ GameObject:
   - component: {fileID: 5209026636028750241}
   - component: {fileID: 8932855698344606434}
   - component: {fileID: 8108012979945835208}
-  - component: {fileID: 1970862842999201971}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -354,27 +309,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1970862842999201971
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7885101699256252342}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9013143563281146032
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +320,6 @@ GameObject:
   - component: {fileID: 781477814094276315}
   - component: {fileID: 2432605164869554218}
   - component: {fileID: 192392218069744579}
-  - component: {fileID: 4910580539244576661}
   m_Layer: 0
   m_Name: Cube (8)
   m_TagString: Untagged
@@ -460,27 +393,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4910580539244576661
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9013143563281146032}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &109057583220068213
 PrefabInstance:
   m_ObjectHideFlags: 0

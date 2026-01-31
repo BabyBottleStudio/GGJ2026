@@ -21,6 +21,8 @@ public class MazeGenerator
         deadEnds = new HashSet<(int row, int col)>();
         //rand = new Random();
 
+        this.inputSize = inputSize;
+
         if (inputSize < 4)
         {
             this.inputSize = 4;
@@ -30,7 +32,7 @@ public class MazeGenerator
             this.inputSize = inputSize;
         }
 
-        realSize = inputSize * 2 - 1;
+        this.realSize = inputSize * 2 - 1;
         this.Maze = new char[realSize, realSize];
 
         InitializeMazeData();
@@ -75,13 +77,20 @@ public class MazeGenerator
                 this.Maze[keyCoords.row, keyCoords.col] = 'K';
             }
 
-            foreach (var coord in deadEnds)
-            {
-                if (this.Maze[coord.row, coord.col] == 'E' || this.Maze[coord.row, coord.col] == 'K' || this.Maze[coord.row, coord.col] == 'P')
-                {
-                    deadEnds.Remove(coord);
-                }
-            }
+            //foreach (var coord in deadEnds)
+            //{
+            //    if (this.Maze[coord.row, coord.col] == 'E' || this.Maze[coord.row, coord.col] == 'K' || this.Maze[coord.row, coord.col] == 'P')
+            //    {
+            //        deadEnds.Remove(coord);
+            //    }
+            //}
+            deadEnds = deadEnds
+                        .Where(coord =>
+                            this.Maze[coord.row, coord.col] != 'E' &&
+                            this.Maze[coord.row, coord.col] != 'K' &&
+                            this.Maze[coord.row, coord.col] != 'P')
+                        .ToHashSet();
+
 
         }
     }

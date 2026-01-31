@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 [CreateAssetMenu]
-public class Level3DGemetry : ScriptableObject
+public class LevelGemetry : ScriptableObject
 {
     [Header("Maze 3D Geometry")]
     [SerializeField] private List<GameObject> roomGeometry;
@@ -20,6 +20,10 @@ public class Level3DGemetry : ScriptableObject
     [SerializeField] private List<GameObject> exitKeyGeometry;
     [Space(10)]
     [SerializeField] private List<GameObject> pickupGeometry;
+    [Space(10)]
+    [SerializeField] private List<GameObject> firstRoomGeometry;
+    [SerializeField] private List<GameObject> exitRoomGeometry;
+
 
 
 
@@ -36,68 +40,84 @@ public class Level3DGemetry : ScriptableObject
                     return roomGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
-                
 
+            case "firstRoom":
+                if (firstRoomGeometry.Count == 1)
+                    return firstRoomGeometry.FirstOrDefault();
+
+                if (firstRoomGeometry.Count > 1)
+                    return firstRoomGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
+
+                return null;
+
+            case "exitRoom":
+                if (exitRoomGeometry.Count == 1)
+                    return exitRoomGeometry.FirstOrDefault();
+
+                if (exitRoomGeometry.Count > 1)
+                    return exitRoomGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
+
+                return null;
             case "horizontalWall":
-                if (roomGeometry.Count == 1)
+                if (horizontalWallGeometry.Count == 1)
                     return horizontalWallGeometry.FirstOrDefault();
 
-                if (roomGeometry.Count > 1)
+                if (horizontalWallGeometry.Count > 1)
                     return horizontalWallGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
 
             case "verticalWall":
-                if (roomGeometry.Count == 1)
+                if (verticalWallGeometry.Count == 1)
                     return verticalWallGeometry.FirstOrDefault();
 
-                if (roomGeometry.Count > 1)
+                if (verticalWallGeometry.Count > 1)
                     return verticalWallGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
                 
             case "verticalPassage":
-                if (roomGeometry.Count == 1)
+                if (verticalPassageGeometry.Count == 1)
                     return verticalPassageGeometry.FirstOrDefault();
 
-                if (roomGeometry.Count > 1)
+                if (verticalPassageGeometry.Count > 1)
                     return verticalPassageGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
 
             case "horizontalPassage":
 
-                if (roomGeometry.Count == 1)
+                if (horizontalPassageGeometry.Count == 1)
                     return horizontalPassageGeometry.FirstOrDefault();
 
-                if (roomGeometry.Count > 1)
+                if (horizontalPassageGeometry.Count > 1)
                     return horizontalPassageGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
 
             case "pillar":
-                if (roomGeometry.Count == 1)
+                if (pillarGeometry.Count == 1)
                     return pillarGeometry.FirstOrDefault();
 
-                if (roomGeometry.Count > 1)
+                if (pillarGeometry.Count > 1)
                     return pillarGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
 
             case "exitKey":
-                if (roomGeometry.Count == 1)
+                if (exitKeyGeometry.Count == 1)
                     return exitKeyGeometry.FirstOrDefault();
 
-                if (roomGeometry.Count > 1)
+                if (exitKeyGeometry.Count > 1)
                     return exitKeyGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
 
             case "pickup":
-                if (roomGeometry.Count == 1)
+                if (pickupGeometry.Count == 1)
                     return pickupGeometry.FirstOrDefault();
 
-                if (roomGeometry.Count > 1)
+                if (pickupGeometry.Count > 1)
                     return pickupGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;

@@ -28,3 +28,7 @@ MonoBehaviour:
   - {fileID: 8487786355784178576, guid: b6a0f61e109728e40927f92acda5f607, type: 3}
   pickupGeometry:
   - {fileID: 7399236587531123679, guid: e038c1eb2b8a7234d9cef99fd28f43b5, type: 3}
+  firstRoomGeometry:
+  - {fileID: 6030234515085630287, guid: 83ada885fcd7d90489bdc38c2ae6ed70, type: 3}
+  exitRoomGeometry:
+  - {fileID: 6030234515085630287, guid: fcd21a7c4a70d214d83d4604078c18fd, type: 3}
