@@ -37,6 +37,8 @@ MonoBehaviour:
   - {fileID: 1755735052439900366, guid: f36c37a57bf490d4ea3172fb617047b1, type: 3}
   exitKeyGeometry:
   - {fileID: 8487786355784178576, guid: b6a0f61e109728e40927f92acda5f607, type: 3}
+  exitKeyStandGeometry:
+  - {fileID: 5787448618938558663, guid: 972f797340fc5d04f9a042e73f5faf2b, type: 3}
   pickupGeometry:
   - {fileID: 6030234515085630287, guid: 9d27d27fa0589db45b18470e2b07994a, type: 3}
   firstRoomGeometry:

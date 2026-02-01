@@ -112,6 +112,9 @@ public class LevelAssembly : MonoBehaviour
                 {
                     Instantiate(levelGeometry.GetRandomElement("room"), pos, Quaternion.identity);
                     Instantiate(levelGeometry.GetRandomElement("exitKey"), pos + new Vector3(2.5f, 0f, -2.5f), Quaternion.identity);
+                    
+                    Instantiate(levelGeometry.GetRandomElement("exitKeyStand"), pos + new Vector3(2.5f, 0f, -2.5f), Quaternion.identity);
+
 
                 }
                 else if (maze[i, j] == 'E')

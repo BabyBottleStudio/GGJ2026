@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   geometry: {fileID: 8487786355784178576, guid: b6a0f61e109728e40927f92acda5f607, type: 3}
   onPickedVFX: {fileID: 6983523269558356349, guid: b3aba48aaaca283498dcc201daf11474, type: 3}
-  onPickedSFX: {fileID: 8300000, guid: ad3cfc470b8d47047a73c57e47b186ff, type: 3}
+  onPickedSFX: {fileID: 8300000, guid: 95d6f6e2c9aaa474e9afbc17709a8167, type: 3}
   value: 100

@@ -57,7 +57,9 @@ public class SoundManger : MonoBehaviour
             return;
         }
         // odsviraj zvuk
-        audioSourceOne.PlayOneShot(keyData.onPickedSFX);
+    
+        audioSourceOne.PlayOneShot(keyData.onPickedSFX, 0.25f);
+      
 
         EventRepository.OnActionKeyPressed += MaskSwap;
     }

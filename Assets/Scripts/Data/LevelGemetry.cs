@@ -19,6 +19,7 @@ public class LevelGemetry : ScriptableObject
     [SerializeField] private List<GameObject> pillarGeometry;
     [Space(10)]
     [SerializeField] private List<GameObject> exitKeyGeometry;
+    [SerializeField] private List<GameObject> exitKeyStandGeometry;
     [Space(10)]
     [SerializeField] private List<GameObject> pickupGeometry;
     [Space(10)]
@@ -97,6 +98,9 @@ public class LevelGemetry : ScriptableObject
                     return exitRoomGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
+
+
+
             case "horizontalWall":
                 if (horizontalWallGeometry.Count == 1)
                     return horizontalWallGeometry.FirstOrDefault();
@@ -149,6 +153,15 @@ public class LevelGemetry : ScriptableObject
 
                 if (exitKeyGeometry.Count > 1)
                     return exitKeyGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
+
+                return null;
+
+            case "exitKeyStand":
+                if (exitKeyStandGeometry.Count == 1)
+                    return exitKeyStandGeometry.FirstOrDefault();
+
+                if (exitKeyStandGeometry.Count > 1)
+                    return exitKeyStandGeometry.ElementAtOrDefault(Random.Range(0, exitKeyStandGeometry.Count));
 
                 return null;
 
