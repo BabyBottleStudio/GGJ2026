@@ -26,7 +26,21 @@ public class LevelGemetry : ScriptableObject
     [SerializeField] private List<GameObject> exitRoomGeometry;
 
 
+    //HashSet<GameObject> npcRandomSet;
 
+    //void RandomizeNPCList()
+    //{
+    //    npcRandomSet = new HashSet<GameObject>();
+
+    //    for (int i = 0; i <= 10; i++)
+    //    {
+    //        var elementToAdd = npcScenesGeometry.ElementAt(Random.Range(0, npcScenesGeometry.Count));
+    //        var test = npcRandomSet.Add(elementToAdd);
+
+    //        Debug.Log($"{test} Game Object added to hashlist");
+    //    }
+
+    //}
 
 
     public GameObject GetRandomElement(string inputKey)
