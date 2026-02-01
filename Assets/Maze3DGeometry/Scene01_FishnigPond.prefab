@@ -1354,7 +1354,7 @@ GameObject:
   - component: {fileID: 5788882094297134485}
   - component: {fileID: 5184006622082718474}
   m_Layer: 0
-  m_Name: Room 1
+  m_Name: Scene01_FishnigPond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

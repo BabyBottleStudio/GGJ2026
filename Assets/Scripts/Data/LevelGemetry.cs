@@ -8,6 +8,7 @@ public class LevelGemetry : ScriptableObject
 {
     [Header("Maze 3D Geometry")]
     [SerializeField] private List<GameObject> roomGeometry;
+    [SerializeField] private List<GameObject> npcScenesGeometry;
     [Space(10)]
     [SerializeField] private List<GameObject> horizontalWallGeometry;
     [SerializeField] private List<GameObject> verticalWallGeometry;
@@ -37,7 +38,16 @@ public class LevelGemetry : ScriptableObject
                     return roomGeometry.FirstOrDefault();
 
                 if (roomGeometry.Count > 1)
-                    return roomGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
+                    return roomGeometry.ElementAtOrDefault(Random.Range(0, npcScenesGeometry.Count));
+
+                return null;
+
+            case "npc":
+                if (npcScenesGeometry.Count == 1)
+                    return npcScenesGeometry.FirstOrDefault();
+
+                if (npcScenesGeometry.Count > 1)
+                    return npcScenesGeometry.ElementAtOrDefault(Random.Range(0, npcScenesGeometry.Count));
 
                 return null;
 

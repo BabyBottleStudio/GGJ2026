@@ -9,7 +9,7 @@ public class LevelAssembly : MonoBehaviour
 
     [SerializeField] int mazeSize = 8;
     int roomSize = 5;
-
+    public int chanceToSpawnNPC;
 
     MazeGenerator mazeGenerator;
 
@@ -121,10 +121,14 @@ public class LevelAssembly : MonoBehaviour
                     Instantiate(levelGeometry.GetRandomElement("firstRoom"), pos, Quaternion.identity);
                     // generisi plejera
                 }
-                else
+                else if(maze[i, j] == 'v')
                 {
 
                     Instantiate(levelGeometry.GetRandomElement("room"), pos, Quaternion.identity);
+                }
+                else
+                {
+                    continue;
                 }
 
             }
@@ -200,6 +204,11 @@ public class LevelAssembly : MonoBehaviour
     }
 
 
+    void DrawNPC()
+    {
+
+    }
+        
 
     void DrawMaze(char[,] lavirintToDisplay)
     {
