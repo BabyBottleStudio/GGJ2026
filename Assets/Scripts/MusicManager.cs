@@ -5,7 +5,9 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance { get; private set; }
 
-    private AudioSource audioSource;
+    public AudioSource audioSourceMusic;
+    public AudioSource audioSourceAmbient
+        ;
 
     private void Awake()
     {
@@ -19,32 +21,32 @@ public class MusicManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        audioSource = GetComponent<AudioSource>();
+        //audioSourceMusic = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        if (!audioSource.isPlaying)
+        if (!audioSourceMusic.isPlaying)
         {
-            audioSource.loop = true;
-            audioSource.Play();
+            audioSourceMusic.loop = true;
+            audioSourceMusic.Play();
         }
     }
 
     // Optional helpers
     public void PlayMusic()
     {
-        if (!audioSource.isPlaying)
-            audioSource.Play();
+        if (!audioSourceMusic.isPlaying)
+            audioSourceMusic.Play();
     }
 
     public void StopMusic()
     {
-        audioSource.Stop();
+        audioSourceMusic.Stop();
     }
 
     public void SetVolume(float value)
     {
-        audioSource.volume = value;
+        audioSourceMusic.volume = value;
     }
 }

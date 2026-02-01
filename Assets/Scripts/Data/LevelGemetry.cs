@@ -42,6 +42,21 @@ public class LevelGemetry : ScriptableObject
 
     //}
 
+    public Stack<GameObject> ShuffleToStack()
+    {
+        // napravi kopiju da ne diraš original
+        List<GameObject> temp = new List<GameObject>(npcScenesGeometry);
+
+        // Fisher–Yates shuffle
+        for (int i = temp.Count - 1; i > 0; i--)
+        {
+            int rnd = Random.Range(0, i + 1);
+            (temp[i], temp[rnd]) = (temp[rnd], temp[i]);
+        }
+
+        return new Stack<GameObject>(temp);
+    }
+
 
     public GameObject GetRandomElement(string inputKey)
     {

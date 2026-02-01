@@ -16,6 +16,15 @@ MonoBehaviour:
   - {fileID: 6030234515085630287, guid: bb9e0d4753ae04a45986e28c7e169b4d, type: 3}
   npcScenesGeometry:
   - {fileID: 6030234515085630287, guid: 4a03900d2332f7347b5df8a5fc535ae5, type: 3}
+  - {fileID: 6030234515085630287, guid: bd252b19069814346a29ce7abd1d5b7a, type: 3}
+  - {fileID: 6030234515085630287, guid: 940e338eb71a63b4ab41601d94c9657a, type: 3}
+  - {fileID: 6030234515085630287, guid: 4de80f3b39a1c9d4bb5ec36eadaeed08, type: 3}
+  - {fileID: 6030234515085630287, guid: b20c0c262e6fb454693977e5a5f301fc, type: 3}
+  - {fileID: 6030234515085630287, guid: 6258866331c018b4fb9a214ae21e40ef, type: 3}
+  - {fileID: 6030234515085630287, guid: eaa3b77dba3b6de4dab5bedbc6e02e24, type: 3}
+  - {fileID: 6030234515085630287, guid: 3f68a6c8dd562a749ae74ec7683bb1a8, type: 3}
+  - {fileID: 6030234515085630287, guid: 4c2edd725bc0ac241afe91bccb5d73e5, type: 3}
+  - {fileID: 6030234515085630287, guid: 7198fa8d7325e5049b98a46bed0b5e35, type: 3}
   horizontalWallGeometry:
   - {fileID: 2206248151943894543, guid: 78736c2bd180c7540a2948e6fcb7baad, type: 3}
   verticalWallGeometry:

@@ -13,6 +13,8 @@ public class LevelAssembly : MonoBehaviour
 
     MazeGenerator mazeGenerator;
 
+    Stack<GameObject> npcPool;
+
     char[,] maze;
 
     private void Awake()
@@ -29,6 +31,7 @@ public class LevelAssembly : MonoBehaviour
     void Start()
     {
         Debug.Log(DrawDataMaze(maze));
+        npcPool = levelGeometry.ShuffleToStack();
         DrawMaze(maze);
     }
 
@@ -125,6 +128,14 @@ public class LevelAssembly : MonoBehaviour
                 {
 
                     Instantiate(levelGeometry.GetRandomElement("room"), pos, Quaternion.identity);
+
+                    int test = Random.Range(0, 100);
+
+                    if (test < chanceToSpawnNPC && npcPool.Count > 0)
+                    {
+                        Instantiate(npcPool.Pop(), pos, Quaternion.identity);
+                    }
+                   
                 }
                 else
                 {

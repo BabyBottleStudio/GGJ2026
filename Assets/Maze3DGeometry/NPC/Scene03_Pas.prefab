@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 5788882094297134485}
   - component: {fileID: 1934931032682232604}
   m_Layer: 0
-  m_Name: Scene03
+  m_Name: Scene03_Pas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,7 +878,7 @@ Transform:
   m_GameObject: {fileID: 6616149248687740701}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2082822, y: 0, z: -2.052744}
+  m_LocalPosition: {x: 3.526, y: 0, z: -1.546}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1191,7 +1191,7 @@ Transform:
   m_GameObject: {fileID: 8858087389592711026}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2802839, y: 0.26524347, z: -0.08089687, w: 0.91898996}
-  m_LocalPosition: {x: 2.19, y: 0.292, z: 2.22}
+  m_LocalPosition: {x: 0, y: 0.292, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
