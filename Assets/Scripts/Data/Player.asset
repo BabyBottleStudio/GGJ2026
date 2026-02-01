@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 0}
   maskPrefab: {fileID: 0}
-  playerIcon: {fileID: 21300000, guid: 5369467f608381a4fa82f23cef6b9973, type: 3}
+  playerIcon: {fileID: 21300000, guid: c32f72f5ca1ae584f9437e683c162e45, type: 3}
   playerIconWithMask: {fileID: 21300000, guid: 64312284c9f318b4880959fabb3fcb96, type: 3}
   emptyMask: {fileID: 21300000, guid: db992e164771a1c439f447635510a66b, type: 3}
   collectedMask: {fileID: 21300000, guid: ffaf33791a8d92948a4c7fd55816803f, type: 3}
