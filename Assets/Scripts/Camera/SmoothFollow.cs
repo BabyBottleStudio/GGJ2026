@@ -51,7 +51,7 @@ public class SmoothFollow : MonoBehaviour
         followPlayer = false;
         lockPosition = new Vector3(e.targetPosition.x, 0f, e.targetPosition.z);
 
-        Debug.Log($"{e.targetPosition}");
+        //Debug.Log($"{e.targetPosition}");
     }
 
     void FollowPlayer(object sender, SpecialTileEventArgs e)
