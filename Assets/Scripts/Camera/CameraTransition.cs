@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
+
+
+
 
 public class CameraTransition : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
+    [Space(10)]
+    [SerializeField] PostProcessVolume maskOnPostProcess;
     [Space(10)]
 
     [SerializeField] Transform defaultTransform;
@@ -23,6 +30,8 @@ public class CameraTransition : MonoBehaviour
 
     Vector3 startPosition;
     Quaternion startRotation;
+
+    float targetWeight = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +62,7 @@ public class CameraTransition : MonoBehaviour
         if (isTransitioning)
         {
             CameraTransitionMovement(targetTransform);
+            PostProcessBlending();
         }
     }
 
@@ -92,12 +102,12 @@ public class CameraTransition : MonoBehaviour
         {
             Debug.Log("Player took the mask off");
             //if (StateMachine.GetCurrentTile() == Tile.Regular)
-                StartTransition(defaultTransform);
+            StartTransition(defaultTransform);
             //else if (StateMachine.GetCurrentTile() == Tile.Special)
-                //StartTransition(specialTileTransform);
-
-
+            //StartTransition(specialTileTransform);
         }
+
+        SetTargetWeightForPostProcessing(e.Value);
     }
 
     void StartTransition(Transform target)
@@ -125,5 +135,17 @@ public class CameraTransition : MonoBehaviour
         {
             isTransitioning = false;
         }
+    }
+
+    public void SetTargetWeightForPostProcessing(bool isOn)
+    {
+        targetWeight = isOn ? 1f : 0f;
+    }
+
+    void PostProcessBlending()
+    {
+        maskOnPostProcess.weight = Mathf.Lerp(maskOnPostProcess.weight, targetWeight, Time.deltaTime * transitionDuration);
+      
+  
     }
 }
