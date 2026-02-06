@@ -12,6 +12,9 @@ public class MaskHandler : MonoBehaviour
 
     private void Awake()
     {
+
+        isMaskOn = false;
+        StateMachine.SetState(State.MaskOff);
         //actionKey = new InputAction(
         //    "Action",
         //    InputActionType.Button,
@@ -31,7 +34,8 @@ public class MaskHandler : MonoBehaviour
     }
     private void OnEnable()
     {
-        isMaskOn = true; // ovo je opasno ostaviti ovako, ali je bagovala prva upotreba maske
+        //isMaskOn = true; // ovo je opasno ostaviti ovako, ali je bagovala prva upotreba maske
+        StateMachine.SetState(State.MaskOff);
         EventRepository.OnKeyCollected += SubscribeToTheEvent;
 
         actionKey.Enable();
@@ -48,20 +52,22 @@ public class MaskHandler : MonoBehaviour
         actionKey.Disable();
     }
 
-    private void Update()
-    {
-        //if (Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonUp(0))
-        //{
-        //    isMaskOn = !isMaskOn;
-        //    EventRepository.InvokeOnActionKeyPressed(isMaskOn);
-        //}
-    }
-
 
 
     void ShowHideMask(object sender, ActionPressedEventArgs e)
     {
         isMaskOn = e.Value;
+
+        if (isMaskOn)
+        {
+            StateMachine.SetState(State.MaskOn);
+        }
+        else
+        {
+            StateMachine.SetState(State.MaskOff);
+
+        }
+
         maskGeometry.SetActive(isMaskOn);
     }
 
