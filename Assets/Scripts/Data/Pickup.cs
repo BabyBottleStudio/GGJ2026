@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 public class Pickup : ScriptableObject
 {
     public GameObject geometry;
-    public ParticleSystem onPickedVFX;
+    public GameObject onPickedVFX;
     public AudioClip onPickedSFX;
     public int value;
 
