@@ -899,6 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinData: {fileID: 11400000, guid: 9b898850d1689e44baf6f7862cffd4af, type: 2}
+  gemData: {fileID: 11400000, guid: c473646d8f13cf64584c9d9497f4abf8, type: 2}
   keyData: {fileID: 11400000, guid: 40592ac09377f3a4eaedf5ff06246598, type: 2}
 --- !u!1 &462042377
 GameObject:
@@ -2475,6 +2476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinData: {fileID: 11400000, guid: 9b898850d1689e44baf6f7862cffd4af, type: 2}
+  gemData: {fileID: 11400000, guid: c473646d8f13cf64584c9d9497f4abf8, type: 2}
   keyData: {fileID: 11400000, guid: 40592ac09377f3a4eaedf5ff06246598, type: 2}
   playerData: {fileID: 11400000, guid: 919e767b1a1e6a544be5b4e0625f3388, type: 2}
   audioSourceOne: {fileID: 1483406919}

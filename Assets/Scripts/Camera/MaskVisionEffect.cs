@@ -37,7 +37,7 @@ public class MaskVisionEffect : MonoBehaviour
 
     void ToggleGhostVision(object sender, ActionPressedEventArgs e)
     {
-        if (e.Value)
+        if (e.isMaskOn)
         {
             // Kada je maska UKLJUČENA:
             // Uključi "Ghosts" layer u Culling Mask-u kamere (OR operacija)

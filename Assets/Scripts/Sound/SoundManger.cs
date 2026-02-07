@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SoundManger : MonoBehaviour
 {
-    public Pickup coinData;
-    public Pickup keyData;
+    //public Pickup coinData;
+    //public Pickup gemData;
+    //public Pickup keyData;
     public PlayerData playerData;
 
     public AudioSource audioSourceOne;
@@ -19,10 +20,10 @@ public class SoundManger : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
         // suskrajbuj se na eventove
-        EventRepository.OnPickupCollected += CoinPickedUp;
-        EventRepository.OnKeyCollected += KeyPickedUp;
+        EventRepository.OnPickupCollected += CollectablePicked;
+        EventRepository.OnKeyCollected += CollectablePicked;
         //EventRepository.OnActionKeyPressed += MaskSwap; // registrovan je dole u metodi
 
     }
@@ -30,12 +31,12 @@ public class SoundManger : MonoBehaviour
     private void OnDisable()
     {
         // unsuscribe
-        EventRepository.OnPickupCollected -= CoinPickedUp;
-        EventRepository.OnKeyCollected -= KeyPickedUp;
+        EventRepository.OnPickupCollected -= CollectablePicked;
+        EventRepository.OnKeyCollected -= CollectablePicked;
         EventRepository.OnActionKeyPressed -= MaskSwap;
     }
 
-    private void CoinPickedUp(object sender, PickupCollectedEventArgs e)
+    private void CollectablePicked(object sender, PickupCollectedEventArgs e)
     {
         var coinGameObj = sender as GameObject;
         if (coinGameObj == null)
@@ -44,25 +45,11 @@ public class SoundManger : MonoBehaviour
             return;
         }
         // odsviraj zvuk
-        audioSourceOne.PlayOneShot(coinData.onPickedSFX);
-       
+        AudioClip onPickedSFX = coinGameObj.GetComponent<ICollectable>().GetOnCollectedSFX;
+        audioSourceOne.PlayOneShot(onPickedSFX);
     }
 
-    private void KeyPickedUp(object sender, PickupCollectedEventArgs e)
-    {
-        var coinGameObj = sender as GameObject;
-        if (coinGameObj == null)
-        {
-            Debug.Log("Casting unsucessfull");
-            return;
-        }
-        // odsviraj zvuk
-    
-        audioSourceOne.PlayOneShot(keyData.onPickedSFX, 0.25f);
-      
 
-        EventRepository.OnActionKeyPressed += MaskSwap;
-    }
 
     void MaskSwap(object sender, ActionPressedEventArgs e)
     {

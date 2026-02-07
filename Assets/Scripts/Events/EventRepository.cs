@@ -15,11 +15,11 @@ public class PickupCollectedEventArgs : EventArgs
 
 public class ActionPressedEventArgs : EventArgs
 {
-    public bool Value;
+    public bool isMaskOn;
 
     public ActionPressedEventArgs(bool value)
     {
-        Value = value;
+        isMaskOn = value;
     }
 }
 

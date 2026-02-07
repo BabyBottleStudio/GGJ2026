@@ -92,7 +92,7 @@ public class CameraTransition : MonoBehaviour
         if (StateMachine.GetCurrentMask() == Mask.Lost)
             return;
 
-        if (e.Value)
+        if (e.isMaskOn)
         {
             Debug.Log("Player has put the mask");
 
@@ -107,7 +107,7 @@ public class CameraTransition : MonoBehaviour
             //StartTransition(specialTileTransform);
         }
 
-        SetTargetWeightForPostProcessing(e.Value);
+        SetTargetWeightForPostProcessing(e.isMaskOn);
     }
 
     void StartTransition(Transform target)

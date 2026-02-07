@@ -6,15 +6,17 @@ public class TriggerDetection : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        int value = other.GetComponent<ICollectable>() != null ? other.GetComponent<ICollectable>().GetValue : 0;
+
         if (other.CompareTag("Collectable"))
         {
-            EventRepository.InvokeOnPickupCollected(1, other.gameObject);
+            EventRepository.InvokeOnPickupCollected(value, other.gameObject);
         }
 
         if (other.CompareTag("Key"))
         {
             StateMachine.SetMask(Mask.Found); // ovo bi trebalo da se prebaci negde drugde
-            EventRepository.InvokeOnKeyCollected(0, other.gameObject);
+            EventRepository.InvokeOnKeyCollected(value, other.gameObject);
         }
 
         if (other.CompareTag("Exit"))

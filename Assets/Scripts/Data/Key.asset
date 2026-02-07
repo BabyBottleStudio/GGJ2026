@@ -15,4 +15,4 @@ MonoBehaviour:
   geometry: {fileID: 8487786355784178576, guid: b6a0f61e109728e40927f92acda5f607, type: 3}
   onPickedVFX: {fileID: 6894292537580010453, guid: 9260a7c16bb8a1c45ae67eff8b143ef1, type: 3}
   onPickedSFX: {fileID: 8300000, guid: 95d6f6e2c9aaa474e9afbc17709a8167, type: 3}
-  value: 100
+  value: 500

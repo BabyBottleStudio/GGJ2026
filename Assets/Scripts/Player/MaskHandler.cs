@@ -56,7 +56,7 @@ public class MaskHandler : MonoBehaviour
 
     void ShowHideMask(object sender, ActionPressedEventArgs e)
     {
-        isMaskOn = e.Value;
+        isMaskOn = e.isMaskOn;
 
         if (isMaskOn)
         {

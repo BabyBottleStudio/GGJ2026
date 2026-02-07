@@ -11,7 +11,5 @@ public class Pickup : ScriptableObject
     public AudioClip onPickedSFX;
     public int value;
 
-
-
-
+    
 }

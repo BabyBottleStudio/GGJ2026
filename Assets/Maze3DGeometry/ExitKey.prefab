@@ -568,6 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2467144808514196448}
   - component: {fileID: 549111125609441874}
+  - component: {fileID: 8867242323761470027}
   m_Layer: 0
   m_Name: ExitKey
   m_TagString: Key
@@ -614,6 +615,19 @@ CapsuleCollider:
   m_Height: 0.55
   m_Direction: 1
   m_Center: {x: 0, y: 0.27, z: 0}
+--- !u!114 &8867242323761470027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487786355784178576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63b0b204bee75e43a097f1abfa9e2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupData: {fileID: 11400000, guid: 40592ac09377f3a4eaedf5ff06246598, type: 2}
 --- !u!1001 &2822230922729003452
 PrefabInstance:
   m_ObjectHideFlags: 0
