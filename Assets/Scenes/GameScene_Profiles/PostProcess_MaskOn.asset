@@ -26,50 +26,6 @@ MonoBehaviour:
   fastMode:
     overrideState: 0
     value: 0
---- !u!114 &-3455496499329936340
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  mode:
-    overrideState: 1
-    value: 1
-  color:
-    overrideState: 1
-    value: {r: 0, g: 0, b: 0, a: 1}
-  center:
-    overrideState: 0
-    value: {x: 0.5, y: 0.5}
-  intensity:
-    overrideState: 1
-    value: 0.513
-  smoothness:
-    overrideState: 1
-    value: 0.252
-  roundness:
-    overrideState: 0
-    value: 1
-  rounded:
-    overrideState: 0
-    value: 0
-  mask:
-    overrideState: 1
-    value: {fileID: 2800000, guid: 6ce17323f358ac04c96698cf8fd73919, type: 3}
-    defaultState: 1
-  opacity:
-    overrideState: 0
-    value: 1
 --- !u!114 &-2537251054846126657
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -130,12 +86,10 @@ MonoBehaviour:
   m_Name: PostProcess_MaskOn
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: -3455496499329936340}
   - {fileID: -2537251054846126657}
   - {fileID: 3085351974540605587}
   - {fileID: -9173929114600480921}
   - {fileID: 2913884767515475547}
-  - {fileID: 7774468451916489560}
 --- !u!114 &2913884767515475547
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1481,31 +1435,3 @@ MonoBehaviour:
   scale:
     overrideState: 0
     value: 0.46
---- !u!114 &7774468451916489560
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
-  m_Name: Grain
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  colored:
-    overrideState: 0
-    value: 1
-  intensity:
-    overrideState: 1
-    value: 1
-  size:
-    overrideState: 0
-    value: 1
-  lumContrib:
-    overrideState: 0
-    value: 0.8

@@ -144,7 +144,7 @@ public class CameraTransition : MonoBehaviour
 
     void PostProcessBlending()
     {
-        maskOnPostProcess.weight = Mathf.Lerp(maskOnPostProcess.weight, targetWeight, Time.deltaTime * transitionDuration);
+        maskOnPostProcess.weight = Mathf.MoveTowards(maskOnPostProcess.weight, targetWeight, Time.deltaTime * transitionDuration);
       
   
     }
