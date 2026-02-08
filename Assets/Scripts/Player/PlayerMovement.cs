@@ -26,23 +26,24 @@ public class PlayerMovement : MonoBehaviour
 
     float ControllsOffTimer;
     public float ControllsOffDuration;
-    bool playerControllActive;
+    //bool playerControllActive;
     Vector3 ControllsOffPosition;
 
     private void OnEnable()
     {
-        EventRepository.OnKeyCollected += PauseControll;
+        EventRepository.OnKeyCollected += SuspendPlayerInput;
     }
 
     private void OnDisable()
     {
-        EventRepository.OnKeyCollected -= PauseControll;
+        EventRepository.OnKeyCollected -= SuspendPlayerInput;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerControllActive = true;
+        //playerControllActive = true;
+        StateMachine.SetPlayerInputState(PlayerInput.On);
         ControllsOffTimer = 0f;
         _characterController = this.GetComponent<CharacterController>();
     }
@@ -50,25 +51,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerControllActive)
+        if (StateMachine.GetPlayerInputState() == PlayerInput.Off)
         {
             ControllsOffTimer += Time.deltaTime;
-            this.transform.position = ControllsOffPosition + new Vector3(0,0.08f,0);
-            this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-
-            if (dustParticles.isPlaying)
-                dustParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
-
-            if (playerAnimation != null)
-            {
-                playerAnimation.SetFloat("AnimSpeedMultiplier", 0f);
-            }
+           
 
             if (ControllsOffTimer >= ControllsOffDuration)
             {
                 Debug.Log($"{ControllsOffTimer}");
                 ControllsOffTimer = 0f;
-                playerControllActive = true;
+                StateMachine.SetPlayerInputState(PlayerInput.On);
+                //playerControllActive = true;
             }
             return;
         }
@@ -82,6 +75,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
+        if (StateMachine.GetPlayerInputState() == PlayerInput.Off)
+            return;
+
         _characterController.Move(_direction * _movementSpeed * Time.deltaTime);
     }
 
@@ -149,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void PauseControll(object sender, PickupCollectedEventArgs e)
+    void SuspendPlayerInput(object sender, PickupCollectedEventArgs e)
     {
         var senderGameObject = sender as GameObject;
 
@@ -159,7 +155,24 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        _input = Vector2.zero;
+        _direction = Vector3.zero;
+        _velocity = 0f;
+
         ControllsOffPosition = senderGameObject.transform.position;
-        playerControllActive = false;
+
+        this.transform.position = ControllsOffPosition + new Vector3(0, 0.08f, 0);
+        this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+        if (dustParticles.isPlaying)
+            dustParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetFloat("AnimSpeedMultiplier", 0f);
+        }
+
+        StateMachine.SetPlayerInputState(PlayerInput.Off);
+        //playerControllActive = false;
     }
 }

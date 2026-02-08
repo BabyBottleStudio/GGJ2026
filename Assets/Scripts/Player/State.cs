@@ -15,3 +15,9 @@ public enum Mask
     Lost,
     Found
 }
+
+public enum PlayerInput
+{
+    On,
+    Off
+}

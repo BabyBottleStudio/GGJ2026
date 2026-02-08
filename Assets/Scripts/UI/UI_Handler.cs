@@ -18,12 +18,15 @@ public class UI_Handler : MonoBehaviour
 
     public GameObject gameOverCanvas;
 
+    public GameObject maskImageAnimation;
+
     //CanvasGroup gameOverCanvasGroup;
 
     private void Awake()
     {
         ChangeStateMaskUI(false);
         gameOverCanvas.SetActive(false);
+        maskImageAnimation.SetActive(false);
         //gameOverCanvasGroup = gameOverCanvas.GetComponent<CanvasGroup>();
     }
 
@@ -52,10 +55,16 @@ public class UI_Handler : MonoBehaviour
 
     void ActivateMaskUI(object sender, PickupCollectedEventArgs e)
     {
+        //StartCoroutine(Wait(10));
+
         foreach (var obj in arrowsIcons)
         {
             obj.SetActive(true);
         }
+
+        maskImageAnimation.SetActive(true);
+
+
         EventRepository.OnKeyCollected -= ActivateMaskUI; // self odjava
         EventRepository.OnActionKeyPressed += ChangePlayerImage;
     }
@@ -86,5 +95,9 @@ public class UI_Handler : MonoBehaviour
         gameOverCanvas.SetActive(true);
     }
 
-
+    //IEnumerator Wait(float secondsToWait)
+    //{
+    //    yield return new WaitForSeconds(secondsToWait);
+        
+    //}
 }
