@@ -24,16 +24,55 @@ public class PlayerMovement : MonoBehaviour
 
     public ParticleSystem dustParticles;
 
+    float ControllsOffTimer;
+    public float ControllsOffDuration;
+    bool playerControllActive;
+    Vector3 ControllsOffPosition;
+
+    private void OnEnable()
+    {
+        EventRepository.OnKeyCollected += PauseControll;
+    }
+
+    private void OnDisable()
+    {
+        EventRepository.OnKeyCollected -= PauseControll;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        playerControllActive = true;
+        ControllsOffTimer = 0f;
         _characterController = this.GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!playerControllActive)
+        {
+            ControllsOffTimer += Time.deltaTime;
+            this.transform.position = ControllsOffPosition + new Vector3(0,0.08f,0);
+            this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+            if (dustParticles.isPlaying)
+                dustParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+
+            if (playerAnimation != null)
+            {
+                playerAnimation.SetFloat("AnimSpeedMultiplier", 0f);
+            }
+
+            if (ControllsOffTimer >= ControllsOffDuration)
+            {
+                Debug.Log($"{ControllsOffTimer}");
+                ControllsOffTimer = 0f;
+                playerControllActive = true;
+            }
+            return;
+        }
+
         ApplyRotation();
 
         ApplyMovement();
@@ -107,5 +146,20 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimation.SetFloat("AnimSpeedMultiplier", targetMultiplier);
         }
+    }
+
+
+    void PauseControll(object sender, PickupCollectedEventArgs e)
+    {
+        var senderGameObject = sender as GameObject;
+
+        if (senderGameObject == null)
+        {
+            Debug.LogWarning("Casting unsucsesfull!");
+            return;
+        }
+
+        ControllsOffPosition = senderGameObject.transform.position;
+        playerControllActive = false;
     }
 }
