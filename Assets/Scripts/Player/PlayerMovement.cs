@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    public PlayerInput playerInput;
     public Animator playerAnimation;
     private Vector2 _input;
 
@@ -43,15 +44,16 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         //playerControllActive = true;
-        StateMachine.SetPlayerInputState(PlayerInput.On);
+        StateMachine.SetPlayerInputState(PlayerControlls.On);
         ControllsOffTimer = 0f;
         _characterController = this.GetComponent<CharacterController>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (StateMachine.GetPlayerInputState() == PlayerInput.Off)
+        if (StateMachine.GetPlayerInputState() == PlayerControlls.Off)
         {
             ControllsOffTimer += Time.deltaTime;
            
@@ -60,7 +62,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log($"{ControllsOffTimer}");
                 ControllsOffTimer = 0f;
-                StateMachine.SetPlayerInputState(PlayerInput.On);
+                EventRepository.InvokeOnCutsceneEnd();
+
+                //StartCoroutine(Wait(10f));
+
+                StateMachine.SetPlayerInputState(PlayerControlls.On);
+                playerInput.ActivateInput();
                 //playerControllActive = true;
             }
             return;
@@ -73,10 +80,15 @@ public class PlayerMovement : MonoBehaviour
         ApplyAnimationMultiplier();
     }
 
+    //IEnumerator Wait(float timeToWait)
+    //{
+    //    yield return new WaitForSeconds(timeToWait);
+    //}
+
     private void ApplyMovement()
     {
-        if (StateMachine.GetPlayerInputState() == PlayerInput.Off)
-            return;
+        //if (StateMachine.GetPlayerInputState() == PlayerControlls.Off)
+        //    return;
 
         _characterController.Move(_direction * _movementSpeed * Time.deltaTime);
     }
@@ -107,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Movement(InputAction.CallbackContext context)
     {
+        
         _input = context.ReadValue<Vector2>();
 
         _direction = new Vector3(_input.x, 0f, _input.y);
@@ -172,7 +185,9 @@ public class PlayerMovement : MonoBehaviour
             playerAnimation.SetFloat("AnimSpeedMultiplier", 0f);
         }
 
-        StateMachine.SetPlayerInputState(PlayerInput.Off);
+
+        StateMachine.SetPlayerInputState(PlayerControlls.Off);
+        playerInput.DeactivateInput();
         //playerControllActive = false;
     }
 }

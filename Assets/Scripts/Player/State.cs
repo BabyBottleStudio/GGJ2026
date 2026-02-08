@@ -16,7 +16,7 @@ public enum Mask
     Found
 }
 
-public enum PlayerInput
+public enum PlayerControlls
 {
     On,
     Off

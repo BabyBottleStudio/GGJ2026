@@ -3,13 +3,13 @@ public static class StateMachine
     private static State currentState = State.MaskOff;
     private static Tile currentTile = Tile.Special; // uvek krece od specijalnog
     private static Mask currentMask = Mask.Lost;
-    private static PlayerInput currentSuspendedInputState;
+    private static PlayerControlls currentSuspendedInputState;
 
     public static State GetCurrentState() => currentState;
     public static Tile GetCurrentTile() => currentTile;
     public static Mask GetCurrentMask() => currentMask;
 
-    public static PlayerInput GetPlayerInputState() => currentSuspendedInputState;
+    public static PlayerControlls GetPlayerInputState() => currentSuspendedInputState;
 
 
     public static void SetState(State newState)
@@ -39,7 +39,7 @@ public static class StateMachine
     }
 
 
-    public static void SetPlayerInputState(PlayerInput newInput)
+    public static void SetPlayerInputState(PlayerControlls newInput)
     {
         if (GetPlayerInputState() == newInput)
             return;

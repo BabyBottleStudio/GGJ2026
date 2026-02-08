@@ -36,7 +36,7 @@ public class UI_Handler : MonoBehaviour
     private void OnEnable()
     {
         EventRepository.OnPickupCollected += UpdateScore;
-        EventRepository.OnKeyCollected += ActivateMaskUI;
+        EventRepository.OnCutsceneEnd += ActivateMaskUI;
         EventRepository.OnLevelFinished += ActivateLevelCompleteCanvas;
     }
 
@@ -53,7 +53,7 @@ public class UI_Handler : MonoBehaviour
         scoreText.text = coinsCollected.ToString();
     }
 
-    void ActivateMaskUI(object sender, PickupCollectedEventArgs e)
+    void ActivateMaskUI()
     {
         //StartCoroutine(Wait(10));
 
@@ -65,7 +65,7 @@ public class UI_Handler : MonoBehaviour
         maskImageAnimation.SetActive(true);
 
 
-        EventRepository.OnKeyCollected -= ActivateMaskUI; // self odjava
+        EventRepository.OnCutsceneEnd -= ActivateMaskUI; // self odjava
         EventRepository.OnActionKeyPressed += ChangePlayerImage;
     }
 

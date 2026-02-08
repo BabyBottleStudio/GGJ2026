@@ -15,6 +15,7 @@ public class MaskHandler : MonoBehaviour
 
         isMaskOn = false;
         StateMachine.SetState(State.MaskOff);
+        StateMachine.SetMask(Mask.Lost);
         //actionKey = new InputAction(
         //    "Action",
         //    InputActionType.Button,
@@ -41,8 +42,6 @@ public class MaskHandler : MonoBehaviour
         actionKey.Enable();
         actionKey.performed += OnAction;
 
-
-        // event 
     }
 
     private void OnDisable()
@@ -82,6 +81,9 @@ public class MaskHandler : MonoBehaviour
 
     private void OnAction(InputAction.CallbackContext ctx)
     {
+        if (StateMachine.GetPlayerInputState() == PlayerControlls.Off)
+            return;
+        
         isMaskOn = !isMaskOn;
         EventRepository.InvokeOnActionKeyPressed(isMaskOn);
     }

@@ -44,6 +44,7 @@ public static class EventRepository
     public static event EventHandler<ActionPressedEventArgs> OnActionKeyPressed;
 
     public static Action OnLevelFinished;
+    public static Action OnCutsceneEnd;
 
     public static event EventHandler<SpecialTileEventArgs> OnTileEnter;
     public static event EventHandler<SpecialTileEventArgs> OnTileExit;
@@ -53,6 +54,11 @@ public static class EventRepository
     //public static Action OnMouseEnterButton;
     //public static Action OnMouseExitButton;
     //public static Action OnMouseSelectButton;
+
+    public static void InvokeOnCutsceneEnd()
+    {
+        OnCutsceneEnd?.Invoke();
+    }
 
     public static void InvokeOnEnterTile(object sender, Vector3 position)
     {
