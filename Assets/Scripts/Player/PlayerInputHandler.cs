@@ -7,7 +7,11 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector3 Movement { get; private set; }
     //public bool MaskPressed { get; private set; }
     bool maskOn;
-    
+
+    //private void Start()
+    //{
+    //    maskOn = false;
+    //}
     // Start is called before the first frame update
     public void OnMove(InputAction.CallbackContext ctx)
     {

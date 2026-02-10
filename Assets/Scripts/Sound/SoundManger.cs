@@ -13,10 +13,7 @@ public class SoundManger : MonoBehaviour
     public AudioSource audioSourceOne;
     public AudioSource audioSourceTwo;
 
-    private void Start()
-    {
-        //audioSourceOne = this.GetComponent<AudioSource>();
-    }
+
 
     private void OnEnable()
     {
@@ -52,6 +49,19 @@ public class SoundManger : MonoBehaviour
 
     void MaskSwap(bool maskOn)
     {
+      
+        if (audioSourceTwo == null)
+        {
+            Debug.Log("audio source is null");
+            return;
+        }
+
+        if (playerData.maskSwapSound == null)
+        {
+            Debug.Log("Sound is null");
+            return;
+        }
+
         audioSourceTwo.PlayOneShot(playerData.maskSwapSound);
     }
 

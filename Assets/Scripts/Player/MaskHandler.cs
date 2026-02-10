@@ -15,7 +15,7 @@ public class MaskHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        StateMachine.SetState(State.MaskOff);
+        //StateMachine.SetState(State.MaskOff);
         EventRepository.OnKeyCollected += SubscribeToTheEvent;
     }
 
