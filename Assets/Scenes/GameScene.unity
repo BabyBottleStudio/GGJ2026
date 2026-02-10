@@ -3751,7 +3751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 749025012}
-  smoothCameraFollow: 80
+  smoothCameraFollow: 0.35
 --- !u!114 &2056918858
 MonoBehaviour:
   m_ObjectHideFlags: 0

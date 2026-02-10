@@ -42,8 +42,8 @@ public class SmoothFollow : MonoBehaviour
 
         //float targetXPos = gameData.playerPosition.x;
 
-        Vector3 newPos = Vector3.SmoothDamp(currentPos, targetPos, ref velocity, smoothCameraFollow * Time.deltaTime);
-        this.transform.position = newPos;
+        Vector3 newPos = Vector3.SmoothDamp(currentPos, targetPos, ref velocity, smoothCameraFollow); // * Time.deltaTime);
+        transform.position = newPos;
     }
 
     void LockToCenterOfTheTile(object sender, SpecialTileEventArgs e)
