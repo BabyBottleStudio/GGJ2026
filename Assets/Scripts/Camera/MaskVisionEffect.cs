@@ -51,6 +51,7 @@ public class MaskVisionEffect : MonoBehaviour
         }
     }
 
+    /*
     void ToggleGhostVision(object sender, ActionPressedEventArgs e)
     {
         if (e.isMaskOn)
@@ -66,5 +67,6 @@ public class MaskVisionEffect : MonoBehaviour
             mainCamera.cullingMask &= ~ghostLayer;
         }
     }
+    */
 
 }

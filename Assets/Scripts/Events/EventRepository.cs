@@ -13,6 +13,7 @@ public class PickupCollectedEventArgs : EventArgs
     }
 }
 
+/*
 public class ActionPressedEventArgs : EventArgs
 {
     public bool isMaskOn;
@@ -22,6 +23,7 @@ public class ActionPressedEventArgs : EventArgs
         isMaskOn = value;
     }
 }
+*/
 
 public class SpecialTileEventArgs : EventArgs
 {

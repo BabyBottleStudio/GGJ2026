@@ -90,6 +90,7 @@ public class UI_Handler : MonoBehaviour
         }
     }
 
+    /*
     void ChangePlayerImage(object sender, ActionPressedEventArgs e)
     {
         if (e.isMaskOn)
@@ -102,6 +103,7 @@ public class UI_Handler : MonoBehaviour
 
         }
     }
+    */
 
     void ActivateLevelCompleteCanvas()
     {
