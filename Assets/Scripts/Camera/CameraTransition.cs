@@ -45,7 +45,7 @@ public class CameraTransition : MonoBehaviour
     private void OnEnable()
     {
         //EventRepository.OnTileEnter += PlayerEnterTile;
-        EventRepository.OnTileExit += TransitionToDefault;
+        //EventRepository.OnTileExit += TransitionToDefault;
         EventRepository.OnActionKeyPressed += PlayerMaskOn;
 
     }
@@ -53,7 +53,7 @@ public class CameraTransition : MonoBehaviour
     private void OnDisable()
     {
         //EventRepository.OnTileEnter -= PlayerEnterTile;
-        EventRepository.OnTileExit -= TransitionToDefault;
+        //EventRepository.OnTileExit -= TransitionToDefault;
         EventRepository.OnActionKeyPressed -= PlayerMaskOn;
     }
     // Update is called once per frame
@@ -66,6 +66,7 @@ public class CameraTransition : MonoBehaviour
         }
     }
 
+    /*
     public void TransitionToDefault(object sender, SpecialTileEventArgs e)
     {
         Debug.Log("Player has left the tile");
@@ -76,7 +77,9 @@ public class CameraTransition : MonoBehaviour
         StartTransition(defaultTransform);
 
     }
+    */
 
+    /*
     public void PlayerEnterTile(object sender, SpecialTileEventArgs e)
     {
         Debug.Log("Player has entered the tile");
@@ -86,7 +89,31 @@ public class CameraTransition : MonoBehaviour
 
         StartTransition(specialTileTransform);
     }
+    */
+    public void PlayerMaskOn(bool maskOn)
+    {
+        if (StateMachine.GetCurrentMask() == Mask.Lost)
+            return;
 
+        if (maskOn)
+        {
+            Debug.Log("Player has put the mask");
+
+            StartTransition(maskOnTransform);
+        }
+        else
+        {
+            Debug.Log("Player took the mask off");
+            //if (StateMachine.GetCurrentTile() == Tile.Regular)
+            StartTransition(defaultTransform);
+            //else if (StateMachine.GetCurrentTile() == Tile.Special)
+            //StartTransition(specialTileTransform);
+        }
+
+        SetTargetWeightForPostProcessing(maskOn);
+    }
+
+    /*
     public void PlayerMaskOn(object sender, ActionPressedEventArgs e)
     {
         if (StateMachine.GetCurrentMask() == Mask.Lost)
@@ -109,6 +136,7 @@ public class CameraTransition : MonoBehaviour
 
         SetTargetWeightForPostProcessing(e.isMaskOn);
     }
+    */
 
     void StartTransition(Transform target)
     {

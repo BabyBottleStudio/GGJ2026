@@ -41,7 +41,9 @@ public static class EventRepository
     public static event EventHandler<PickupCollectedEventArgs> OnPickupCollected;
     public static event EventHandler<PickupCollectedEventArgs> OnKeyCollected;
 
-    public static event EventHandler<ActionPressedEventArgs> OnActionKeyPressed;
+    //public static event EventHandler<ActionPressedEventArgs> OnActionKeyPressed; // radimo na uklanjanju ovoga
+
+    public static event Action<bool> OnActionKeyPressed;
 
     public static Action OnLevelFinished;
     public static Action OnCutsceneEnd;
@@ -84,7 +86,8 @@ public static class EventRepository
 
     public static void InvokeOnActionKeyPressed(bool isMaskOn)
     {
-        OnActionKeyPressed?.Invoke(isMaskOn, new ActionPressedEventArgs(isMaskOn));
+       // OnActionKeyPressed?.Invoke(isMaskOn, new ActionPressedEventArgs(isMaskOn));
+        OnActionKeyPressed?.Invoke(isMaskOn);
     }
 
     public static void InvokeOnLevelFinished()

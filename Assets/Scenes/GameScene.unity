@@ -1578,22 +1578,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3628633445225642351, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1727884653}
+    - target: {fileID: 3628633445225642351, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
+      propertyPath: playerInputHandler
+      value: 
+      objectReference: {fileID: 1727884655}
     - target: {fileID: 3768537321828708401, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3768537321828708401, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7003575994717409607, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1727884653}
     - target: {fileID: 7003575994717409607, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
-      propertyPath: ControllsOffDuration
-      value: 3.2
-      objectReference: {fileID: 0}
+      propertyPath: playerInputHandler
+      value: 
+      objectReference: {fileID: 1727884655}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1790,17 +1794,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &749025009 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7003575994717409607, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
-  m_PrefabInstance: {fileID: 697634376}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81129bef96143e478ca4791c6476429, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &749025012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 745664160322199050, guid: 08d6eeb68c1179641a571fe2539ac357, type: 3}
@@ -3172,6 +3165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727884654}
   - component: {fileID: 1727884653}
+  - component: {fileID: 1727884655}
   m_Layer: 0
   m_Name: PlayerInput
   m_TagString: Untagged
@@ -3206,9 +3200,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 749025009}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Movement
+      - m_Target: {fileID: 1727884655}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3225,7 +3219,19 @@ MonoBehaviour:
     m_ActionId: 37fd153e-129e-4818-b47c-997f658d1766
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1727884655}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c7976bc1-5dfd-45fe-890f-79bbcd332541
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -3268,6 +3274,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 57739a46-bd8f-4299-804c-ca09668753f3
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1727884655}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 274aed9b-5824-40e2-8025-731e171d6b05
+    m_ActionName: Player/Action[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3288,6 +3310,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1727884655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727884652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b278f51f83475a46b431e3262c67a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1766948623
 PrefabInstance:
   m_ObjectHideFlags: 0

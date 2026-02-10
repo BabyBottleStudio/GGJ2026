@@ -77,6 +77,19 @@ public class UI_Handler : MonoBehaviour
         }
     }
 
+    void ChangePlayerImage(bool maskOn)
+    {
+        if (maskOn)
+        {
+            playerImage.sprite = playerData.playerIconWithMask;
+        }
+        else
+        {
+            playerImage.sprite = playerData.playerIcon;
+
+        }
+    }
+
     void ChangePlayerImage(object sender, ActionPressedEventArgs e)
     {
         if (e.isMaskOn)

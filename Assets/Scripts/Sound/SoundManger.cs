@@ -47,13 +47,19 @@ public class SoundManger : MonoBehaviour
         // odsviraj zvuk
         AudioClip onPickedSFX = coinGameObj.GetComponent<ICollectable>().GetOnCollectedSFX;
         audioSourceOne.PlayOneShot(onPickedSFX);
+        EventRepository.OnActionKeyPressed += MaskSwap;
     }
 
+    void MaskSwap(bool maskOn)
+    {
+        audioSourceTwo.PlayOneShot(playerData.maskSwapSound);
+    }
 
-
+    /*
     void MaskSwap(object sender, ActionPressedEventArgs e)
     {
         audioSourceTwo.PlayOneShot(playerData.maskSwapSound);
     }
+    */
 
 }

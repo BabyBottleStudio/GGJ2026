@@ -8,8 +8,10 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerInput playerInput;
-    public Animator playerAnimation;
+    public PlayerInputHandler playerInputHandler;
     private Vector2 _input;
+    
+    public Animator playerAnimation;
 
     CharacterController _characterController;
     [SerializeField] float _movementSpeed;
@@ -53,6 +55,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _input = playerInputHandler.MoveInput;
+        _direction = playerInputHandler.Movement;
+
+        //return; 
         if (StateMachine.GetPlayerInputState() == PlayerControlls.Off)
         {
             ControllsOffTimer += Time.deltaTime;
@@ -72,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
             }
             return;
         }
+
+
 
         ApplyRotation();
 
@@ -97,13 +105,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input.sqrMagnitude == 0)
             return;
+
         ////direction = new Vector3 ()
         var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
 
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
-
 
     private void ApllyGravity()
     {
@@ -124,7 +132,6 @@ public class PlayerMovement : MonoBehaviour
 
         _direction = new Vector3(_input.x, 0f, _input.y);
     }
-
 
     private void ApplyAnimationMultiplier()
     {
@@ -156,7 +163,6 @@ public class PlayerMovement : MonoBehaviour
             playerAnimation.SetFloat("AnimSpeedMultiplier", targetMultiplier);
         }
     }
-
 
     void SuspendPlayerInput(object sender, PickupCollectedEventArgs e)
     {

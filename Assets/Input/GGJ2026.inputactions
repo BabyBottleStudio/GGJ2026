@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Action",
+                    "type": "Button",
+                    "id": "274aed9b-5824-40e2-8025-731e171d6b05",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -257,12 +266,12 @@
                 },
                 {
                     "name": "",
-                    "id": "a248f198-6071-4e40-b6fc-a63bc0f2c65e",
+                    "id": "5eb5c1b6-22e9-4531-a8be-95729de734b3",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Fire",
+                    "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,33 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    public Vector2 Movement { get; private set; }
-    public bool MaskPressed { get; private set; }
-
+    public Vector2 MoveInput { get; private set; }
+    public Vector3 Movement { get; private set; }
+    //public bool MaskPressed { get; private set; }
+    bool maskOn;
+    
     // Start is called before the first frame update
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        Movement = ctx.ReadValue<Vector2>();
-        Debug.Log($"Javljam se iz nove skripte. Vektor2 je {Movement}");
+        var vektor = ctx.ReadValue<Vector2>();
+        MoveInput = vektor;
+        Movement = new Vector3 (vektor.x, 0.0f, vektor.y);
+        //Debug.Log($"Javljam se iz nove skripte. Vektor2 je {Movement}");
     }
 
-    public void OnMask(InputAction.CallbackContext ctx)
+    public void OnAction(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed)
             return;
 
-        MaskPressed = true;
-        Debug.Log($"Javljam se iz nove skripte. OnMask: {MaskPressed}");
+        // MaskPressed = true;
+        if (StateMachine.GetCurrentMask() == Mask.Lost)
+            return;
 
+        maskOn = StateMachine.GetCurrentState() == State.MaskOn ? false : true;
+
+        EventRepository.InvokeOnActionKeyPressed(maskOn);
+        //Debug.Log($"Javljam se iz nove skripte. OnMask: {maskOn}");
     }
 
-    public void ConsumeMask()
-    {
-        MaskPressed = false;
-        Debug.Log($"Javljam se iz nove skripte. ConsumeMask: {MaskPressed}");
-    }
+    //public void ConsumeAction()
+    //{
+    //    MaskPressed = false;
+    //    Debug.Log($"Javljam se iz nove skripte. ConsumeMask: {MaskPressed}");
+    //}
 }

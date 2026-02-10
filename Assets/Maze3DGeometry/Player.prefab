@@ -5387,7 +5387,7 @@ MonoBehaviour:
   smoothTime: 0.05
   gravityMultiplier: 3
   dustParticles: {fileID: 5338322065756716773}
-  ControllsOffDuration: 3.6
+  ControllsOffDuration: 3.2
 --- !u!114 &4490545845067510820
 MonoBehaviour:
   m_ObjectHideFlags: 0
