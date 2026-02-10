@@ -24,14 +24,11 @@ public class MaskVisionEffect : MonoBehaviour
         EventRepository.OnActionKeyPressed -= ToggleGhostVision;
         
     }
-    // Update is called once per frame
-
 
     void SubscribeToEvent(object sender, PickupCollectedEventArgs e)
     {
         EventRepository.OnActionKeyPressed += ToggleGhostVision;
         EventRepository.OnKeyCollected -= SubscribeToEvent;
-
     }
 
 

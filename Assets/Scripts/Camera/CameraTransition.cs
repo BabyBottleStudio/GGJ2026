@@ -92,8 +92,8 @@ public class CameraTransition : MonoBehaviour
     */
     public void PlayerMaskOn(bool maskOn)
     {
-        if (StateMachine.GetCurrentMask() == Mask.Lost)
-            return;
+        //if (StateMachine.GetCurrentMask() == Mask.Lost)
+        //    return;
 
         if (maskOn)
         {
