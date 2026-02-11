@@ -62,7 +62,7 @@ public class SoundManger : MonoBehaviour
             return;
         }
 
-        audioSourceTwo.PlayOneShot(playerData.maskSwapSound);
+        audioSourceTwo.PlayOneShot(playerData.maskSwapSound, 0.4f);
     }
 
     /*
