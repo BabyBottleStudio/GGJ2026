@@ -12,6 +12,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Char2_Kapa
+    second: {fileID: 2100000, guid: 8403f9dbe6825304ab562e4be4abcb77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Char2_KapaObod
+    second: {fileID: 2100000, guid: a703ae64d6156d1489241b068cd69e38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Char2_Kosa
     second: {fileID: 2100000, guid: 57c923be65be32d43a26c4b89db73163, type: 2}
   - first:
