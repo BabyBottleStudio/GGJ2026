@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 528a9d4ba7be35543bc0d24bd07476ee
+guid: 5f97d298cc81b5a4eb23caf3005becbf
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,78 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Char2_Cipele
-    second: {fileID: 2100000, guid: e24362ded70c4a64099cceb5dfa8cf04, type: 2}
+      name: Boxy_Cipele
+    second: {fileID: 2100000, guid: b3254acb4e6080c48acd6ef6564b4ae0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Char2_Kosa
-    second: {fileID: 2100000, guid: 57c923be65be32d43a26c4b89db73163, type: 2}
+      name: Boxy_Lice
+    second: {fileID: 2100000, guid: f41e9348ad11fe84aaeb211a6d50b624, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Char2_Lice
-    second: {fileID: 2100000, guid: 70899cf0cb46c1a44a313b408a750fc2, type: 2}
+      name: Boxy_Oci
+    second: {fileID: 2100000, guid: 6b9b180cfc584d04b9aa8d20a739b41e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Char2_Majca
-    second: {fileID: 2100000, guid: aaf91662b5fa4a04d9ec726fa78f77a1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Char2_OciObrve
-    second: {fileID: 2100000, guid: 8be5b9b408db8944fabadd04afabdf09, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Char2_Pantalone
-    second: {fileID: 2100000, guid: dc884d85cac9ca349bd365dc3849bc15, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Char2_Ranac
-    second: {fileID: 2100000, guid: cc797325fd56f5c4faf0b0d2c5d687d4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cipele
-    second: {fileID: 2100000, guid: e24362ded70c4a64099cceb5dfa8cf04, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Kosa
-    second: {fileID: 2100000, guid: 57c923be65be32d43a26c4b89db73163, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Lice
-    second: {fileID: 2100000, guid: 70899cf0cb46c1a44a313b408a750fc2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Majca
-    second: {fileID: 2100000, guid: aaf91662b5fa4a04d9ec726fa78f77a1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: OciObrve
-    second: {fileID: 2100000, guid: 8be5b9b408db8944fabadd04afabdf09, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Pantalone
-    second: {fileID: 2100000, guid: dc884d85cac9ca349bd365dc3849bc15, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ranac
-    second: {fileID: 2100000, guid: cc797325fd56f5c4faf0b0d2c5d687d4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Slusalice
-    second: {fileID: 2100000, guid: e7f6a9f570544a544a5bbac933efb41a, type: 2}
+      name: Boxy_Odelo
+    second: {fileID: 2100000, guid: 549ca2f78dade67418a492ce15d255b3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
