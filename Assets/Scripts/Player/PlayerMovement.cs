@@ -72,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
 
                 //StartCoroutine(Wait(10f));
 
+                if (playerAnimation != null)
+                {
+                    playerAnimation.SetBool("MaskPickedUp", false);
+                }
+
                 StateMachine.SetPlayerInputState(PlayerControlls.On);
                 playerInput.ActivateInput();
                 //playerControllActive = true;
@@ -141,10 +146,10 @@ public class PlayerMovement : MonoBehaviour
         // 2. Proveravamo da li se karakter trenutno kreće
         // Koristimo _input.sqrMagnitude (kvadrat magnitude) jer je performantnije od magnitude
         // i proveravamo da li je veće od nule (tj. da li ima inputa)
-        if (_input.sqrMagnitude == 0)
+        if (_input.sqrMagnitude <= 0.05)
         {
             // Kada je idle (nema inputa), postavljamo usporenu vrednost (0.2f)
-            targetMultiplier = 0.2f;
+            targetMultiplier = 0f;
 
             if (dustParticles.isPlaying)
                 dustParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
@@ -156,12 +161,21 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        // 3. Šaljemo izračunatu brzinu u Animator Controller
-        // Moras imati Float parametar u Animatoru koji se zove TACNO "AnimSpeedMultiplier"
         if (playerAnimation != null)
         {
-            playerAnimation.SetFloat("AnimSpeedMultiplier", targetMultiplier);
+            playerAnimation.SetFloat("RunSpeed", targetMultiplier);
         }
+
+        // 3. Šaljemo izračunatu brzinu u Animator Controller
+        // Moras imati Float parametar u Animatoru koji se zove TACNO "AnimSpeedMultiplier"
+        //if (playerAnimation != null)
+        //{
+        //    playerAnimation.SetFloat("AnimSpeedMultiplier", targetMultiplier);
+        //}
+        //else
+        //{
+        //    Debug.Log("AnimSpeedMultiplier is null");
+        //}
     }
 
     void SuspendPlayerInput(object sender, PickupCollectedEventArgs e)
@@ -172,6 +186,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogWarning("Casting unsucsesfull!");
             return;
+        }
+
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetBool("MaskPickedUp", true);
         }
 
         _input = Vector2.zero;
@@ -186,10 +205,10 @@ public class PlayerMovement : MonoBehaviour
         if (dustParticles.isPlaying)
             dustParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
-        if (playerAnimation != null)
-        {
-            playerAnimation.SetFloat("AnimSpeedMultiplier", 0f);
-        }
+        //if (playerAnimation != null)
+        //{
+        //    playerAnimation.SetFloat("AnimSpeedMultiplier", 0f);
+        //}
 
 
         StateMachine.SetPlayerInputState(PlayerControlls.Off);

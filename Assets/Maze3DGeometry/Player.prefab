@@ -300,7 +300,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877945404675118665}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dbc50d2d08717024d9a67aaf034a1270, type: 2}
   m_CullingMode: 0
@@ -5366,7 +5366,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.96
   m_Radius: 0.75
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -5387,7 +5387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
   playerInputHandler: {fileID: 0}
-  playerAnimation: {fileID: 7752406221329944724}
+  playerAnimation: {fileID: 1315039501308327587}
   _movementSpeed: 3.5
   smoothTime: 0.05
   gravityMultiplier: 3
@@ -5926,13 +5926,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9868ff78ed0340c459d4adb6dd94118e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1315039501308327587}
   m_SourcePrefab: {fileID: 100100000, guid: 9868ff78ed0340c459d4adb6dd94118e, type: 3}
 --- !u!4 &6153021526357347336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9868ff78ed0340c459d4adb6dd94118e, type: 3}
   m_PrefabInstance: {fileID: 5974399869696207843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6784739732739643058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9868ff78ed0340c459d4adb6dd94118e, type: 3}
+  m_PrefabInstance: {fileID: 5974399869696207843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1315039501308327587
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784739732739643058}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52c6bdd5aacc8d045a8e756d69eb16db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7912761820489497929
 PrefabInstance:
   m_ObjectHideFlags: 0
