@@ -46,6 +46,7 @@ public static class EventRepository
     //public static event EventHandler<ActionPressedEventArgs> OnActionKeyPressed; // radimo na uklanjanju ovoga
 
     public static event Action<bool> OnActionKeyPressed;
+    public static event Action OnMaskPickupAnimFinish;
 
     public static Action OnLevelFinished;
     public static Action OnCutsceneEnd;
@@ -58,6 +59,12 @@ public static class EventRepository
     //public static Action OnMouseEnterButton;
     //public static Action OnMouseExitButton;
     //public static Action OnMouseSelectButton;
+
+
+    public static void InvokeOnMaskPickupAnimFinish()
+    {
+        OnMaskPickupAnimFinish?.Invoke();
+    }
 
     public static void InvokeOnCutsceneEnd()
     {
