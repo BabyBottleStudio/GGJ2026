@@ -22,8 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private float currentVelocity;
 
     private const float _gravity = -9.81f;
-    [SerializeField] private float gravityMultiplier = 3f;
+    [SerializeField] private float gravityMultiplier;
     float _velocity;
+    [SerializeField] float maxFallSpeed = -25f;
 
     public ParticleSystem dustParticles;
 
@@ -56,7 +57,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         _input = playerInputHandler.MoveInput;
-        _direction = playerInputHandler.Movement;
+        //_direction = playerInputHandler.Movement;
+        Vector3 horizontal = new Vector3(_input.x, 0f, _input.y);
 
         //return; 
         if (StateMachine.GetPlayerInputState() == PlayerControlls.Off)
@@ -86,10 +88,14 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        ApplyRotation();
+        ApplyRotation(horizontal);
 
         ApplyMovement();
         ApllyGravity();
+
+        Vector3 finalMove = horizontal * _movementSpeed;
+        finalMove.y = _velocity;
+        _characterController.Move(finalMove * Time.deltaTime);
         ApplyAnimationMultiplier();
     }
 
@@ -106,13 +112,13 @@ public class PlayerMovement : MonoBehaviour
         _characterController.Move(_direction * _movementSpeed * Time.deltaTime);
     }
 
-    private void ApplyRotation()
+    private void ApplyRotation(Vector3 horizontal)
     {
-        if (_input.sqrMagnitude == 0)
+        if (_input.sqrMagnitude == 0f)
             return;
 
         ////direction = new Vector3 ()
-        var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
+        var targetAngle = Mathf.Atan2(horizontal.x, horizontal.z) * Mathf.Rad2Deg;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
 
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -127,16 +133,19 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _velocity += _gravity * gravityMultiplier * Time.deltaTime;
+            _velocity = Mathf.Max(_velocity, maxFallSpeed);
         }
         _direction.y = _velocity;
     }
+    
+    /*
     public void Movement(InputAction.CallbackContext context)
     {
         
         _input = context.ReadValue<Vector2>();
 
         _direction = new Vector3(_input.x, 0f, _input.y);
-    }
+    } */
 
     private void ApplyAnimationMultiplier()
     {
