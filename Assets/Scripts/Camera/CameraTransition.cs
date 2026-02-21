@@ -9,6 +9,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class CameraTransition : MonoBehaviour
 {
+    public GameSettings gameSettings;
     [SerializeField] Camera mainCamera;
     [Space(10)]
     [SerializeField] PostProcessVolume maskOnPostProcess;
@@ -18,11 +19,11 @@ public class CameraTransition : MonoBehaviour
     [SerializeField] Transform specialTileTransform;
     [SerializeField] Transform maskOnTransform;
 
-    [Space(10)]
-    [SerializeField] float transitionDuration;
-    [SerializeField] AnimationCurve cameraTransition;
+    //[Space(10)]
+    //[SerializeField] float transitionDuration;
+    //[SerializeField] AnimationCurve cameraTransition;
 
-    public Material ghostMaterial;
+
 
     float transitionTimer = 0f;
     Vector3 currentVelocity;
@@ -42,19 +43,6 @@ public class CameraTransition : MonoBehaviour
         isTransitioning = false;
         mainCamera.transform.position = defaultTransform.position;
         mainCamera.transform.rotation = defaultTransform.rotation;
-
-        if (ghostMaterial == null)
-        {
-            Debug.LogWarning("Ghost material is null");
-            return;
-        }
-
-        if (!ghostMaterial.HasProperty("_DissolveAmt"))
-        {
-            Debug.LogWarning("Ghost material does not have _dissolveAmt property");
-            return;
-        }
-
     }
 
     private void OnEnable()
@@ -62,7 +50,6 @@ public class CameraTransition : MonoBehaviour
         //EventRepository.OnTileEnter += PlayerEnterTile;
         //EventRepository.OnTileExit += TransitionToDefault;
         EventRepository.OnActionKeyPressed += PlayerMaskOn;
-
     }
 
     private void OnDisable()
@@ -71,6 +58,7 @@ public class CameraTransition : MonoBehaviour
         //EventRepository.OnTileExit -= TransitionToDefault;
         EventRepository.OnActionKeyPressed -= PlayerMaskOn;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -81,77 +69,23 @@ public class CameraTransition : MonoBehaviour
         }
     }
 
-    /*
-    public void TransitionToDefault(object sender, SpecialTileEventArgs e)
-    {
-        Debug.Log("Player has left the tile");
 
-        if (StateMachine.GetCurrentState() == State.MaskOn)
-            return;
-
-        StartTransition(defaultTransform);
-
-    }
-    */
-
-    /*
-    public void PlayerEnterTile(object sender, SpecialTileEventArgs e)
-    {
-        Debug.Log("Player has entered the tile");
-
-        if (StateMachine.GetCurrentState() == State.MaskOn)
-            return;
-
-        StartTransition(specialTileTransform);
-    }
-    */
     public void PlayerMaskOn(bool maskOn)
     {
-        //if (StateMachine.GetCurrentMask() == Mask.Lost)
-        //    return;
-
         if (maskOn)
         {
-            Debug.Log("Player has put the mask");
-
+            //Debug.Log("Player has put the mask");
             StartTransition(maskOnTransform);
         }
         else
         {
-            Debug.Log("Player took the mask off");
-            //if (StateMachine.GetCurrentTile() == Tile.Regular)
+            //Debug.Log("Player took the mask off");
             StartTransition(defaultTransform);
-            //else if (StateMachine.GetCurrentTile() == Tile.Special)
-            //StartTransition(specialTileTransform);
+
         }
 
         SetTargetWeightForPostProcessing(maskOn);
     }
-
-    /*
-    public void PlayerMaskOn(object sender, ActionPressedEventArgs e)
-    {
-        if (StateMachine.GetCurrentMask() == Mask.Lost)
-            return;
-
-        if (e.isMaskOn)
-        {
-            Debug.Log("Player has put the mask");
-
-            StartTransition(maskOnTransform);
-        }
-        else
-        {
-            Debug.Log("Player took the mask off");
-            //if (StateMachine.GetCurrentTile() == Tile.Regular)
-            StartTransition(defaultTransform);
-            //else if (StateMachine.GetCurrentTile() == Tile.Special)
-            //StartTransition(specialTileTransform);
-        }
-
-        SetTargetWeightForPostProcessing(e.isMaskOn);
-    }
-    */
 
     void StartTransition(Transform target)
     {
@@ -167,8 +101,8 @@ public class CameraTransition : MonoBehaviour
     void CameraTransitionMovement(Transform targetTransform)
     {
         transitionTimer += Time.deltaTime;
-        float t = Mathf.Clamp01(transitionTimer / transitionDuration);
-        float curveT = cameraTransition.Evaluate(t);
+        float t = Mathf.Clamp01(transitionTimer / gameSettings.CameraTransitionDuration);
+        float curveT = gameSettings.CameraTransition.Evaluate(t);
 
         mainCamera.transform.position = Vector3.Lerp(startPosition, targetTransform.position, curveT);
         mainCamera.transform.rotation = Quaternion.Slerp(startRotation, targetTransform.rotation, curveT);
@@ -187,9 +121,9 @@ public class CameraTransition : MonoBehaviour
 
     void PostProcessBlending()
     {
-        var amt = Mathf.MoveTowards(maskOnPostProcess.weight, targetWeight, Time.deltaTime * transitionDuration);
+        var amt = Mathf.MoveTowards(maskOnPostProcess.weight, targetWeight, Time.deltaTime * gameSettings.CameraTransitionDuration);
         maskOnPostProcess.weight = amt;
-        ghostMaterial.SetFloat("_DissolveAmt", targetWeight - amt*2);
+
     }
 
 }

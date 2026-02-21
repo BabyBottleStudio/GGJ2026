@@ -9,7 +9,7 @@ public class MaskHandler : MonoBehaviour
     private void Awake()
     {
         //isMaskOn = false;
-        StateMachine.SetState(State.MaskOff);
+        StateMachine.SetMaskState(MaskUse.MaskOff);
         StateMachine.SetMask(Mask.Lost);
     }
 
@@ -27,7 +27,7 @@ public class MaskHandler : MonoBehaviour
     void ShowHideMask(bool maskPressed)
     {
         //isMaskOn = !isMaskOn;
-        StateMachine.SetState(maskPressed ? State.MaskOn : State.MaskOff);
+        StateMachine.SetMaskState(maskPressed ? MaskUse.MaskOn : MaskUse.MaskOff);
 
         maskGeometry.SetActive(maskPressed);
     }

@@ -27,10 +27,10 @@ public class PlayerInputHandler : MonoBehaviour
             return;
 
         // MaskPressed = true;
-        if (StateMachine.GetCurrentMask() == Mask.Lost)
+        if (StateMachine.GetMaskAvailability() == Mask.Lost)
             return;
 
-        maskOn = StateMachine.GetCurrentState() == State.MaskOn ? false : true;
+        maskOn = StateMachine.GetMaskState() == MaskUse.MaskOn ? false : true;
 
         EventRepository.InvokeOnActionKeyPressed(maskOn);
         //Debug.Log($"Javljam se iz nove skripte. OnMask: {maskOn}");

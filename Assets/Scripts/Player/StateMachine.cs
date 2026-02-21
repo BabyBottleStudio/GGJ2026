@@ -1,23 +1,23 @@
 public static class StateMachine
 {
-    private static State currentState = State.MaskOff;
+    private static MaskUse currentMaskState = MaskUse.MaskOff;
     private static Tile currentTile = Tile.Special; // uvek krece od specijalnog
-    private static Mask currentMask = Mask.Lost;
+    private static Mask currentMaskAvailability = Mask.Lost;
     private static PlayerControlls currentSuspendedInputState;
 
-    public static State GetCurrentState() => currentState;
+    public static MaskUse GetMaskState() => currentMaskState;
     public static Tile GetCurrentTile() => currentTile;
-    public static Mask GetCurrentMask() => currentMask;
+    public static Mask GetMaskAvailability() => currentMaskAvailability;
 
     public static PlayerControlls GetPlayerInputState() => currentSuspendedInputState;
 
 
-    public static void SetState(State newState)
+    public static void SetMaskState(MaskUse newState)
     {
-        if (GetCurrentState() == newState)
+        if (GetMaskState() == newState)
             return;
 
-        currentState = newState;
+        currentMaskState = newState;
     }
 
 
@@ -32,10 +32,10 @@ public static class StateMachine
 
     public static void SetMask(Mask newMaskState)
     {
-        if (GetCurrentMask() == newMaskState)
+        if (GetMaskAvailability() == newMaskState)
             return;
 
-        currentMask = newMaskState;
+        currentMaskAvailability = newMaskState;
     }
 
 
