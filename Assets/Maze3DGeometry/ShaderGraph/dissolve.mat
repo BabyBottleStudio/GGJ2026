@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: dissolve
-  m_Shader: {fileID: -6465566751694194690, guid: 26c6cae5ea89aaf4eab064cd82905b23, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 9af2558b3c6342f4dae8e4dbb2db006f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -32,12 +32,16 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Dissolve: 0
-    - _EdgeThickness: 0.06
+    - _DissolveAmt: 0
+    - _EdgeThickness: 0.02
+    - _FresnelPower: 1.69
     - _Metallic: 0
     - _Size: 50
     - _Smoothness: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 1.227663, b: 2, a: 1}
+    - _DissolveEdgeColor: {r: 0, g: 4.910652, b: 8, a: 1}
     - _EdgeColor: {r: 0, g: 6.982186, b: 9.863011, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &384288493899113882

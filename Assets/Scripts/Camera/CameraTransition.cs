@@ -22,6 +22,8 @@ public class CameraTransition : MonoBehaviour
     [SerializeField] float transitionDuration;
     [SerializeField] AnimationCurve cameraTransition;
 
+    public Material ghostMaterial;
+
     float transitionTimer = 0f;
     Vector3 currentVelocity;
 
@@ -40,6 +42,19 @@ public class CameraTransition : MonoBehaviour
         isTransitioning = false;
         mainCamera.transform.position = defaultTransform.position;
         mainCamera.transform.rotation = defaultTransform.rotation;
+
+        if (ghostMaterial == null)
+        {
+            Debug.LogWarning("Ghost material is null");
+            return;
+        }
+
+        if (!ghostMaterial.HasProperty("_DissolveAmt"))
+        {
+            Debug.LogWarning("Ghost material does not have _dissolveAmt property");
+            return;
+        }
+
     }
 
     private void OnEnable()
@@ -172,8 +187,9 @@ public class CameraTransition : MonoBehaviour
 
     void PostProcessBlending()
     {
-        maskOnPostProcess.weight = Mathf.MoveTowards(maskOnPostProcess.weight, targetWeight, Time.deltaTime * transitionDuration);
-      
-  
+        var amt = Mathf.MoveTowards(maskOnPostProcess.weight, targetWeight, Time.deltaTime * transitionDuration);
+        maskOnPostProcess.weight = amt;
+        ghostMaterial.SetFloat("_DissolveAmt", targetWeight - amt*2);
     }
+
 }
