@@ -126,6 +126,9 @@ public class MazeGenerator
                 int newRow = UnityEngine.Random.Range(0, realSize / 2) * 2;
                 int newCol = UnityEngine.Random.Range(0, realSize / 2) * 2;
 
+                if (Maze[newRow, newCol] == 'K' || Maze[newRow, newCol] == 'E')
+                    continue;
+
                 pickupCoords.Add((newRow, newCol));
             }
         }
