@@ -18,7 +18,7 @@ public class UI_Handler : MonoBehaviour
 
     public GameObject gameOverCanvas;
 
-    public GameObject maskImageAnimation;
+    //public GameObject maskImageAnimation;
 
     //CanvasGroup gameOverCanvasGroup;
 
@@ -26,7 +26,7 @@ public class UI_Handler : MonoBehaviour
     {
         ChangeStateMaskUI(false);
         gameOverCanvas.SetActive(false);
-        maskImageAnimation.SetActive(false);
+        //maskImageAnimation.SetActive(false);
         //gameOverCanvasGroup = gameOverCanvas.GetComponent<CanvasGroup>();
     }
 
@@ -62,7 +62,7 @@ public class UI_Handler : MonoBehaviour
             obj.SetActive(true);
         }
 
-        maskImageAnimation.SetActive(true);
+        //maskImageAnimation.SetActive(true);
 
 
         EventRepository.OnCutsceneEnd -= ActivateMaskUI; // self odjava
