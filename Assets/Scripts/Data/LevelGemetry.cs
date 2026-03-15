@@ -25,6 +25,7 @@ public class LevelGemetry : ScriptableObject
     [Space(10)]
     [SerializeField] private List<GameObject> firstRoomGeometry;
     [SerializeField] private List<GameObject> exitRoomGeometry;
+    [SerializeField] private List<GameObject> exitGeometry;
 
 
     //HashSet<GameObject> npcRandomSet;
@@ -171,6 +172,15 @@ public class LevelGemetry : ScriptableObject
 
                 if (pickupGeometry.Count > 1)
                     return pickupGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
+
+                return null;
+
+            case "exitGate":
+                if (exitGeometry.Count == 1)
+                    return exitGeometry.FirstOrDefault();
+
+                if (exitGeometry.Count > 1)
+                    return exitGeometry.ElementAtOrDefault(Random.Range(0, exitGeometry.Count));
 
                 return null;
 

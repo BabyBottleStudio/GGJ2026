@@ -20,7 +20,7 @@ public class SoundManger : MonoBehaviour
 
         // suskrajbuj se na eventove
         EventRepository.OnPickupCollected += CollectablePicked;
-        EventRepository.OnKeyCollected += CollectablePicked;
+        //EventRepository.OnKeyCollected += CollectablePicked;
         //EventRepository.OnActionKeyPressed += MaskSwap; // registrovan je dole u metodi
 
     }
@@ -29,7 +29,7 @@ public class SoundManger : MonoBehaviour
     {
         // unsuscribe
         EventRepository.OnPickupCollected -= CollectablePicked;
-        EventRepository.OnKeyCollected -= CollectablePicked;
+        //EventRepository.OnKeyCollected -= CollectablePicked;
         EventRepository.OnActionKeyPressed -= MaskSwap;
     }
 

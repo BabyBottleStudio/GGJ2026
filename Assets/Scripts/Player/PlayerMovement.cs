@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInput playerInput;
     public PlayerInputHandler playerInputHandler;
     private Vector2 _input;
-    
+
     public Animator playerAnimation;
 
     CharacterController _characterController;
@@ -28,8 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     public ParticleSystem dustParticles;
 
-    float ControllsOffTimer;
-    public float ControllsOffDuration;
+    //float ControllsOffTimer;
+    //public float ControllsOffDuration;
     //bool playerControllActive;
     Vector3 ControllsOffPosition;
 
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //playerControllActive = true;
         StateMachine.SetPlayerInputState(PlayerControlls.On);
-        ControllsOffTimer = 0f;
+        //ControllsOffTimer = 0f;
         _characterController = this.GetComponent<CharacterController>();
 
     }
@@ -59,34 +59,6 @@ public class PlayerMovement : MonoBehaviour
         _input = playerInputHandler.MoveInput;
         //_direction = playerInputHandler.Movement;
         Vector3 horizontal = new Vector3(_input.x, 0f, _input.y);
-
-        //return; 
-        if (StateMachine.GetPlayerInputState() == PlayerControlls.Off)
-        {
-            ControllsOffTimer += Time.deltaTime;
-           
-
-            if (ControllsOffTimer >= ControllsOffDuration)
-            {
-                Debug.Log($"{ControllsOffTimer}");
-                ControllsOffTimer = 0f;
-                EventRepository.InvokeOnCutsceneEnd();
-
-                //StartCoroutine(Wait(10f));
-
-                if (playerAnimation != null)
-                {
-                    playerAnimation.SetBool("MaskPickedUp", false);
-                }
-
-                StateMachine.SetPlayerInputState(PlayerControlls.On);
-                playerInput.ActivateInput();
-                //playerControllActive = true;
-            }
-            return;
-        }
-
-
 
         ApplyRotation(horizontal);
 
@@ -103,6 +75,36 @@ public class PlayerMovement : MonoBehaviour
     //{
     //    yield return new WaitForSeconds(timeToWait);
     //}
+
+    public void ResumePlayerControlls()
+    {
+        //if (StateMachine.GetPlayerInputState() == PlayerControlls.Off)
+        //{
+        //ControllsOffTimer += Time.deltaTime;
+
+
+        //if (ControllsOffTimer >= ControllsOffDuration)
+        //{
+        //Debug.Log($"{ControllsOffTimer}");
+        //ControllsOffTimer = 0f;
+        //EventRepository.InvokeOnCutsceneEnd();
+
+        //StartCoroutine(Wait(10f));
+
+        //if (playerAnimation != null)
+        //{
+        //    playerAnimation.SetBool("MaskPickedUp", false);
+        //}
+
+        StateMachine.SetPlayerInputState(PlayerControlls.On);
+        playerInput.ActivateInput();
+        Debug.Log("InputActivated");
+        //playerControllActive = true;
+        //}
+        //return;
+        // }
+
+    }
 
     private void ApplyMovement()
     {
@@ -137,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         }
         _direction.y = _velocity;
     }
-    
+
     /*
     public void Movement(InputAction.CallbackContext context)
     {
@@ -167,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!dustParticles.isPlaying)
                 dustParticles.Play();
-            
+
         }
 
         if (playerAnimation != null)
@@ -187,6 +189,14 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
+    public void MaskPickedUpAnimation(bool isPickedUp)
+    {
+        if (playerAnimation == null)
+            return;
+
+        playerAnimation.SetBool("MaskPickedUp", isPickedUp);
+    }
+
     void SuspendPlayerInput(object sender, PickupCollectedEventArgs e)
     {
         var senderGameObject = sender as GameObject;
@@ -197,31 +207,41 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (playerAnimation != null)
-        {
-            playerAnimation.SetBool("MaskPickedUp", true);
-        }
+
 
         _input = Vector2.zero;
         _direction = Vector3.zero;
         _velocity = 0f;
 
-        ControllsOffPosition = senderGameObject.transform.position;
+        ControllsOffPosition = senderGameObject.transform.position + new Vector3(0, 0.08f, 0);
 
-        this.transform.position = ControllsOffPosition + new Vector3(0, 0.08f, 0);
-        this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        //_characterController.enabled = false;
+
+        //this.transform.SetPositionAndRotation(ControllsOffPosition, Quaternion.Euler(0f, 180f, 0f));
+        //this.transform.position = ControllsOffPosition + new Vector3(0, 0.08f, 0);
+        //this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        //Debug.Log($"player pos 2 {transform.position}");
+        //_characterController.enabled = true;
 
         if (dustParticles.isPlaying)
             dustParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
-        //if (playerAnimation != null)
-        //{
-        //    playerAnimation.SetFloat("AnimSpeedMultiplier", 0f);
-        //}
-
 
         StateMachine.SetPlayerInputState(PlayerControlls.Off);
+
         playerInput.DeactivateInput();
+        //Debug.Log("InputDeactivated 3");
         //playerControllActive = false;
+    }
+
+    public void PositionPlayerForTheCutScene()
+    {
+        _characterController.enabled = false;
+
+        this.transform.SetPositionAndRotation(ControllsOffPosition, Quaternion.Euler(0f, 180f, 0f));
+        //this.transform.position = ControllsOffPosition + new Vector3(0, 0.08f, 0);
+        //this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        //Debug.Log($"player pos 2 {transform.position}");
+        _characterController.enabled = true;
     }
 }

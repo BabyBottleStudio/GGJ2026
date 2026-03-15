@@ -26,16 +26,18 @@ public class MaterialFlash : MonoBehaviour
 
     // Update is called once per frame
 
+    /*
     private void OnEnable()
     {
-        EventRepository.OnMaskPickupAnimFinish += FlashEffect; // invokuje se preko animacije
+        //EventRepository.OnMaskPickupAnimFinish += FlashEffect; // invokuje se preko animacije
     }
 
     private void OnDisable()
     {
-        EventRepository.OnMaskPickupAnimFinish += FlashEffect;
+        //EventRepository.OnMaskPickupAnimFinish += FlashEffect;
         
     }
+    */
 
     public void FlashEffect()
     {

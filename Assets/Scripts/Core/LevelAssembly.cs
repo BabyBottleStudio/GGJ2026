@@ -11,6 +11,11 @@ public class LevelAssembly : MonoBehaviour
     int roomSize = 5;
     public int chanceToSpawnNPC;
 
+    [SerializeField] private GameObject exitCamera;
+    Vector3 exitCameraPosition;
+
+    GameObject exitGeometry;
+
     MazeGenerator mazeGenerator;
 
     Stack<GameObject> npcPool;
@@ -94,6 +99,9 @@ public class LevelAssembly : MonoBehaviour
 
     void DrawRooms()
     {
+        float distance = roomSize * 0.5f;
+
+        Vector3 offset = new Vector3(distance, 0f, -distance);
 
         for (int i = 0; i < maze.GetLength(0); i++)
         {
@@ -106,14 +114,14 @@ public class LevelAssembly : MonoBehaviour
                 if (maze[i, j] == 'C')
                 {
                     Instantiate(levelGeometry.GetRandomElement("room"), pos, Quaternion.identity);
-                    Instantiate(levelGeometry.GetRandomElement("pickup"), pos + new Vector3(2.5f, 0f, -2.5f), Quaternion.identity);
+                    Instantiate(levelGeometry.GetRandomElement("pickup"), pos + offset, Quaternion.identity);
                 }
                 else if (maze[i, j] == 'K')
                 {
                     Instantiate(levelGeometry.GetRandomElement("room"), pos, Quaternion.identity);
-                    Instantiate(levelGeometry.GetRandomElement("exitKey"), pos + new Vector3(2.5f, 0f, -2.5f), Quaternion.identity);
+                    Instantiate(levelGeometry.GetRandomElement("exitKey"), pos + offset, Quaternion.identity);
                     
-                    Instantiate(levelGeometry.GetRandomElement("exitKeyStand"), pos + new Vector3(2.5f, 0f, -2.5f), Quaternion.identity);
+                    Instantiate(levelGeometry.GetRandomElement("exitKeyStand"), pos + offset, Quaternion.identity);
 
 
                 }
@@ -121,6 +129,11 @@ public class LevelAssembly : MonoBehaviour
                 {
                     // izgenerisi izlaz
                     Instantiate(levelGeometry.GetRandomElement("exitRoom"), pos, Quaternion.identity);
+                    exitGeometry = Instantiate(levelGeometry.GetRandomElement("exitGate"), pos + offset, Quaternion.Euler(0, 45, 0) );
+                    exitGeometry.transform.GetComponent<Animator>().enabled = false;
+                    exitGeometry.SetActive(false);
+                    exitCameraPosition = pos;
+                    //exitCamera.transform.position = pos;
                 }
                 else if (maze[i, j] == 'P')
                 {
@@ -217,6 +230,11 @@ public class LevelAssembly : MonoBehaviour
         }
     }
 
+    void PlaceExitCamera()
+    {
+        float offset = roomSize * 0.5f;
+        exitCamera.transform.position = exitCameraPosition + new Vector3(offset, 0f, -offset);
+    }
 
     void DrawNPC()
     {
@@ -236,6 +254,12 @@ public class LevelAssembly : MonoBehaviour
         DrawRooms();
         DrawHorizontalMazeWalls();
         DrawVerticalMazeWalls();
+        PlaceExitCamera();
+    }
+
+    public void ActivateGateGeometry()
+    {
+        exitGeometry.SetActive(true);
     }
 }
 

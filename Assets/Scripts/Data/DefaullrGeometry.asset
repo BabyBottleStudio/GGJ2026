@@ -45,3 +45,5 @@ MonoBehaviour:
   - {fileID: 6030234515085630287, guid: 83ada885fcd7d90489bdc38c2ae6ed70, type: 3}
   exitRoomGeometry:
   - {fileID: 6030234515085630287, guid: fcd21a7c4a70d214d83d4604078c18fd, type: 3}
+  exitGeometry:
+  - {fileID: 8167882049232534195, guid: 261a3ac17a3f09c48a3874b035703a2b, type: 3}

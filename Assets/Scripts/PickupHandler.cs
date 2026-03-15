@@ -6,7 +6,8 @@ public class PickupHandler : MonoBehaviour
     //public Pickup coinData;
     // public Pickup gemData;
     public Pickup keyData;
-    public PlayableDirector timeline;
+    public PlayableDirector pickupMaskAnim;
+    public PlayableDirector CutsceneManager;
 
     private void OnEnable()
     {
@@ -46,12 +47,12 @@ public class PickupHandler : MonoBehaviour
             return;
         }
 
-        Debug.Log("Cutscene Working");
         collectableGameObj.SetActive(false);
 
-        timeline.gameObject.transform.position = collectableGameObj.transform.position;
-        timeline.gameObject.SetActive(true);
-        timeline.Play();
+        pickupMaskAnim.gameObject.transform.position = collectableGameObj.transform.position;
+        //pickupMaskAnim.gameObject.SetActive(true);
+        Debug.Log("Cutscene Working 1");
+        CutsceneManager.Play();
     }
 
 
