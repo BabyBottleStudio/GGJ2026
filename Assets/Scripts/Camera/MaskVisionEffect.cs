@@ -9,11 +9,8 @@ public class MaskVisionEffect : MonoBehaviour
     public LayerMask ghostLayer;
 
     public Material ghostMaterial;
-    float maxDissolveValue = 2.5f;
 
-    float timer;
 
-    // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
@@ -42,7 +39,7 @@ public class MaskVisionEffect : MonoBehaviour
             return;
         }
 
-        ghostMaterial.SetFloat("_DissolveAmt", maxDissolveValue);
+        ghostMaterial.SetFloat("_DissolveAmt", 1);
     }
 
     private void OnEnable()
@@ -53,7 +50,6 @@ public class MaskVisionEffect : MonoBehaviour
     private void OnDisable()
     {
         EventRepository.OnActionKeyPressed -= ToggleGhostVision;
-
     }
 
     void SubscribeToEvent(object sender, PickupCollectedEventArgs e)
@@ -65,23 +61,20 @@ public class MaskVisionEffect : MonoBehaviour
 
     void ToggleGhostVision(bool maskOn)
     {
+        StopAllCoroutines();
+        StartCoroutine(GhostDissolveRoutine(maskOn));
+
         if (maskOn)
         {
             // Kada je maska UKLJUČENA:
             // Uključi "Ghosts" layer u Culling Mask-u kamere (OR operacija)
             // treba da je odmah aktivan
-            StopAllCoroutines();
-            StartCoroutine(GhostDissolveRoutine(StateMachine.GetMaskState()));
             mainCamera.cullingMask |= ghostLayer;
         }
         else
         {
-            // Kada je maska ISKLJUČENA:
             // Isključi "Ghosts" layer iz Culling Mask-a kamere (AND NOT operacija)
             // aktivira se kada kamera završi povratak, a za to vreme traje efekat nestajanja
-
-            StopAllCoroutines();
-            StartCoroutine(GhostDissolveRoutine(StateMachine.GetMaskState()));
             StartCoroutine(TurnGhostLayerOff(gameSettings.CameraTransitionDuration));
         }
     }
@@ -90,16 +83,15 @@ public class MaskVisionEffect : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         mainCamera.cullingMask &= ~ghostLayer;
-
     }
 
 
-    IEnumerator GhostDissolveRoutine(MaskUse isMaskUsed)
+    IEnumerator GhostDissolveRoutine(bool isMaskUsed)
     {
         float timer = 0f;
         float dissolveDuration = gameSettings.CameraTransitionDuration;
         float startValue = ghostMaterial.GetFloat("_DissolveAmt");
-        float targetValue = (isMaskUsed == MaskUse.MaskOn ? 0 : maxDissolveValue);
+        float targetValue = (isMaskUsed ? 0 : 1);
 
         while (timer < dissolveDuration)
         {
@@ -115,7 +107,5 @@ public class MaskVisionEffect : MonoBehaviour
         }
 
         ghostMaterial.SetFloat("_DissolveAmt", targetValue);
-
     }
-
 }

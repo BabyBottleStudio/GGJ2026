@@ -66,7 +66,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DissolveAmt: 2.5
+    - _DissolveAmt: 1
     - _DstBlend: 10
     - _EdgeThickness: 0.02
     - _FresnelPower: 1.7
@@ -84,7 +84,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0, g: 1.8147594, b: 2, a: 1}
-    - _DissolveEdgeColor: {r: 0, g: 3.9999998, b: 3.9999998, a: 1}
+    - _DissolveEdgeColor: {r: 0, g: 2.9960785, b: 2.9960785, a: 1}
     - _EmissionColor: {r: 0, g: 0.39955145, b: 0.5, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &238917835538034987
