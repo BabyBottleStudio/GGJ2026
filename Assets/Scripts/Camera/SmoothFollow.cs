@@ -12,11 +12,19 @@ public class SmoothFollow : MonoBehaviour
 
     bool followPlayer;
 
+    public bool lockToSpecialTiles;
+
     private void OnEnable()
     {
         followPlayer = false;
-        EventRepository.OnTileEnter += LockToCenterOfTheTile;
-        EventRepository.OnTileExit += FollowPlayer;
+
+        if (lockToSpecialTiles)
+            EventRepository.OnTileEnter += LockToCenterOfTheTile;
+
+        if (!lockToSpecialTiles)
+            followPlayer = true;
+
+            EventRepository.OnTileExit += FollowPlayer;
     }
 
     private void OnDisable()

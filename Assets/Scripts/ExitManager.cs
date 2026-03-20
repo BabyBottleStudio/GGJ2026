@@ -8,21 +8,43 @@ public class ExitManager : MonoBehaviour
     [SerializeField] GameObject lockedGeometry;
     [SerializeField] GameObject unlockedGeometry;
 
-    private void OnEnable()
-    {
-        EventRepository.OnKeyCollected += UnlockTheGate;
-    }
 
-    private void OnDisable()
+    private void Start()
     {
-        
-        EventRepository.OnKeyCollected -= UnlockTheGate;
+        lockedGeometry.SetActive(true);
+        unlockedGeometry.SetActive(false);
     }
-   
+    //private void OnEnable()
+    //{
+    //    EventRepository.OnKeyCollected += UnlockTheGate;
+    //}
 
-    public void UnlockTheGate(object sender, PickupCollectedEventArgs e)
+    //private void OnDisable()
+    //{
+
+    //    EventRepository.OnKeyCollected -= UnlockTheGate;
+    //}
+
+
+    //public void UnlockTheGate(object sender, PickupCollectedEventArgs e)
+    //{
+    //    lockedGeometry.SetActive(false);
+    //    //unlockedGeometry.SetActive(true);
+    //}
+
+    public void DeactivateLockedGeometry()
     {
         lockedGeometry.SetActive(false);
+
+    }
+
+    public void ActivateUnlockedGeometry()
+    {
         unlockedGeometry.SetActive(true);
+    }
+
+    public void MoveTo(Vector3 newPosition)
+    {
+        this.transform.position = newPosition;
     }
 }

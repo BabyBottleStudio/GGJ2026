@@ -471,6 +471,8 @@ GameObject:
   - component: {fileID: 4490545845067510820}
   - component: {fileID: 3628633445225642351}
   - component: {fileID: 1990906515210750126}
+  - component: {fileID: 3761896149290497688}
+  - component: {fileID: 359081565331047660}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -542,7 +544,6 @@ MonoBehaviour:
   gravityMultiplier: 3
   maxFallSpeed: -25
   dustParticles: {fileID: 5338322065756716773}
-  ControllsOffDuration: 3.9
 --- !u!114 &4490545845067510820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,7 +576,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3768537321828708401}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e904b19ccfa6612438a41094176bbda9, type: 3}
   m_Name: 
@@ -619,6 +620,104 @@ MonoBehaviour:
     m_RotationOrder: 4
   flashDuration: 2
   intensity: 1.5
+--- !u!114 &3761896149290497688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768537321828708401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 0c7c700776246a8409b12365c4fe09a4, type: 2}
+    - {fileID: 11400000, guid: 6df2224b5a041294f841a53ed439b6f6, type: 2}
+    - {fileID: 11400000, guid: fea46bddd0b535d40957f8f897c973ca, type: 2}
+    - {fileID: 11400000, guid: 36c51c8def9df804e81b53118d8b4a49, type: 2}
+    - {fileID: 11400000, guid: d953e28cd97f4b444ac305af63539fd2, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1990906515210750126}
+          m_TargetAssemblyTypeName: MaterialFlash, Assembly-CSharp
+          m_MethodName: FlashEffect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7003575994717409607}
+          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+          m_MethodName: MaskPickedUpAnimation
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7003575994717409607}
+          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+          m_MethodName: ResumePlayerControlls
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7003575994717409607}
+          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+          m_MethodName: MaskPickedUpAnimation
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7003575994717409607}
+          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+          m_MethodName: PositionPlayerForTheCutScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!81 &359081565331047660
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768537321828708401}
+  m_Enabled: 1
 --- !u!1 &3848259222704835258
 GameObject:
   m_ObjectHideFlags: 0

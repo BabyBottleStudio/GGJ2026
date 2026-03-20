@@ -15,6 +15,7 @@ public class LevelAssembly : MonoBehaviour
     Vector3 exitCameraPosition;
 
     GameObject exitGeometry;
+   
 
     MazeGenerator mazeGenerator;
 
@@ -129,9 +130,9 @@ public class LevelAssembly : MonoBehaviour
                 {
                     // izgenerisi izlaz
                     Instantiate(levelGeometry.GetRandomElement("exitRoom"), pos, Quaternion.identity);
-                    exitGeometry = Instantiate(levelGeometry.GetRandomElement("exitGate"), pos + offset, Quaternion.Euler(0, 45, 0) );
-                    exitGeometry.transform.GetComponent<Animator>().enabled = false;
-                    exitGeometry.SetActive(false);
+                    exitGeometry = Instantiate(levelGeometry.GetRandomElement("exitGate"), pos + offset, Quaternion.identity); // .Euler(0, 45, 0) );
+                    //exitGeometry.transform.GetComponent<Animator>().enabled = false;
+                    //exitGeometry.SetActive(false);
                     exitCameraPosition = pos;
                     //exitCamera.transform.position = pos;
                 }
@@ -259,7 +260,12 @@ public class LevelAssembly : MonoBehaviour
 
     public void ActivateGateGeometry()
     {
-        exitGeometry.SetActive(true);
+        exitGeometry.GetComponent<ExitManager>().ActivateUnlockedGeometry();
+    }
+
+    public void DeactivateLockedGateGeometry()
+    {
+        exitGeometry.GetComponent<ExitManager>().DeactivateLockedGeometry();
     }
 }
 
