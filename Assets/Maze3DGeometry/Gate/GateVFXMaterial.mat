@@ -25,8 +25,10 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 1.21
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _DissolveAmt: 0
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &8044275384063438805
