@@ -123,7 +123,7 @@ public class CameraTransition : MonoBehaviour
     {
         var amt = Mathf.MoveTowards(maskOnPostProcess.weight, targetWeight, Time.deltaTime * gameSettings.CameraTransitionDuration);
         maskOnPostProcess.weight = amt;
-
     }
+
 
 }

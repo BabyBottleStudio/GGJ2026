@@ -103,7 +103,14 @@ public class PlayerMovement : MonoBehaviour
         //}
         //return;
         // }
+    }
 
+
+    public void DeactivatePlayerControlls()
+    {
+        StateMachine.SetPlayerInputState(PlayerControlls.Off);
+
+        playerInput.DeactivateInput();
     }
 
     private void ApplyMovement()
@@ -233,6 +240,8 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("InputDeactivated 3");
         //playerControllActive = false;
     }
+
+
 
     public void PositionPlayerForTheCutScene()
     {
