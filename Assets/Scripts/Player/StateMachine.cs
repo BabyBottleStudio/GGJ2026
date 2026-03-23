@@ -4,12 +4,24 @@ public static class StateMachine
     private static Tile currentTile = Tile.Special; // uvek krece od specijalnog
     private static Mask currentMaskAvailability = Mask.Lost;
     private static PlayerControlls currentSuspendedInputState;
+    public static AnyCoins currentCoinsState = AnyCoins.No;
 
     public static MaskUse GetMaskState() => currentMaskState;
     public static Tile GetCurrentTile() => currentTile;
     public static Mask GetMaskAvailability() => currentMaskAvailability;
 
     public static PlayerControlls GetPlayerInputState() => currentSuspendedInputState;
+
+    public static AnyCoins GetCoinsState() => currentCoinsState;
+
+
+    public static void SetCoinsState(AnyCoins newState)
+    {
+        if (GetCoinsState() == newState)
+            return;
+
+        currentCoinsState = newState;
+    }
 
 
     public static void SetMaskState(MaskUse newState)

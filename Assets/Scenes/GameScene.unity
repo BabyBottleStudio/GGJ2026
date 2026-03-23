@@ -245,7 +245,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39700490}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4e37e41c5e01e0946b4d7baaf957ceaf, type: 3}
@@ -370,7 +370,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39700490}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 65d439b9b5af02d458cb19a8f40ff83a, type: 3}
@@ -4589,6 +4589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 919e767b1a1e6a544be5b4e0625f3388, type: 2}
+  basicCoin: {fileID: 11400000, guid: 9b898850d1689e44baf6f7862cffd4af, type: 2}
   audioSourceOne: {fileID: 1483406919}
   audioSourceTwo: {fileID: 1483406920}
 --- !u!82 &1483406919

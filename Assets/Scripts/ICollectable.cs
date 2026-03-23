@@ -8,4 +8,6 @@ public interface ICollectable
     GameObject GetOnCollectedVFX { get; }
     AudioClip GetOnCollectedSFX { get;  }
 
+    
+
 }

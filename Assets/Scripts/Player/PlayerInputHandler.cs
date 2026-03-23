@@ -44,11 +44,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnThrow(InputAction.CallbackContext ctx)
     {
-        Debug.Log($"Javljam se iz nove skripte za bacanje.");
+        //Debug.Log($"Javljam se iz nove skripte za bacanje.");
         if (!ctx.performed)
             return;
 
-        Debug.Log($"Throw je ok.");
+        //Debug.Log($"Throw je ok.");
         EventRepository.InvokeOnThrowPressed();
     }
 }

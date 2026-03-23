@@ -12,5 +12,7 @@ public class CoinValue : MonoBehaviour, ICollectable
     public GameObject GetOnCollectedVFX => pickupData.onPickedVFX;
     public AudioClip GetOnCollectedSFX => pickupData.onPickedSFX;
 
-   
+    //public AudioClip GetOnThrowSFX => pickupData.onThrowSFX;
+
+    //public AudioClip GetOnGroundHitSFX => pickupData.onGroundHitSFX;
 }

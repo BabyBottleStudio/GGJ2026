@@ -16,3 +16,6 @@ MonoBehaviour:
   onPickedVFX: {fileID: 3098860540778262961, guid: 0723a7fac575c814a9df6ab8712150a9, type: 3}
   onPickedSFX: {fileID: 8300000, guid: 69583ef747bec5a47bf78c25801554d4, type: 3}
   value: 1
+  onThrowSFX: {fileID: 8300000, guid: 7040ad4d39e65cd45a677820920b67ce, type: 3}
+  onGroundHitSFX: {fileID: 8300000, guid: e4317158d4b60fd43bc045ba2927faa6, type: 3}
+  onEmptyThrowSFX: {fileID: 8300000, guid: 818641419e35a4f469420bab673a8364, type: 3}

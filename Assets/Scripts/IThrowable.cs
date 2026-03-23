@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IThrowable
 {
-  
+    AudioClip GetOnThrowSFX { get; }
+    AudioClip GetOnGroundHitSFX { get; }
 }

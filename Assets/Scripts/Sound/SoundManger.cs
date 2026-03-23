@@ -9,6 +9,7 @@ public class SoundManger : MonoBehaviour
     //public Pickup gemData;
     //public Pickup keyData;
     public PlayerData playerData;
+    public Pickup basicCoin;
 
     public AudioSource audioSourceOne;
     public AudioSource audioSourceTwo;
@@ -22,7 +23,8 @@ public class SoundManger : MonoBehaviour
         EventRepository.OnPickupCollected += CollectablePicked;
         //EventRepository.OnKeyCollected += CollectablePicked;
         //EventRepository.OnActionKeyPressed += MaskSwap; // registrovan je dole u metodi
-
+        EventRepository.OnThrowPressed += PlayThrowSound;
+        //EventRepository.OnCoinHitFloor += PlayCoinHitFloor;
     }
 
     private void OnDisable()
@@ -31,6 +33,8 @@ public class SoundManger : MonoBehaviour
         EventRepository.OnPickupCollected -= CollectablePicked;
         //EventRepository.OnKeyCollected -= CollectablePicked;
         EventRepository.OnActionKeyPressed -= MaskSwap;
+        EventRepository.OnThrowPressed -= PlayThrowSound;
+        //EventRepository.OnCoinHitFloor -= PlayCoinHitFloor;
     }
 
     private void CollectablePicked(object sender, PickupCollectedEventArgs e)
@@ -47,9 +51,32 @@ public class SoundManger : MonoBehaviour
         EventRepository.OnActionKeyPressed += MaskSwap;
     }
 
+    void PlayThrowSound()
+    {
+        if (StateMachine.GetCoinsState() == AnyCoins.Yes)
+        {
+            if (basicCoin.onThrowSFX != null)
+                audioSourceOne.PlayOneShot(basicCoin.onThrowSFX);
+        }
+        else
+        {
+            if (basicCoin.onEmptyThrowSFX != null)
+                audioSourceOne.PlayOneShot(basicCoin.onEmptyThrowSFX);
+        }
+    }
+
+    void PlayCoinHitFloor()
+    {
+        if (basicCoin.onGroundHitSFX != null && !audioSourceTwo.isPlaying)
+            audioSourceTwo.PlayOneShot(basicCoin.onGroundHitSFX);
+
+        // logika je prebacena na coin zarad testiranja laga na zvuku
+    }
+
+
     void MaskSwap(bool maskOn)
     {
-      
+
         if (audioSourceTwo == null)
         {
             Debug.Log("audio source is null");

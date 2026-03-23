@@ -16,6 +16,8 @@ public class Breadcrumbs : MonoBehaviour
     {
         breadcrumbs = new BreadcrumbsRepository();
         objPoolRoot = new GameObject("Breadcrumbs").transform;
+
+
     }
 
 
@@ -45,7 +47,7 @@ public class Breadcrumbs : MonoBehaviour
 
 
         // ako je obican, samo ga enqueue a ako je onaj vredniji, onda instanciraj u obj pool odgovarajuci broj komada
-        Debug.Log($"Picked up {e.Value} value coin!");
+        //Debug.Log($"Picked up {e.Value} value coin!");
 
         if (e.Value <= 1)
         {
@@ -69,8 +71,11 @@ public class Breadcrumbs : MonoBehaviour
                 breadcrumbs.AddToPool(obj);
                 obj.transform.parent = objPoolRoot;
                 obj.SetActive(false);
+
             }
         }
+
+        StateMachine.SetCoinsState(AnyCoins.Yes);
     }
 
     public void ThrowBreadcrumb()
@@ -80,6 +85,7 @@ public class Breadcrumbs : MonoBehaviour
         if (breadcrumbs.Count == 0)
             return;
 
+        
         var currentBreadcrumb = breadcrumbs.RemoveFromPool();
 
         // scale na 0
@@ -87,13 +93,14 @@ public class Breadcrumbs : MonoBehaviour
         currentBreadcrumb.transform.position = transform.position + transform.up * 0.75f - transform.forward * 0.3f; // ovo ce da baguje jer ce odmah da ga instant pokupi
         // unhide
         currentBreadcrumb.SetActive(true);
-        Vector3 throwDir = (-transform.forward + Vector3.up).normalized *1.2f;
+        Vector3 throwDir = (-transform.forward + Vector3.up).normalized * 1.2f;
 
         var rb = currentBreadcrumb.GetComponent<Rigidbody>();
         rb.AddForce(throwDir * throwForce, ForceMode.Impulse);
-      
-      
-        
+
+        if (breadcrumbs.Count == 0)
+            StateMachine.SetCoinsState(AnyCoins.No);
+
     }
 }
 
@@ -117,6 +124,8 @@ public class BreadcrumbsRepository
 
     public void AddToPool(GameObject objToAdd)
     {
+        var rb = objToAdd.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
         objPool.Enqueue(objToAdd);
     }
 

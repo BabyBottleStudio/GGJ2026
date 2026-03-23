@@ -14,5 +14,8 @@ public class Pickup : ScriptableObject
     public AudioClip onPickedSFX;
     public int value;
 
+    public AudioClip onThrowSFX;
+    public AudioClip onGroundHitSFX;
+    public AudioClip onEmptyThrowSFX;
     
 }

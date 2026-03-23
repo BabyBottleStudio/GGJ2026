@@ -13,6 +13,7 @@ public class PickupCollectedEventArgs : EventArgs
     }
 }
 
+
 /*
 public class ActionPressedEventArgs : EventArgs
 {
@@ -41,6 +42,7 @@ public static class EventRepository
     // https://www.youtube.com/watch?v=OuZrhykVytg&t=2s
 
     public static event EventHandler<PickupCollectedEventArgs> OnPickupCollected;
+    //public static event EventHandler<PickupCollectedEventArgs> OnThrow;
     public static event EventHandler<PickupCollectedEventArgs> OnKeyCollected;
 
     //public static event EventHandler<ActionPressedEventArgs> OnActionKeyPressed; // radimo na uklanjanju ovoga
@@ -48,6 +50,8 @@ public static class EventRepository
     public static event Action<bool> OnActionKeyPressed;
     public static event Action OnThrowPressed;
     public static event Action OnMaskPickupAnimFinish;
+
+    public static event Action OnCoinHitFloor;
 
     public static Action OnLevelFinished;
     public static Action OnCutsceneEnd;
@@ -82,6 +86,11 @@ public static class EventRepository
     {
         OnTileExit?.Invoke(sender, new SpecialTileEventArgs(position));
 
+    }
+
+    public static void InvokeOnCoinHitFloor()
+    {
+        OnCoinHitFloor?.Invoke();
     }
 
     public static void InvokeOnPickupCollected(int scoreValue, object sender)

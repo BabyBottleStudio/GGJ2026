@@ -21,3 +21,9 @@ public enum PlayerControlls
     On,
     Off
 }
+
+public enum AnyCoins
+{
+    No,
+    Yes
+}
