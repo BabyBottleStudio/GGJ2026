@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2315304539278463921}
-  - component: {fileID: 6223473397933766064}
+  - component: {fileID: 4363732425388998871}
   m_Layer: 0
   m_Name: Pillar
   m_TagString: Untagged
@@ -35,8 +35,8 @@ Transform:
   - {fileID: 4947068440234811142}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6223473397933766064
-BoxCollider:
+--- !u!136 &4363732425388998871
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -53,9 +53,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2.3457937, z: 1}
-  m_Center: {x: 0, y: 0.67289674, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.9
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4333489985550096052
 PrefabInstance:
   m_ObjectHideFlags: 0

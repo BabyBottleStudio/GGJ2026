@@ -38,6 +38,7 @@ public class UI_Handler : MonoBehaviour
         EventRepository.OnPickupCollected += UpdateScore;
         //EventRepository.OnCutsceneEnd += ActivateMaskUI;
         EventRepository.OnLevelFinished += ActivateLevelCompleteCanvas;
+        EventRepository.OnThrowPressed += UpdateScore;
     }
 
     private void OnDisable()
@@ -45,11 +46,21 @@ public class UI_Handler : MonoBehaviour
         EventRepository.OnPickupCollected -= UpdateScore;
         EventRepository.OnActionKeyPressed -= ChangePlayerImage;
         EventRepository.OnLevelFinished -= ActivateLevelCompleteCanvas;
+        EventRepository.OnThrowPressed -= UpdateScore;
     }
 
     private void UpdateScore(object sender, PickupCollectedEventArgs e)
     {
         coinsCollected += e.Value;
+        scoreText.text = coinsCollected.ToString();
+    }
+
+    private void UpdateScore()
+    {
+        if (coinsCollected == 0)
+            return;
+
+        coinsCollected --;
         scoreText.text = coinsCollected.ToString();
     }
 

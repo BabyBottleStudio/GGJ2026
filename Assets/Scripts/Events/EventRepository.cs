@@ -46,6 +46,7 @@ public static class EventRepository
     //public static event EventHandler<ActionPressedEventArgs> OnActionKeyPressed; // radimo na uklanjanju ovoga
 
     public static event Action<bool> OnActionKeyPressed;
+    public static event Action OnThrowPressed;
     public static event Action OnMaskPickupAnimFinish;
 
     public static Action OnLevelFinished;
@@ -97,6 +98,12 @@ public static class EventRepository
     {
        // OnActionKeyPressed?.Invoke(isMaskOn, new ActionPressedEventArgs(isMaskOn));
         OnActionKeyPressed?.Invoke(isMaskOn);
+    }
+
+    public static void InvokeOnThrowPressed()
+    {
+        // OnActionKeyPressed?.Invoke(isMaskOn, new ActionPressedEventArgs(isMaskOn));
+        OnThrowPressed?.Invoke();
     }
 
     public static void InvokeOnLevelFinished()

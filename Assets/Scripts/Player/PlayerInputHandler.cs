@@ -41,4 +41,14 @@ public class PlayerInputHandler : MonoBehaviour
     //    MaskPressed = false;
     //    Debug.Log($"Javljam se iz nove skripte. ConsumeMask: {MaskPressed}");
     //}
+
+    public void OnThrow(InputAction.CallbackContext ctx)
+    {
+        Debug.Log($"Javljam se iz nove skripte za bacanje.");
+        if (!ctx.performed)
+            return;
+
+        Debug.Log($"Throw je ok.");
+        EventRepository.InvokeOnThrowPressed();
+    }
 }
