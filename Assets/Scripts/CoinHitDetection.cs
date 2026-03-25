@@ -36,10 +36,10 @@ public class CoinHitDetection : MonoBehaviour
      */
     private void OnCollisionEnter(Collision collision)
     {
-        if (isHit)
-            return;
+        //if (isHit)
+        //    return;
 
-        isHit = true;
+        //isHit = true;
         Debug.Log("Coin sucsessfully fell");
         //EventRepository.InvokeOnCoinHitFloor();
         //audioSource.clip = pickupData.onGroundHitSFX;

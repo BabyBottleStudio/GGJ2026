@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
         StateMachine.SetPlayerInputState(PlayerControlls.On);
         playerInput.ActivateInput();
-        Debug.Log("InputActivated");
+        //Debug.Log("InputActivated");
         //playerControllActive = true;
         //}
         //return;

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class UI_Handler : MonoBehaviour
 {
     public TMP_Text scoreText;
+    public Animator coinIconAnim;
+    string coinIconAnimTrigger = "ThrowEmpty";
+    
     private int coinsCollected;
 
     public PlayerData playerData;
@@ -26,6 +29,8 @@ public class UI_Handler : MonoBehaviour
     {
         ChangeStateMaskUI(false);
         gameOverCanvas.SetActive(false);
+        coinIconAnim.SetInteger("State", 0);
+
         //maskImageAnimation.SetActive(false);
         //gameOverCanvasGroup = gameOverCanvas.GetComponent<CanvasGroup>();
     }
@@ -36,17 +41,35 @@ public class UI_Handler : MonoBehaviour
     private void OnEnable()
     {
         EventRepository.OnPickupCollected += UpdateScore;
+        EventRepository.OnPickupCollected += CoinPickupIconAnimation;
         //EventRepository.OnCutsceneEnd += ActivateMaskUI;
         EventRepository.OnLevelFinished += ActivateLevelCompleteCanvas;
         EventRepository.OnThrowPressed += UpdateScore;
+        EventRepository.OnThrowPressed += CoinThrowIconAnimation;
     }
 
     private void OnDisable()
     {
         EventRepository.OnPickupCollected -= UpdateScore;
+        EventRepository.OnPickupCollected -= CoinPickupIconAnimation;
         EventRepository.OnActionKeyPressed -= ChangePlayerImage;
         EventRepository.OnLevelFinished -= ActivateLevelCompleteCanvas;
         EventRepository.OnThrowPressed -= UpdateScore;
+        EventRepository.OnThrowPressed -= CoinThrowIconAnimation;
+    }
+
+
+    void CoinPickupIconAnimation(object sender, PickupCollectedEventArgs e)
+    {
+        coinIconAnim.SetTrigger("Collect");
+        //coinIconAnim.SetInteger("State", 1);
+        coinIconAnimTrigger = "Throw";
+    }
+
+    void CoinThrowIconAnimation()
+    {
+        coinIconAnim.SetTrigger(coinIconAnimTrigger);
+        coinIconAnimTrigger = coinsCollected <= 0 ? "ThrowEmpty" : "Throw";
     }
 
     private void UpdateScore(object sender, PickupCollectedEventArgs e)
