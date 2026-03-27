@@ -5,9 +5,9 @@ using UnityEngine;
 public class CoinHitDetection : MonoBehaviour
 {
 
-    bool isHit;
+    //bool isHit;
     AudioSource audioSource;
-    Pickup pickupData;
+    //Pickup pickupData;
 
     //AudioClip audioClip;
 
@@ -18,11 +18,11 @@ public class CoinHitDetection : MonoBehaviour
     }
 
 
-    private void OnEnable()
-    {
-        isHit = false;
+    //private void OnEnable()
+    //{
+    //    isHit = false;
 
-    }
+    //}
    /*
     private void OnTriggerEnter(Collider other)
     {
@@ -40,7 +40,7 @@ public class CoinHitDetection : MonoBehaviour
         //    return;
 
         //isHit = true;
-        Debug.Log("Coin sucsessfully fell");
+        //Debug.Log("Coin sucsessfully fell");
         //EventRepository.InvokeOnCoinHitFloor();
         //audioSource.clip = pickupData.onGroundHitSFX;
         audioSource.Play();

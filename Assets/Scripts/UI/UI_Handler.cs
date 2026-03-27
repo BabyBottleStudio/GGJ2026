@@ -29,7 +29,7 @@ public class UI_Handler : MonoBehaviour
     {
         ChangeStateMaskUI(false);
         gameOverCanvas.SetActive(false);
-        coinIconAnim.SetInteger("State", 0);
+        //coinIconAnim.SetInteger("State", 0);
 
         //maskImageAnimation.SetActive(false);
         //gameOverCanvasGroup = gameOverCanvas.GetComponent<CanvasGroup>();

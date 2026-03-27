@@ -80,7 +80,7 @@ public class Breadcrumbs : MonoBehaviour
 
     public void ThrowBreadcrumb()
     {
-        Debug.Log("Sucsessfully started throw breadcrumb");
+        //Debug.Log("Sucsessfully started throw breadcrumb");
 
         if (breadcrumbs.Count == 0)
             return;
@@ -89,8 +89,11 @@ public class Breadcrumbs : MonoBehaviour
         var currentBreadcrumb = breadcrumbs.RemoveFromPool();
 
         // scale na 0
+        var spawnPosition = transform.position + transform.up * 0.75f;
 
-        currentBreadcrumb.transform.position = transform.position + transform.up * 0.75f - transform.forward * 0.3f; // ovo ce da baguje jer ce odmah da ga instant pokupi
+        spawnPosition += -transform.forward * 0.3f; // pomeranje da bude iza ledja
+
+        currentBreadcrumb.transform.position = spawnPosition; // ovo ce da baguje jer ce odmah da ga instant pokupi
         // unhide
         currentBreadcrumb.SetActive(true);
         Vector3 throwDir = (-transform.forward + Vector3.up).normalized * 1.2f;
