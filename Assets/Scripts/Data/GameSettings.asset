@@ -37,3 +37,53 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  CameraIntroDuration: 2
+  CameraIntroToGameTransition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.0023926767
+      outSlope: -0.0023926767
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.6530343
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  PostProcessWeightTransitionDuration: 2
+  PostProcesWeightTransition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.0000066899856
+      outSlope: -0.0000066899856
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 7.7714458
+      outSlope: 7.7714458
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.096306086
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,13 +13,16 @@ public class CameraTransition : MonoBehaviour
     public GameSettings gameSettings;
     [SerializeField] Camera mainCamera;
     [Space(10)]
+    [SerializeField] PostProcessVolume startingPostProcess;
     [SerializeField] PostProcessVolume maskOnPostProcess;
     [Space(10)]
 
+    [SerializeField] Transform startTransform;
     [SerializeField] Transform defaultTransform;
     [SerializeField] Transform specialTileTransform;
     [SerializeField] Transform maskOnTransform;
 
+    //AnimationCurve cameraTransition;
     //[Space(10)]
     //[SerializeField] float transitionDuration;
     //[SerializeField] AnimationCurve cameraTransition;
@@ -36,6 +40,8 @@ public class CameraTransition : MonoBehaviour
 
     float targetWeight = 0f;
 
+    //Func<float, bool> isTargetWeightReached;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +49,9 @@ public class CameraTransition : MonoBehaviour
         isTransitioning = false;
         mainCamera.transform.position = defaultTransform.position;
         mainCamera.transform.rotation = defaultTransform.rotation;
+
+        //isTargetWeightReached = IsTargetWeightReached();
+
     }
 
     private void OnEnable()
@@ -62,13 +71,33 @@ public class CameraTransition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isTransitioning)
+        //if (isTransitioning)
+        //{
+        //    StopAllCoroutines();
+        //    StartCoroutine(CameraTransition_Movement());
+        //    //CameraTransitionMovement();
+        //    PostProcessBlending();
+        //}
+    }
+    public void TransitionToDefault()
+    {
+        StartTransition(defaultTransform);
+        SetTargetWeightForPostProcessing(false);
+
+        StopAllCoroutines();
+        StartCoroutine(CameraTransitionMovement(gameSettings.CameraIntroToGameTransition, gameSettings.CameraIntroDuration));
+        StartCoroutine(PostProcessBlending(startingPostProcess, gameSettings.PostProcesWeightTransition, gameSettings.PostProcessWeightTransitionDuration));
+        //CameraTransitionMovement();
+        //startingPostProcess.gameObject.SetActive(false);
+    }
+    public void StartingPostProcessActive(bool isActive)
+    {
+        startingPostProcess.gameObject.SetActive(isActive);
+        if (isActive)
         {
-            CameraTransitionMovement(targetTransform);
-            PostProcessBlending();
+            startingPostProcess.weight = 1f;
         }
     }
-
 
     public void PlayerMaskOn(bool maskOn)
     {
@@ -85,6 +114,10 @@ public class CameraTransition : MonoBehaviour
         }
 
         SetTargetWeightForPostProcessing(maskOn);
+
+        StopAllCoroutines();
+        StartCoroutine(CameraTransitionMovement(gameSettings.CameraTransition, gameSettings.CameraTransitionDuration));
+        StartCoroutine(PostProcessBlending(maskOnPostProcess, gameSettings.CameraTransition, 3f)); //gameSettings.CameraTransitionDuration));
     }
 
     void StartTransition(Transform target)
@@ -97,8 +130,8 @@ public class CameraTransition : MonoBehaviour
         transitionTimer = 0f;
         isTransitioning = true;
     }
-
-    void CameraTransitionMovement(Transform targetTransform)
+    /*
+    void CameraTransitionMovement()//Transform targetTransform)
     {
         transitionTimer += Time.deltaTime;
         float t = Mathf.Clamp01(transitionTimer / gameSettings.CameraTransitionDuration);
@@ -112,18 +145,98 @@ public class CameraTransition : MonoBehaviour
         {
             isTransitioning = false;
         }
+    }*/
+
+    public void SetCameraToStartPosition()
+    {
+        mainCamera.transform.position = startTransform.position;
+        mainCamera.transform.rotation = startTransform.rotation;
     }
 
     public void SetTargetWeightForPostProcessing(bool isOn)
     {
         targetWeight = isOn ? 1f : 0f;
+        //isTargetWeightReached = IsTargetWeightReached();
     }
 
+    /*
+    bool IsTargetWeightReached(float postProcessWeight)
+    {
+        if (targetWeight == 1f)
+        {
+            return postProcessWeight < targetWeight;
+        }
+        else if (targetWeight == 0)
+        {
+            return postProcessWeight >= targetWeight;
+        }
+
+        return false;
+    }
+    */
+
+    /*
+    Func<float, bool> IsTargetWeightReached()
+    {
+        switch (targetWeight)
+        {
+            case 0f:
+                return (currentWeight) => currentWeight >= targetWeight;
+            case 1f:
+                return (currentWeight) => currentWeight < targetWeight;
+            default:
+                throw new ArgumentException(targetWeight.ToString());
+        }
+    }
+    */
+    /*
     void PostProcessBlending()
     {
         var amt = Mathf.MoveTowards(maskOnPostProcess.weight, targetWeight, Time.deltaTime * gameSettings.CameraTransitionDuration);
         maskOnPostProcess.weight = amt;
+    } 
+    */
+
+
+
+    IEnumerator PostProcessBlending(PostProcessVolume postProcess, AnimationCurve transitionCurve, float duration)
+    {
+        float transitionTimer = 0f;
+        //float amt = postProcess.weight == 1f ? 1f : 0f;
+        float startWeight = postProcess.weight;
+
+        while (transitionTimer < duration) // (treba da se upotrebi delegat koji radi pravilnu promenu)
+        {
+            transitionTimer += Time.deltaTime;
+
+            float t = Mathf.Clamp01(transitionTimer / duration);
+            float curveT = transitionCurve.Evaluate(t);
+
+            //var amt = Mathf.MoveTowards(postProcess.weight, targetWeight, curveT); //Time.deltaTime * gameSettings.CameraTransitionDuration);
+           var amt = Mathf.Lerp(startWeight, targetWeight, curveT); //Time.deltaTime * gameSettings.CameraTransitionDuration);
+            postProcess.weight = amt;
+            yield return null;
+        }
+
+        postProcess.weight = targetWeight;
     }
 
+    IEnumerator CameraTransitionMovement(AnimationCurve transitionCurve, float duration)
+    {
+        while (transitionTimer < duration)
+        {
+            transitionTimer += Time.deltaTime;
+            //float t = Mathf.Clamp01(transitionTimer / gameSettings.CameraTransitionDuration);
+            float t = Mathf.Clamp01(transitionTimer / duration);
+            float curveT = transitionCurve.Evaluate(t);
+
+            mainCamera.transform.position = Vector3.Lerp(startPosition, targetTransform.position, curveT);
+            mainCamera.transform.rotation = Quaternion.Slerp(startRotation, targetTransform.rotation, curveT);
+
+            yield return null;
+        }
+
+        isTransitioning = false;
+    }
 
 }
