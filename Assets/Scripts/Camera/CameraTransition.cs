@@ -49,6 +49,7 @@ public class CameraTransition : MonoBehaviour
         isTransitioning = false;
         mainCamera.transform.position = defaultTransform.position;
         mainCamera.transform.rotation = defaultTransform.rotation;
+        mainCamera.fieldOfView = gameSettings.IntroFOV;
 
         //isTargetWeightReached = IsTargetWeightReached();
 
@@ -69,24 +70,25 @@ public class CameraTransition : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        //if (isTransitioning)
-        //{
-        //    StopAllCoroutines();
-        //    StartCoroutine(CameraTransition_Movement());
-        //    //CameraTransitionMovement();
-        //    PostProcessBlending();
-        //}
-    }
+    //void Update()
+    //{
+    //    //if (isTransitioning)
+    //    //{
+    //    //    StopAllCoroutines();
+    //    //    StartCoroutine(CameraTransition_Movement());
+    //    //    //CameraTransitionMovement();
+    //    //    PostProcessBlending();
+    //    //}
+    //}
     public void TransitionToDefault()
     {
         StartTransition(defaultTransform);
         SetTargetWeightForPostProcessing(false);
 
         StopAllCoroutines();
-        StartCoroutine(CameraTransitionMovement(gameSettings.CameraIntroToGameTransition, gameSettings.CameraIntroDuration));
+        StartCoroutine(CameraTransitionMovement(gameSettings.CameraIntroToGamePosTransition, gameSettings.CameraIntroToGameRotationTransition, gameSettings.CameraIntroTransitionDuration));
         StartCoroutine(PostProcessBlending(startingPostProcess, gameSettings.PostProcesWeightTransition, gameSettings.PostProcessWeightTransitionDuration));
+        StartCoroutine(CameraFOVBlending(gameSettings.CameraIntroFOVTransition, gameSettings.CameraFOVTransitionDuration));
         //CameraTransitionMovement();
         //startingPostProcess.gameObject.SetActive(false);
     }
@@ -151,6 +153,7 @@ public class CameraTransition : MonoBehaviour
     {
         mainCamera.transform.position = startTransform.position;
         mainCamera.transform.rotation = startTransform.rotation;
+        mainCamera.fieldOfView = gameSettings.IntroFOV;
     }
 
     public void SetTargetWeightForPostProcessing(bool isOn)
@@ -237,6 +240,47 @@ public class CameraTransition : MonoBehaviour
         }
 
         isTransitioning = false;
+    }
+
+
+    IEnumerator CameraTransitionMovement(AnimationCurve posTransitionCurve, AnimationCurve rotationTransitionCurve, float duration)
+    {
+        while (transitionTimer < duration)
+        {
+            transitionTimer += Time.deltaTime;
+            //float t = Mathf.Clamp01(transitionTimer / gameSettings.CameraTransitionDuration);
+            float t = Mathf.Clamp01(transitionTimer / duration);
+            float posCurveT = posTransitionCurve.Evaluate(t);
+            float rotationCurveT = rotationTransitionCurve.Evaluate(t);
+
+            mainCamera.transform.position = Vector3.Lerp(startPosition, targetTransform.position, posCurveT);
+            mainCamera.transform.rotation = Quaternion.Slerp(startRotation, targetTransform.rotation, rotationCurveT);
+
+            yield return null;
+        }
+
+        isTransitioning = false;
+    }
+
+
+    IEnumerator CameraFOVBlending(AnimationCurve transitionCurve, float duration)
+    {
+        float transitionTimer = 0f;
+
+        float startFOV = gameSettings.IntroFOV;
+
+        while(transitionTimer < duration)
+        {
+            transitionTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(transitionTimer / duration);
+            float curveT = transitionCurve.Evaluate(t);
+
+            mainCamera.fieldOfView = Mathf.Lerp(startFOV, gameSettings.GameFOV, curveT);
+
+            yield return null;
+        }
+
+        mainCamera.fieldOfView = gameSettings.GameFOV;
     }
 
 }

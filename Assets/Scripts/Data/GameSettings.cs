@@ -5,13 +5,21 @@ using UnityEngine;
 [CreateAssetMenu]
 public class GameSettings : ScriptableObject
 {
-    [Header("Camera Settings")]
+    [Header("Mask Transition Camera")]
     public float CameraTransitionDuration;
     public AnimationCurve CameraTransition;
 
-    [Header("Camera Intro Settings")]
-    public float CameraIntroDuration;
-    public AnimationCurve CameraIntroToGameTransition;
+    [Header("Intro Transition Camera")]
+    public float CameraIntroTransitionDuration;
+    public AnimationCurve CameraIntroToGamePosTransition;
+    public AnimationCurve CameraIntroToGameRotationTransition;
+
+    public AnimationCurve CameraIntroFOVTransition;
+    public float CameraFOVTransitionDuration;
+    public float IntroFOV;
+    public float GameFOV;
+
+
 
     public float PostProcessWeightTransitionDuration;
     public AnimationCurve PostProcesWeightTransition;

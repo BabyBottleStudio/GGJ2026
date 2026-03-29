@@ -37,31 +37,100 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  CameraIntroDuration: 2
-  CameraIntroToGameTransition:
+  CameraIntroTransitionDuration: 2
+  CameraIntroToGamePosTransition:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.0023926767
-      outSlope: -0.0023926767
+      inSlope: Infinity
+      outSlope: -0.0031087857
+      tangentMode: 5
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.5026385
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.002260223
+      outSlope: 0.002260223
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.6912929
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CameraIntroToGameRotationTransition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0046084635
+      outSlope: 0.0046084635
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.6530343
+      outWeight: 0.48435736
+    - serializedVersion: 3
+      time: 0.7
+      value: 1
+      inSlope: 0.005591758
+      outSlope: 0
+      tangentMode: 65
+      weightedMode: 3
+      inWeight: 0.79834145
+      outWeight: 0.051029775
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.13490663
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CameraIntroFOVTransition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.4911966
+      outSlope: 3.4911966
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.21185659
+    - serializedVersion: 3
+      time: 0.88186735
+      value: 1
+      inSlope: 0.00023436044
+      outSlope: 0
+      tangentMode: 65
+      weightedMode: 3
+      inWeight: 0.83029836
+      outWeight: 0.35864747
     - serializedVersion: 3
       time: 1
       value: 1
       inSlope: -0
       outSlope: -0
-      tangentMode: 0
+      tangentMode: 65
       weightedMode: 3
-      inWeight: 1
+      inWeight: 0.34472263
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  CameraFOVTransitionDuration: 1.5
+  IntroFOV: 52
+  GameFOV: 45
   PostProcessWeightTransitionDuration: 2
   PostProcesWeightTransition:
     serializedVersion: 2
@@ -69,20 +138,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.0000066899856
-      outSlope: -0.0000066899856
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
-      weightedMode: 3
+      weightedMode: 0
       inWeight: 0
-      outWeight: 1
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 7.7714458
-      outSlope: 7.7714458
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.096306086
+      weightedMode: 0
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
