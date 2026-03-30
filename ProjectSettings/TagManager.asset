@@ -9,7 +9,6 @@ TagManager:
   - Exit
   - CameraTrigger
   - Interact
-  - Iteractable
   layers:
   - Default
   - TransparentFX
