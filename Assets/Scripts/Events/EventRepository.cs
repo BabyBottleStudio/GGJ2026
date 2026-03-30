@@ -37,6 +37,8 @@ public class SpecialTileEventArgs : EventArgs
 }
 
 
+
+
 public static class EventRepository
 {
     // https://www.youtube.com/watch?v=OuZrhykVytg&t=2s
@@ -56,6 +58,9 @@ public static class EventRepository
     public static Action OnLevelFinished;
     public static Action OnCutsceneEnd;
 
+    public static Action OnInteractinStart;
+    public static Action OnInteractinEnd;
+
     public static event EventHandler<SpecialTileEventArgs> OnTileEnter;
     public static event EventHandler<SpecialTileEventArgs> OnTileExit;
 
@@ -65,6 +70,16 @@ public static class EventRepository
     //public static Action OnMouseExitButton;
     //public static Action OnMouseSelectButton;
 
+
+    public static void InvokeOnInteractionStart()
+    {
+        OnInteractinStart?.Invoke();
+    }
+
+    public static void InvokeOnInteractionEnd()
+    {
+        OnInteractinEnd?.Invoke();
+    }
 
     public static void InvokeOnMaskPickupAnimFinish()
     {

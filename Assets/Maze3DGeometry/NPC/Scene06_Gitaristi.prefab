@@ -818,6 +818,7 @@ Transform:
   - {fileID: 1227386792970526176}
   - {fileID: 680453136841123292}
   - {fileID: 3871696105811938530}
+  - {fileID: 8114846652682138974}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1934931032682232604
@@ -1747,6 +1748,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 831546605736125436, guid: a6075b54fa73afb41a6387e63b20befb, type: 3}
   m_PrefabInstance: {fileID: 214848689374643744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1834030384414346238
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5788882094297134485}
+    m_Modifications:
+    - target: {fileID: 7535145592644554805, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: textToSay
+      value: Jamming alone is not as fun as jamming with friend.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.173
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.796
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666005597005569526, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+      propertyPath: m_Name
+      value: Iteractable
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+--- !u!4 &8114846652682138974 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
+  m_PrefabInstance: {fileID: 1834030384414346238}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4481424827860283166
 PrefabInstance:

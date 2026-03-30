@@ -8,6 +8,8 @@ TagManager:
   - Key
   - Exit
   - CameraTrigger
+  - Interact
+  - Iteractable
   layers:
   - Default
   - TransparentFX

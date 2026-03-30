@@ -30,6 +30,17 @@ public class TriggerDetection : MonoBehaviour
             StateMachine.SetTile(Tile.Special);
             EventRepository.InvokeOnEnterTile(other, other.gameObject.transform.position);
         }
+
+        if (other.CompareTag("Interact"))
+        {
+            EventRepository.InvokeOnInteractionStart();
+            if (other.TryGetComponent<IInteractable>(out var interactable))
+            {
+                Debug.Log(interactable.GetTextToSay());
+            }
+
+            Debug.Log("Interaction started. The text should be displayed on the screen.");
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -38,6 +49,13 @@ public class TriggerDetection : MonoBehaviour
         {
             StateMachine.SetTile(Tile.Regular);
             EventRepository.InvokeOnExitTile(other, other.gameObject.transform.position);
+        }
+
+        if (other.CompareTag("Interact"))
+        {
+            EventRepository.InvokeOnInteractionEnd();
+
+            Debug.Log("Interaction ended. The text should be removed from the screen.");
         }
     }
 
