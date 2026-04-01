@@ -15,11 +15,11 @@ public class LevelAssembly : MonoBehaviour
     Vector3 exitCameraPosition;
 
     GameObject exitGeometry;
-   
+
 
     MazeGenerator mazeGenerator;
 
-    Stack<GameObject> npcPool;
+    Stack<NonPlayableCharacter> npcPool;
 
     char[,] maze;
 
@@ -121,7 +121,7 @@ public class LevelAssembly : MonoBehaviour
                 {
                     Instantiate(levelGeometry.GetRandomElement("room"), pos, Quaternion.identity);
                     Instantiate(levelGeometry.GetRandomElement("exitKey"), pos + offset, Quaternion.identity);
-                    
+
                     Instantiate(levelGeometry.GetRandomElement("exitKeyStand"), pos + offset, Quaternion.identity);
 
 
@@ -141,7 +141,7 @@ public class LevelAssembly : MonoBehaviour
                     Instantiate(levelGeometry.GetRandomElement("firstRoom"), pos, Quaternion.identity);
                     // generisi plejera
                 }
-                else if(maze[i, j] == 'v')
+                else if (maze[i, j] == 'v')
                 {
 
                     Instantiate(levelGeometry.GetRandomElement("room"), pos, Quaternion.identity);
@@ -150,9 +150,24 @@ public class LevelAssembly : MonoBehaviour
 
                     if (test < chanceToSpawnNPC && npcPool.Count > 0)
                     {
-                        Instantiate(npcPool.Pop(), pos, Quaternion.identity);
+                        NonPlayableCharacter npcData = npcPool.Pop();
+
+                        GameObject npcGeometry = Instantiate(npcData.Geometry, pos, Quaternion.identity);
+
+
+                        var interactableObject = npcGeometry.transform.Find("Interactable");
+
+                        if (interactableObject != null)
+                        {
+                            interactableObject.TryGetComponent<Interact>(out var interact);
+                            interact.SetNPCData(npcData);
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Interactable obj not found at {npcGeometry.name}");
+                        }
+
                     }
-                   
                 }
                 else
                 {
@@ -174,7 +189,7 @@ public class LevelAssembly : MonoBehaviour
             //Console.Write($" {verticallWall} ");
             for (int j = 0; j < maze.GetLength(1); j += 2)
             {
-                var zCoord = (i+1) / 2 * roomSize * -1;
+                var zCoord = (i + 1) / 2 * roomSize * -1;
                 var xCoord = j / 2 * roomSize;
                 //if (maze[i, j] == '+')
                 //    continue;
@@ -211,7 +226,7 @@ public class LevelAssembly : MonoBehaviour
                 //    continue;
 
                 var zCoord = i / 2 * roomSize * -1;
-                var xCoord = (j+1) / 2 * roomSize;
+                var xCoord = (j + 1) / 2 * roomSize;
 
                 if (maze[i, j] == '|')
                 {
@@ -241,7 +256,7 @@ public class LevelAssembly : MonoBehaviour
     {
 
     }
-        
+
 
     void DrawMaze(char[,] lavirintToDisplay)
     {

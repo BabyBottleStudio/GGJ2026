@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Interact : MonoBehaviour, IInteractable
 {
+    [SerializeField] NonPlayableCharacter npcData;
 
-    [SerializeField] string textToSay;
-    public string GetTextToSay() => textToSay;
+    public NonPlayableCharacter OnPlayerEnter() => npcData;
+
+    public void SetNPCData(NonPlayableCharacter npcData)
+    {
+        this.npcData = npcData;
+    }
     
 }

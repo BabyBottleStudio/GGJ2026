@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Serbian (Latin) (sr-Latn)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-Serbian (Latin) (sr-Latn)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8389e462a1f946e499147b1f3ac8a2c0
+  m_SerializeEntries:
+  - m_GUID: 114bb60b7b9fc0748a34064812c84e69
+    m_Address: NPCDialogs_sr-Latn
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-sr-Latn
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 414ee9491c041e04ba2563a191fd5560, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4df5b69919d2001439c16a1e70dff79e, type: 2}
+    - {fileID: 11400000, guid: 99f54540e4c517c4ea803a2206741a7e, type: 2}

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7633164740569120416}
   - component: {fileID: 8647041115537977945}
-  - component: {fileID: 7535145592644554805}
+  - component: {fileID: 8164377856673006743}
   m_Layer: 0
-  m_Name: Iteractable
+  m_Name: Interactable
   m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.25
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7535145592644554805
+--- !u!114 &8164377856673006743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

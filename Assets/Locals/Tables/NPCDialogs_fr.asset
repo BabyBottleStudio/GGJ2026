@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: NPCDialogs_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 5e835ee40be347b429fc5bfa4a7ac174, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 37207855104
+    m_Localized: "Tu me manques, mon ami.\nNous p\xEAchions ensemble autrefois..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1034768535552
+    m_Localized: "Une journ\xE9e de p\xEAche avec un ami est une journ\xE9e bien
+      pass\xE9e !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1873587392512
+    m_Localized: "... un banc ... se reposer dans la for\xEAt..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2327503360000
+    m_Localized: "O\xF9 pourrait-il \xEAtre ???"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2636841668608
+    m_Localized: "... une partie d\u2019\xE9checs abandonn\xE9e... \xE9trange..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3094138245120
+    m_Localized: "Mon grand-p\xE8re m\u2019a appris \xE0 faire un feu de camp."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4160225464320
+    m_Localized: "... La chaleur d\u2019un feu est la chose la plus belle au monde.\r\nMerci,
+      grand-p\xE8re !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3531201499136
+    m_Localized: "Jouer seul n\u2019est pas aussi amusant que jouer avec un ami."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3820772052992
+    m_Localized: ... (bruit de lecture) ...
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

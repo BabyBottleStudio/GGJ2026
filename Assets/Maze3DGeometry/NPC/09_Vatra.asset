@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1d0f8db5660e448b44b8d140c8eae1, type: 3}
+  m_Name: 09_Vatra
+  m_EditorClassIdentifier: 
+  Geometry: {fileID: 6030234515085630287, guid: b20c0c262e6fb454693977e5a5f301fc, type: 3}
+  Icon: {fileID: 21300000, guid: f4221f64dda0a7b44b2c747d6397396c, type: 3}
+  dialogue:
+    m_TableReference:
+      m_TableCollectionName: GUID:5e835ee40be347b429fc5bfa4a7ac174
+    m_TableEntryReference:
+      m_KeyId: 4160225464320
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []

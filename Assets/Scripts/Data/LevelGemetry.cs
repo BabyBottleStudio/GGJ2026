@@ -8,7 +8,7 @@ public class LevelGemetry : ScriptableObject
 {
     [Header("Maze 3D Geometry")]
     [SerializeField] private List<GameObject> roomGeometry;
-    [SerializeField] private List<GameObject> npcScenesGeometry;
+    [SerializeField] private List<NonPlayableCharacter> npcScenesGeometry;
     [Space(10)]
     [SerializeField] private List<GameObject> horizontalWallGeometry;
     [SerializeField] private List<GameObject> verticalWallGeometry;
@@ -44,10 +44,10 @@ public class LevelGemetry : ScriptableObject
 
     //}
 
-    public Stack<GameObject> ShuffleToStack()
+    public Stack<NonPlayableCharacter> ShuffleToStack()
     {
         // napravi kopiju da ne diraš original
-        List<GameObject> temp = new List<GameObject>(npcScenesGeometry);
+        List<NonPlayableCharacter> temp = new List<NonPlayableCharacter>(npcScenesGeometry);
 
         // Fisher–Yates shuffle
         for (int i = temp.Count - 1; i > 0; i--)
@@ -56,7 +56,7 @@ public class LevelGemetry : ScriptableObject
             (temp[i], temp[rnd]) = (temp[rnd], temp[i]);
         }
 
-        return new Stack<GameObject>(temp);
+        return new Stack<NonPlayableCharacter>(temp);
     }
 
 
@@ -74,11 +74,34 @@ public class LevelGemetry : ScriptableObject
                 return null;
 
             case "npc":
+
+                /*
+                NonPlayableCharacter npcData = null;
+
                 if (npcScenesGeometry.Count == 1)
-                    return npcScenesGeometry.FirstOrDefault();
+                    npcData = npcScenesGeometry.FirstOrDefault();
 
                 if (npcScenesGeometry.Count > 1)
-                    return npcScenesGeometry.ElementAtOrDefault(Random.Range(0, npcScenesGeometry.Count));
+                    npcData = npcScenesGeometry.ElementAtOrDefault(Random.Range(0, npcScenesGeometry.Count));
+
+                GameObject npcGeometry;
+                if (npcData != null)
+                {
+                    npcGeometry = npcData.Geometry;
+                    var interactableObject = npcGeometry.transform.Find("Interactable");
+
+                    if (interactableObject != null)
+                    {
+                        interactableObject.TryGetComponent<Interact>(out var interact);
+                        interact.SetNPCData(npcData);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Interactable obj not found at {npcGeometry.name}");
+                    }
+                    return npcGeometry;
+                }
+                */
 
                 return null;
 
@@ -119,7 +142,7 @@ public class LevelGemetry : ScriptableObject
                     return verticalWallGeometry.ElementAtOrDefault(Random.Range(0, roomGeometry.Count));
 
                 return null;
-                
+
             case "verticalPassage":
                 if (verticalPassageGeometry.Count == 1)
                     return verticalPassageGeometry.FirstOrDefault();
@@ -187,12 +210,12 @@ public class LevelGemetry : ScriptableObject
             default:
                 Debug.LogWarning("Invalid input key for getting the random element!");
                 return null;
-                
+
         }
-                
+
 
     }
 
-    
+
 
 }

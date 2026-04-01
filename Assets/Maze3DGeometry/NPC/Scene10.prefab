@@ -2628,7 +2628,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7535145592644554805, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: textToSay
-      value: A day spend fishing with a friend is a day well spent!
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2672,7 +2672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8666005597005569526, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: m_Name
-      value: Iteractable
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

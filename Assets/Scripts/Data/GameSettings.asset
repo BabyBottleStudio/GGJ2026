@@ -130,7 +130,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   CameraFOVTransitionDuration: 1.5
   IntroFOV: 52
-  GameFOV: 45
+  GameFOV: 40
   PostProcessWeightTransitionDuration: 2
   PostProcesWeightTransition:
     serializedVersion: 2

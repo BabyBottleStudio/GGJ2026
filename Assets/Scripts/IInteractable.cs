@@ -1,4 +1,4 @@
 ﻿internal interface IInteractable
 {
-    public string GetTextToSay();
+    public NonPlayableCharacter OnPlayerEnter();
 }

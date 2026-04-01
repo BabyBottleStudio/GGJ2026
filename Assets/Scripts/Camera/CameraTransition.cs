@@ -49,7 +49,7 @@ public class CameraTransition : MonoBehaviour
         isTransitioning = false;
         mainCamera.transform.position = defaultTransform.position;
         mainCamera.transform.rotation = defaultTransform.rotation;
-        mainCamera.fieldOfView = gameSettings.IntroFOV;
+        mainCamera.fieldOfView = gameSettings.GameFOV;
 
         //isTargetWeightReached = IsTargetWeightReached();
 
@@ -149,7 +149,7 @@ public class CameraTransition : MonoBehaviour
         }
     }*/
 
-    public void SetCameraToStartPosition()
+    public void SetCameraToIntroPosition()
     {
         mainCamera.transform.position = startTransform.position;
         mainCamera.transform.rotation = startTransform.rotation;

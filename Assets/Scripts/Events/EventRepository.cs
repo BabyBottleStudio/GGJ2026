@@ -26,6 +26,16 @@ public class ActionPressedEventArgs : EventArgs
 }
 */
 
+public class InteractionEventArgs : EventArgs
+{
+    public NonPlayableCharacter NPCData { get; }
+
+    public InteractionEventArgs(NonPlayableCharacter npcData)
+    {
+        this.NPCData = npcData;
+    }
+}
+
 public class SpecialTileEventArgs : EventArgs
 {
     public Vector3 targetPosition;
@@ -58,8 +68,8 @@ public static class EventRepository
     public static Action OnLevelFinished;
     public static Action OnCutsceneEnd;
 
-    public static Action OnInteractinStart;
-    public static Action OnInteractinEnd;
+    public static event EventHandler<InteractionEventArgs> OnInteractionStart;
+    public static Action OnInteractionEnd;
 
     public static event EventHandler<SpecialTileEventArgs> OnTileEnter;
     public static event EventHandler<SpecialTileEventArgs> OnTileExit;
@@ -71,14 +81,14 @@ public static class EventRepository
     //public static Action OnMouseSelectButton;
 
 
-    public static void InvokeOnInteractionStart()
+    public static void InvokeOnInteractionStart(object sender, NonPlayableCharacter npcData)
     {
-        OnInteractinStart?.Invoke();
+        OnInteractionStart?.Invoke(sender, new InteractionEventArgs(npcData));
     }
 
     public static void InvokeOnInteractionEnd()
     {
-        OnInteractinEnd?.Invoke();
+        OnInteractionEnd?.Invoke();
     }
 
     public static void InvokeOnMaskPickupAnimFinish()

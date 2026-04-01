@@ -33,13 +33,13 @@ public class TriggerDetection : MonoBehaviour
 
         if (other.CompareTag("Interact"))
         {
-            EventRepository.InvokeOnInteractionStart();
             if (other.TryGetComponent<IInteractable>(out var interactable))
             {
-                Debug.Log(interactable.GetTextToSay());
+                EventRepository.InvokeOnInteractionStart(other, interactable.OnPlayerEnter());
+                Debug.Log("Interaction started. The text should be displayed on the screen.");
+
             }
 
-            Debug.Log("Interaction started. The text should be displayed on the screen.");
         }
     }
 
@@ -59,7 +59,7 @@ public class TriggerDetection : MonoBehaviour
         }
     }
 
-  
+
 
 
 

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: NPCDialogs_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 5e835ee40be347b429fc5bfa4a7ac174, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 37207855104
+    m_Localized: "Te extra\xF1o, amigo m\xEDo.\nSol\xEDamos pescar juntos..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1034768535552
+    m_Localized: "\xA1Un d\xEDa de pesca con un amigo es un d\xEDa bien aprovechado!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1873587392512
+    m_Localized: ... un banco ... descansando en el bosque...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2327503360000
+    m_Localized: "\xBFD\xF3nde podr\xEDa estar???"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2636841668608
+    m_Localized: "... una partida de ajedrez abandonada ... extra\xF1o ..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3094138245120
+    m_Localized: "Mi abuelo me ense\xF1\xF3 a hacer una fogata."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4160225464320
+    m_Localized: "... El calor de una fogata es lo m\xE1s hermoso del mundo.\r\n\xA1Gracias,
+      abuelo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3531201499136
+    m_Localized: Tocar solo no es tan divertido como tocar con un amigo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3820772052992
+    m_Localized: ... (sonido de lectura) ...
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

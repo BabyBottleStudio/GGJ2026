@@ -828,7 +828,7 @@ Transform:
   - {fileID: 1227386792970526176}
   - {fileID: 680453136841123292}
   - {fileID: 2630875875109938459}
-  - {fileID: 2997281166192016705}
+  - {fileID: 585563455858597503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1934931032682232604
@@ -1648,7 +1648,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1001 &4644910736718382049
+--- !u!1001 &7047610324082385119
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1656,13 +1656,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5788882094297134485}
     m_Modifications:
-    - target: {fileID: 7535145592644554805, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
-      propertyPath: textToSay
-      value: Where could he be...
-      objectReference: {fileID: 0}
     - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.455
+      value: 3.218
       objectReference: {fileID: 0}
     - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1670,7 +1666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.449
+      value: -1.669
       objectReference: {fileID: 0}
     - target: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1700,21 +1696,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8647041115537977945, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
-      propertyPath: m_Radius
-      value: 0.88
-      objectReference: {fileID: 0}
     - target: {fileID: 8666005597005569526, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
       propertyPath: m_Name
-      value: Iteractable
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
---- !u!4 &2997281166192016705 stripped
+--- !u!4 &585563455858597503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7633164740569120416, guid: da34d6bd4a9afd147bf17032a4491ac9, type: 3}
-  m_PrefabInstance: {fileID: 4644910736718382049}
+  m_PrefabInstance: {fileID: 7047610324082385119}
   m_PrefabAsset: {fileID: 0}
