@@ -25,12 +25,16 @@ public class DialogueUI : MonoBehaviour
     public PlayableAsset dialogOn;
     public PlayableAsset dialogOff;
 
+    //AudioSource audioSource;
+    //public AudioClip typingLettersSound;
+
     // treba nam event koji ce kao parametar da prosledi npc data skriptable objekat
 
     private void Start()
     {
 
         dialogueUIRoot.SetActive(false);
+        //audioSource = GetComponent<AudioSource>();
         //animator = GetComponent<Animator>();
         //playableDirector = dialogueUIRoot.GetComponent<PlayableDirector>();
     }
@@ -116,6 +120,7 @@ public class DialogueUI : MonoBehaviour
         {
             maxVisibleChars++;
             dialogueDisplayText.maxVisibleCharacters = maxVisibleChars;
+            //audioSource.PlayOneShot(typingLettersSound, 0.05f);
             yield return new WaitForSeconds(maxTypeTime / typeSpeed);
 
         }
