@@ -45,11 +45,6 @@ public class Breadcrumbs : MonoBehaviour
         }
 
         
-
-
-        //newBreadcrumb.SetActive(false);
-
-
         // ako je obican, samo ga enqueue a ako je onaj vredniji, onda instanciraj u obj pool odgovarajuci broj komada
         Debug.Log($"Picked up {e.Value} value coin!");
 
@@ -95,7 +90,7 @@ public class Breadcrumbs : MonoBehaviour
         CoinValue coinValue = currentBreadcrumb.GetComponent<CoinValue>();
 
 
-        // scale na 0
+
         var spawnPosition = transform.position + transform.up * 0.75f;
 
         spawnPosition += -transform.forward * 0.3f; // pomeranje da bude iza ledja
@@ -105,9 +100,10 @@ public class Breadcrumbs : MonoBehaviour
         coinValue.PrepareForPicking();
 
         Vector3 throwDir = (-transform.forward + Vector3.up).normalized * 1.2f;
+        coinValue.GetCoinRB().AddForce(throwDir * throwForce, ForceMode.Impulse);
 
-        var rb = currentBreadcrumb.GetComponent<Rigidbody>();
-        rb.AddForce(throwDir * throwForce, ForceMode.Impulse);
+        //var rb = currentBreadcrumb.GetComponent<Rigidbody>();
+        //rb.AddForce(throwDir * throwForce, ForceMode.Impulse);
 
         if (breadcrumbs.Count == 0)
             StateMachine.SetCoinsState(AnyCoins.No);
@@ -124,22 +120,16 @@ public class BreadcrumbsRepository
     }
 
     Queue<GameObject> objPool;
-    //Queue<GameObject> VFXPool;
-
 
     // kada plejer pokupi coin, on bi trebalo da se stavi u obj pool i da se stavi u queue
 
     public BreadcrumbsRepository()
     {
         objPool = new Queue<GameObject>();
-        //VFXPool = new Queue<GameObject>();
-
     }
 
     public void AddToPool(GameObject objToAdd)
     {
-        //    if (objPool == null)
-        //        objPool = new Queue<GameObject>();
         objPool.Enqueue(objToAdd);
     }
 

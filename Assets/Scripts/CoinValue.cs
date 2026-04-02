@@ -11,6 +11,8 @@ public class CoinValue : MonoBehaviour, ICollectable
     private GameObject OnCollectedVFX;
 
     Rigidbody rb;
+    BoxCollider boxCollider;
+    CapsuleCollider capsuleCollider;
 
     public int GetValue => pickupData.value;
 
@@ -19,6 +21,10 @@ public class CoinValue : MonoBehaviour, ICollectable
         geometry = transform.Find("Geometry").gameObject;
         OnCollectedVFX = transform.Find("VFX").gameObject;
         rb = GetComponent<Rigidbody>();
+        
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        boxCollider = GetComponent<BoxCollider>();
+
         PrepareForPicking();
     }
 
@@ -26,10 +32,14 @@ public class CoinValue : MonoBehaviour, ICollectable
     {
         geometry.SetActive(true);
         OnCollectedVFX.SetActive(false);
-        GetComponent<CapsuleCollider>().enabled = true;
-        GetComponent<BoxCollider>().enabled = true;
+        
+        capsuleCollider.enabled = true;
+        boxCollider.enabled = true;
+
         rb.useGravity = true;
     }
+    public Rigidbody GetCoinRB() => rb;
+
 
     public GameObject GetGeometry => geometry;
 
@@ -41,14 +51,17 @@ public class CoinValue : MonoBehaviour, ICollectable
     {
         geometry.SetActive(false);
         OnCollectedVFX.SetActive(true);
-        GetComponent<CapsuleCollider>().enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
+        
+        capsuleCollider.enabled = false;
+        boxCollider.enabled = false;
 
         rb.useGravity = false;
+
         if (rb.isKinematic)
             rb.isKinematic = false;
     }
     //public AudioClip GetOnThrowSFX => pickupData.onThrowSFX;
 
     //public AudioClip GetOnGroundHitSFX => pickupData.onGroundHitSFX;
+
 }
