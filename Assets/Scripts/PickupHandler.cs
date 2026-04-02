@@ -32,10 +32,12 @@ public class PickupHandler : MonoBehaviour
             return;
         }
 
-        GameObject onPickedVFX = collectableGameObj.GetComponent<ICollectable>().GetOnCollectedVFX;
-        Instantiate(onPickedVFX, collectableGameObj.transform.position, Quaternion.identity);
+        var coinValue = collectableGameObj.GetComponent<CoinValue>();
+        GameObject onPickedVFX = coinValue.GetOnCollectedVFX;
+        coinValue.OnCollect();
+        //Instantiate(onPickedVFX, collectableGameObj.transform.position, Quaternion.identity);
 
-        collectableGameObj.SetActive(false);
+        //collectableGameObj.SetActive(false);
     }
 
     private void KeyPickedUp(object sender, PickupCollectedEventArgs e)
@@ -51,7 +53,7 @@ public class PickupHandler : MonoBehaviour
 
         pickupMaskAnim.gameObject.transform.position = collectableGameObj.transform.position;
         //pickupMaskAnim.gameObject.SetActive(true);
-        Debug.Log("Cutscene Working 1");
+        //Debug.Log("Cutscene Working 1");
         CutsceneManager.Play();
     }
 

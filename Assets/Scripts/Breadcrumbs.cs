@@ -8,7 +8,7 @@ public class Breadcrumbs : MonoBehaviour
 
     BreadcrumbsRepository breadcrumbs;
     Transform objPoolRoot;
-
+    //Transform VFXPoolRoot;
     float throwForce = 2f;
 
     // Start is called before the first frame update
@@ -16,8 +16,7 @@ public class Breadcrumbs : MonoBehaviour
     {
         breadcrumbs = new BreadcrumbsRepository();
         objPoolRoot = new GameObject("Breadcrumbs").transform;
-
-
+        //VFXPoolRoot = new GameObject("Breadcrumbs_VFX").transform;
     }
 
 
@@ -45,9 +44,14 @@ public class Breadcrumbs : MonoBehaviour
             return;
         }
 
+        
+
+
+        //newBreadcrumb.SetActive(false);
+
 
         // ako je obican, samo ga enqueue a ako je onaj vredniji, onda instanciraj u obj pool odgovarajuci broj komada
-        //Debug.Log($"Picked up {e.Value} value coin!");
+        Debug.Log($"Picked up {e.Value} value coin!");
 
         if (e.Value <= 1)
         {
@@ -61,7 +65,7 @@ public class Breadcrumbs : MonoBehaviour
             //Debug.Log($"Usao sam u deo gde je value veci od 1");
             // a ako je vrednost veca, razbij mu vrednost na manje kamencice koji vrede 1
             // treba da postoji neka mustra za instanciranje
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < e.Value; i++)
             {
                 // instanciraj i ubaci u queue
 
@@ -85,8 +89,11 @@ public class Breadcrumbs : MonoBehaviour
         if (breadcrumbs.Count == 0)
             return;
 
-        
+
         var currentBreadcrumb = breadcrumbs.RemoveFromPool();
+
+        CoinValue coinValue = currentBreadcrumb.GetComponent<CoinValue>();
+
 
         // scale na 0
         var spawnPosition = transform.position + transform.up * 0.75f;
@@ -95,7 +102,8 @@ public class Breadcrumbs : MonoBehaviour
 
         currentBreadcrumb.transform.position = spawnPosition; // ovo ce da baguje jer ce odmah da ga instant pokupi
         // unhide
-        currentBreadcrumb.SetActive(true);
+        coinValue.PrepareForPicking();
+
         Vector3 throwDir = (-transform.forward + Vector3.up).normalized * 1.2f;
 
         var rb = currentBreadcrumb.GetComponent<Rigidbody>();
@@ -116,6 +124,7 @@ public class BreadcrumbsRepository
     }
 
     Queue<GameObject> objPool;
+    //Queue<GameObject> VFXPool;
 
 
     // kada plejer pokupi coin, on bi trebalo da se stavi u obj pool i da se stavi u queue
@@ -123,12 +132,14 @@ public class BreadcrumbsRepository
     public BreadcrumbsRepository()
     {
         objPool = new Queue<GameObject>();
+        //VFXPool = new Queue<GameObject>();
+
     }
 
     public void AddToPool(GameObject objToAdd)
     {
-        var rb = objToAdd.GetComponent<Rigidbody>();
-        rb.isKinematic = false;
+        //    if (objPool == null)
+        //        objPool = new Queue<GameObject>();
         objPool.Enqueue(objToAdd);
     }
 

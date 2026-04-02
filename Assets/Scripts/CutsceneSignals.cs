@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CutsceneSignals : MonoBehaviour
 {
-   public void CutsceneEnd()
-    {
-        Debug.Log("End of the cutscene!!!");
-    }
+   //public void CutsceneEnd()
+   // {
+   //     Debug.Log("End of the cutscene!!!");
+   // }
 }

@@ -32,7 +32,7 @@ public class CameraTransition : MonoBehaviour
     float transitionTimer = 0f;
     Vector3 currentVelocity;
 
-    bool isTransitioning;
+    bool isTransitioning = false;
     Transform targetTransform;
 
     Vector3 startPosition;
