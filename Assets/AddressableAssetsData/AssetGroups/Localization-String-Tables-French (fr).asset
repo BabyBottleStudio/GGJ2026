@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 0e5bed752bd09ac44863c87953f2769c
   m_SerializeEntries:
+  - m_GUID: a7021f884407b3c46b7ecd60e44ed63f
+    m_Address: StartTile_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8f8b0b84d5e1b242adf81ae87232044
     m_Address: NPCDialogs_fr
     m_ReadOnly: 1

@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8f6d0b252580e9747a97f4b6a24fdf05
   m_SerializeEntries:
+  - m_GUID: 22068aecb1136314eaf9ab3b096c21f2
+    m_Address: Assets/Locals/Tables/StartTile Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5e835ee40be347b429fc5bfa4a7ac174
     m_Address: Assets/Locals/Tables/NPCDialogs Shared Data.asset
     m_ReadOnly: 1
