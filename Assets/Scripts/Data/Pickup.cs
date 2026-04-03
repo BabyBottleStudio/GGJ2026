@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 public class Pickup : ScriptableObject
 {
     public GameObject geometry;
-    public GameObject onPickedVFX;
+    //public GameObject onPickedVFX;
     //public PlayableDirector timeline;
 
     public AudioClip onPickedSFX;

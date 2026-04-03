@@ -53,6 +53,8 @@ public class Breadcrumbs : MonoBehaviour
             // ako je vrednost jedan, taj ces kasnije koristiti kao kamencic
             breadcrumbs.AddToPool(newBreadcrumb);
             newBreadcrumb.transform.parent = objPoolRoot;
+            //var coinValue = newBreadcrumb.GetComponent<CoinValue>();
+            //coinValue.OnCollect();
         }
         else
         {
@@ -69,6 +71,13 @@ public class Breadcrumbs : MonoBehaviour
                 var obj = Instantiate(pickup.geometry);
                 breadcrumbs.AddToPool(obj);
                 obj.transform.parent = objPoolRoot;
+
+                var coinValue = obj.GetComponent<CoinValue>();
+                //coinValue.SetReferences("Breadcrumbs");
+                coinValue.OnCollect();
+                
+
+               
                 obj.SetActive(false);
 
             }
@@ -86,6 +95,10 @@ public class Breadcrumbs : MonoBehaviour
 
 
         var currentBreadcrumb = breadcrumbs.RemoveFromPool();
+
+        if (!currentBreadcrumb.activeInHierarchy)
+            currentBreadcrumb.SetActive(true);
+
 
         CoinValue coinValue = currentBreadcrumb.GetComponent<CoinValue>();
 

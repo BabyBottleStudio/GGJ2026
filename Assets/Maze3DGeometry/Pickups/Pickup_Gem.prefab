@@ -307,6 +307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickUP_Gem_VFX
       objectReference: {fileID: 0}
+    - target: {fileID: 4510066386680885369, guid: 012652746f6b6f94ba7f7ac9aa25a8bb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ff8b5b679d0c1547ae2e2332e5a39dd, type: 2}
     - target: {fileID: 6988556044311993153, guid: 012652746f6b6f94ba7f7ac9aa25a8bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

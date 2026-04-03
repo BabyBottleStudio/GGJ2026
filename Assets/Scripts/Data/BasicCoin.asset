@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601fe4faa84edfd4aab7a1dfbd6657a3, type: 3}
   m_Name: BasicCoin
   m_EditorClassIdentifier: 
-  geometry: {fileID: 7399236587531123679, guid: e038c1eb2b8a7234d9cef99fd28f43b5, type: 3}
+  geometry: {fileID: 2751129053581700072, guid: 51917dae471389146975626ba418d905, type: 3}
   onPickedVFX: {fileID: 3098860540778262961, guid: 0723a7fac575c814a9df6ab8712150a9, type: 3}
   onPickedSFX: {fileID: 8300000, guid: 69583ef747bec5a47bf78c25801554d4, type: 3}
   value: 1
