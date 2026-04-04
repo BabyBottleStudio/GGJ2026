@@ -26,6 +26,11 @@ MonoBehaviour:
     m_Localized: "Prona\u0111i masku da otklju\u010Da\u0161 izlaz"
     m_Metadata:
       m_Items: []
+  - m_Id: 668982172635136
+    m_Localized: "Sakupljaj!\nBacaj kao mrvice hleba da ti pomognu.\nPritisni <Space>
+      ili <RMB> da baci\u0161."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -28,12 +28,13 @@ public class ActionPressedEventArgs : EventArgs
 
 public class InteractionEventArgs : EventArgs
 {
-    public NonPlayableCharacter NPCData { get; }
+    public InteractiveObject NPCData { get; }
 
-    public InteractionEventArgs(NonPlayableCharacter npcData)
+    public InteractionEventArgs(InteractiveObject npcData)
     {
         this.NPCData = npcData;
     }
+
 }
 
 public class SpecialTileEventArgs : EventArgs
@@ -68,6 +69,9 @@ public static class EventRepository
     public static Action OnLevelFinished;
     public static Action OnCutsceneEnd;
 
+    public static Action OnHelpEnter;
+    public static Action OnHelpExit;
+
     public static event EventHandler<InteractionEventArgs> OnInteractionStart;
     public static Action OnInteractionEnd;
 
@@ -81,7 +85,18 @@ public static class EventRepository
     //public static Action OnMouseSelectButton;
 
 
-    public static void InvokeOnInteractionStart(object sender, NonPlayableCharacter npcData)
+
+    public static void InvokeOnHelpEnter()
+    {
+        OnHelpEnter?.Invoke();
+    }
+
+    public static void InvokeOnHelpExit()
+    {
+        OnHelpExit?.Invoke();
+    }
+
+    public static void InvokeOnInteractionStart(object sender, InteractiveObject npcData)
     {
         OnInteractionStart?.Invoke(sender, new InteractionEventArgs(npcData));
     }

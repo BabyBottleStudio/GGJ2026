@@ -26,6 +26,15 @@ MonoBehaviour:
     m_Localized: Find the mask to unlock the exit
     m_Metadata:
       m_Items: []
+  - m_Id: 668982172635136
+    m_Localized: 'Collect!
+
+      Leave as breadcrumbs to help you.
+
+      Press
+      <Space> or <RMB> to throw.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -27,3 +27,9 @@ public enum AnyCoins
     No,
     Yes
 }
+
+public enum HelpMenu
+{
+    Disabled,
+    Enabled
+}

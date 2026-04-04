@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     //bool playerControllActive;
     Vector3 ControllsOffPosition;
 
+    float idleTimer = 0f;
+
     private void OnEnable()
     {
         EventRepository.OnKeyCollected += SuspendPlayerInput;
@@ -69,6 +71,40 @@ public class PlayerMovement : MonoBehaviour
         finalMove.y = _velocity;
         _characterController.Move(finalMove * Time.deltaTime);
         ApplyAnimationMultiplier();
+
+        //Debug.Log(finalMove);
+
+
+        /*
+        if (horizontal == Vector3.zero)
+        {
+            if (StateMachine.GetHelpMenuState() == HelpMenu.Disabled)
+            {
+                idleTimer += Time.deltaTime;
+                if (idleTimer >= 3)
+                {
+                    EventRepository.InvokeOnHelpEnter();
+                    //Debug.Log("Sad bi trebalo da se aktivira help");
+                    // ako state machine odgovara
+                    // invokuje event
+
+                    idleTimer = 0f;
+                }
+
+            }
+
+        }
+        else
+        {
+            idleTimer = 0f;
+
+            if (StateMachine.GetHelpMenuState() == HelpMenu.Enabled)
+                EventRepository.InvokeOnHelpExit();
+            //Debug.Log("Sad bi trebalo da se deaktivira help");
+            //invokuje event
+            //
+        }
+        */
     }
 
     //IEnumerator Wait(float timeToWait)

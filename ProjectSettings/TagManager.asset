@@ -9,6 +9,7 @@ TagManager:
   - Exit
   - CameraTrigger
   - Interact
+  - Help
   layers:
   - Default
   - TransparentFX

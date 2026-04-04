@@ -15,7 +15,7 @@ public class DialogueUI : MonoBehaviour
 
     //Animator animator;
 
-    NonPlayableCharacter npcData;
+    InteractiveObject npcData;
 
     bool isTyping;
 

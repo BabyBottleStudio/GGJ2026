@@ -6,10 +6,9 @@ using UnityEngine.Localization;
 
 
 [CreateAssetMenu]
-public class NonPlayableCharacter : ScriptableObject
+public class NonPlayableCharacter : InteractiveObject
 {
     public GameObject Geometry;
-    public Sprite Icon;
-    public LocalizedString dialogue;
+
 
 }

@@ -6,6 +6,8 @@ public static class StateMachine
     private static PlayerControlls currentSuspendedInputState;
     public static AnyCoins currentCoinsState = AnyCoins.No;
 
+    public static HelpMenu currentHelpMenuState = HelpMenu.Disabled;
+
     public static MaskUse GetMaskState() => currentMaskState;
     public static Tile GetCurrentTile() => currentTile;
     public static Mask GetMaskAvailability() => currentMaskAvailability;
@@ -13,6 +15,8 @@ public static class StateMachine
     public static PlayerControlls GetPlayerInputState() => currentSuspendedInputState;
 
     public static AnyCoins GetCoinsState() => currentCoinsState;
+
+    public static HelpMenu GetHelpMenuState() => currentHelpMenuState;
 
 
     public static void SetCoinsState(AnyCoins newState)
@@ -57,5 +61,13 @@ public static class StateMachine
             return;
 
         currentSuspendedInputState = newInput;
+    }
+
+    public static void SetHelpMenuState(HelpMenu newState)
+    {
+        if (GetHelpMenuState() == newState)
+            return;
+
+        currentHelpMenuState = newState;
     }
 }

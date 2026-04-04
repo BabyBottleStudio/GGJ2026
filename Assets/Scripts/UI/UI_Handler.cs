@@ -9,7 +9,7 @@ public class UI_Handler : MonoBehaviour
     public TMP_Text scoreText;
     public Animator coinIconAnim;
     string coinIconAnimTrigger = "ThrowEmpty";
-    
+
     private int coinsCollected;
 
     public PlayerData playerData;
@@ -21,6 +21,10 @@ public class UI_Handler : MonoBehaviour
 
     public GameObject gameOverCanvas;
 
+    public CanvasGroup helpCanvasGroup;
+    Coroutine fadeAlphaCoroutine;
+    float targetAlpha;
+
     //public GameObject maskImageAnimation;
 
     //CanvasGroup gameOverCanvasGroup;
@@ -29,6 +33,9 @@ public class UI_Handler : MonoBehaviour
     {
         ChangeStateMaskUI(false);
         gameOverCanvas.SetActive(false);
+        helpCanvasGroup.alpha = 0f;
+        helpCanvasGroup.gameObject.SetActive(false);
+
         //coinIconAnim.SetInteger("State", 0);
 
         //maskImageAnimation.SetActive(false);
@@ -46,6 +53,9 @@ public class UI_Handler : MonoBehaviour
         EventRepository.OnLevelFinished += ActivateLevelCompleteCanvas;
         EventRepository.OnThrowPressed += UpdateScore;
         EventRepository.OnThrowPressed += CoinThrowIconAnimation;
+
+        EventRepository.OnHelpEnter += StartHelpMenuFadeIn;
+        EventRepository.OnHelpExit += StartHelpMenuFadeOut;
     }
 
     private void OnDisable()
@@ -56,6 +66,9 @@ public class UI_Handler : MonoBehaviour
         EventRepository.OnLevelFinished -= ActivateLevelCompleteCanvas;
         EventRepository.OnThrowPressed -= UpdateScore;
         EventRepository.OnThrowPressed -= CoinThrowIconAnimation;
+
+        EventRepository.OnHelpEnter -= StartHelpMenuFadeIn;
+        EventRepository.OnHelpExit -= StartHelpMenuFadeOut;
     }
 
 
@@ -83,7 +96,7 @@ public class UI_Handler : MonoBehaviour
         if (coinsCollected == 0)
             return;
 
-        coinsCollected --;
+        coinsCollected--;
         scoreText.text = coinsCollected.ToString();
     }
 
@@ -144,9 +157,68 @@ public class UI_Handler : MonoBehaviour
         gameOverCanvas.SetActive(true);
     }
 
+    void StartHelpMenuFadeIn()
+    {
+        targetAlpha = 1f;
+        helpCanvasGroup.gameObject.SetActive(true);
+
+        if (fadeAlphaCoroutine != null)
+            StopCoroutine(fadeAlphaCoroutine);
+
+        //Debug.Log(StateMachine.GetHelpMenuState());
+        StateMachine.SetHelpMenuState(HelpMenu.Enabled);
+       // Debug.Log(StateMachine.GetHelpMenuState());
+
+        fadeAlphaCoroutine = StartCoroutine(HelpMenuFade());
+    }
+
+    void StartHelpMenuFadeOut()
+    {
+        targetAlpha = 0f;
+
+        if (fadeAlphaCoroutine != null)
+            StopCoroutine(fadeAlphaCoroutine);
+
+        fadeAlphaCoroutine = StartCoroutine(HelpMenuFade());
+
+        //helpCanvasGroup.gameObject.SetActive(false);
+    }
+
+    IEnumerator HelpMenuFade()
+    {
+        float fadeInDuration = 0.5f;
+
+        float timer = 0f;
+
+        float startAlpha = helpCanvasGroup.alpha;
+
+        while (timer < fadeInDuration)
+        {
+            timer += Time.deltaTime;
+
+            float t = timer / fadeInDuration;
+
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+
+            helpCanvasGroup.alpha = alpha;
+
+            yield return null;
+        }
+
+        if (targetAlpha == 1f)
+            helpCanvasGroup.alpha = targetAlpha;
+        else if (targetAlpha == 0f)
+        {
+            helpCanvasGroup.gameObject.SetActive(false);
+            StateMachine.SetHelpMenuState(HelpMenu.Disabled);
+            //Debug.Log(StateMachine.GetHelpMenuState());
+        }
+
+    }
+
     //IEnumerator Wait(float secondsToWait)
     //{
     //    yield return new WaitForSeconds(secondsToWait);
-        
+
     //}
 }

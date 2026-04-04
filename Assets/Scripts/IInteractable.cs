@@ -1,4 +1,4 @@
 ﻿internal interface IInteractable
 {
-    public NonPlayableCharacter OnPlayerEnter();
+    public InteractiveObject OnPlayerEnter();
 }

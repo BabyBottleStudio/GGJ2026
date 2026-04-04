@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Interact : MonoBehaviour, IInteractable
 {
-    [SerializeField] NonPlayableCharacter npcData;
+    [SerializeField] InteractiveObject npcData;
 
-    public NonPlayableCharacter OnPlayerEnter() => npcData;
+    public InteractiveObject OnPlayerEnter() => npcData;
 
-    public void SetNPCData(NonPlayableCharacter npcData)
+    public void SetNPCData(InteractiveObject npcData)
     {
         this.npcData = npcData;
     }

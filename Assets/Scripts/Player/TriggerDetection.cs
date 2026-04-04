@@ -36,11 +36,16 @@ public class TriggerDetection : MonoBehaviour
             if (other.TryGetComponent<IInteractable>(out var interactable))
             {
                 EventRepository.InvokeOnInteractionStart(other, interactable.OnPlayerEnter());
-                Debug.Log("Interaction started. The text should be displayed on the screen.");
-
+                //Debug.Log("Interaction started. The text should be displayed on the screen.");
             }
-
         }
+
+        if (other.CompareTag("Help"))
+        {
+            EventRepository.InvokeOnHelpEnter();
+        }
+
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -55,7 +60,12 @@ public class TriggerDetection : MonoBehaviour
         {
             EventRepository.InvokeOnInteractionEnd();
 
-            Debug.Log("Interaction ended. The text should be removed from the screen.");
+            //Debug.Log("Interaction ended. The text should be removed from the screen.");
+        }
+
+        if (other.CompareTag("Help"))
+        {
+            EventRepository.InvokeOnHelpExit();
         }
     }
 
