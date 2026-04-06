@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class MaskHandler : MonoBehaviour
 {
     public GameObject maskGeometry;

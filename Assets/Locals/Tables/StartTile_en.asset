@@ -35,6 +35,10 @@ MonoBehaviour:
       <Space> or <RMB> to throw.'
     m_Metadata:
       m_Items: []
+  - m_Id: 1005368914399232
+    m_Localized: Pres <E> or <LMB> to use the mask.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

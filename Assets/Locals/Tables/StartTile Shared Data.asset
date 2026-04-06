@@ -24,7 +24,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 668982172635136
-    m_Key: helpTotem.coins
+    m_Key: 'helpTotem.mask
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1005368914399232
+    m_Key: helpTotem.mask
     m_Metadata:
       m_Items: []
   m_Metadata:

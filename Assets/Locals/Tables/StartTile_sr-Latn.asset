@@ -31,6 +31,10 @@ MonoBehaviour:
       ili <RMB> da baci\u0161."
     m_Metadata:
       m_Items: []
+  - m_Id: 1005368914399232
+    m_Localized: "Pritisni <E> ili <LMB> da upotrebi\u0161 masku."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
