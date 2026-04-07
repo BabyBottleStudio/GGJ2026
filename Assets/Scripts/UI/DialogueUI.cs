@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.UI;
-
+using UnityEngine.Localization.Settings;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -42,6 +42,10 @@ public class DialogueUI : MonoBehaviour
     public Sprite nextPageIcon;
     public Sprite closeDialogIcon;
 
+    int dialogSessionId;
+    bool restartTypingAfterUpdate;
+    //bool shouldRestartTyping;
+
     //AudioSource audioSource;
     //public AudioClip typingLettersSound;
 
@@ -65,19 +69,28 @@ public class DialogueUI : MonoBehaviour
 
         EventRepository.OnInteractionStart += ShowInteractionText;
         EventRepository.OnInteractionEnd += HideInteractionText;
+        LocalizationSettings.SelectedLocaleChanged += OnLanguageChanged;
     }
 
     private void OnDisable()
     {
         EventRepository.OnInteractionStart -= ShowInteractionText;
         EventRepository.OnInteractionEnd -= HideInteractionText;
+        LocalizationSettings.SelectedLocaleChanged -= OnLanguageChanged;
+
         if (npcData != null)
         {
             npcData.dialogue.StringChanged -= UpdateText;
         }
     }
 
+    void OnLanguageChanged(UnityEngine.Localization.Locale locale)
+    {
+        if (npcData == null || !dialogueUIRoot.activeInHierarchy)
+            return;
 
+        restartTypingAfterUpdate = true;
+    }
 
     void ShowInteractionText(object sender, InteractionEventArgs e)
     {
@@ -87,20 +100,34 @@ public class DialogueUI : MonoBehaviour
             npcData.dialogue.StringChanged -= UpdateText;
         }
 
+        if (typeText != null)
+        {
+            StopCoroutine(typeText);
+            typeText = null;
+        }
+
+        dialogSessionId++;
+        int mySession = dialogSessionId;
+
         isAnimationInterupted = true;
         currentPage = 0;
         //currentPageCount = 1;
         npcData = e.NPCData;
         playableDirector.playableAsset = dialogOn;
         playableDirector.time = 0f;
+        
         dialogueUIRoot.SetActive(true);
+
         nextPageButton.GetComponent<Button>().image.sprite = nextPageIcon;
+        nextPageButton.SetActive(false);
+
 
         playableDirector.Play();
 
         npcProfilePicture.sprite = npcData.Icon;
 
         npcData.dialogue.StringChanged += UpdateText;
+        //shouldRestartTyping = true;
         npcData.dialogue.RefreshString();
 
         //fireAction.Disable();
@@ -135,11 +162,12 @@ public class DialogueUI : MonoBehaviour
         dialogueText.maxVisibleCharacters = 0; // dialogueText.text.Length;
         dialogueText.ForceMeshUpdate();
 
-        if (dialogueUIRoot.activeInHierarchy)
+        if (restartTypingAfterUpdate && dialogueUIRoot.activeInHierarchy)
         {
+            //shouldRestartTyping = false;
             currentPage = 0;
-            StartTypingText(currentPage);
-
+            StartTypingText(currentPage); // neki bolji sistem da ovo ne krene svakako
+            restartTypingAfterUpdate = false;
             EventSystem.current.SetSelectedGameObject(nextPageButton);
         }
     }
@@ -158,6 +186,9 @@ public class DialogueUI : MonoBehaviour
             StopCoroutine(typeText);
 
         dialogueText.maxVisibleCharacters = 0;
+
+        nextPageButton.SetActive(false);
+
         typeText = StartCoroutine(TypeDialogText(pageIndex));
 
     }
@@ -184,7 +215,7 @@ public class DialogueUI : MonoBehaviour
         {
             isDialogClosedByButton = true;
             HideInteractionText();
-            TurnOffDialogUI();
+            //TurnOffDialogUI();
             return;
             //nextPageButton.SetActive(false);
         }
@@ -195,7 +226,14 @@ public class DialogueUI : MonoBehaviour
 
     IEnumerator TypeDialogText(int pageIndex)
     {
+        int mySession = dialogSessionId;
+
         yield return null;
+
+        if (mySession != dialogSessionId)
+            yield break;
+        
+
         Canvas.ForceUpdateCanvases();
         dialogueText.ForceMeshUpdate();
         currentPageCount = dialogueText.textInfo.pageCount;
@@ -252,26 +290,31 @@ public class DialogueUI : MonoBehaviour
 
         dialogueText.ForceMeshUpdate();
         isTyping = false;
-
-
     }
 
 
     public void TurnOffDialogUI()
     {
+        Debug.Log("TurnOffDialogUI Triggered");
+
         if (npcData != null)
         {
             npcData.dialogue.StringChanged -= UpdateText;
             npcData = null;
         }
 
+        if (typeText != null)
+        {
+            StopCoroutine(typeText);
+            typeText = null;
+        }
 
         //npcData.dialogue.StringChanged -= UpdateText;
         ResetText();
-        
+
         npcProfilePicture.sprite = null;
         npcData = null;
-        nextPageButton.SetActive(false);
+        //nextPageButton.SetActive(false);
         dialogueUIRoot.SetActive(false);
         isAnimationInterupted = true;
         currentPageCount = 1;

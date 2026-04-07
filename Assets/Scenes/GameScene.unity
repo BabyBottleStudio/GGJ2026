@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4433962, g: 0.32770103, b: 0.2739854, a: 1}
+  m_Color: {r: 0.509434, g: 0.4584437, b: 0.30037382, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -900,7 +900,7 @@ PlayableDirector:
   m_GameObject: {fileID: 150898962}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: bc7133376809e5446a2cf2355a65592c, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 67c4ba55240bbab48bc35b34ef1542b8, type: 2}
   m_InitialState: 0
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
@@ -920,6 +920,8 @@ PlayableDirector:
     value: {fileID: 1500259119}
   - key: {fileID: -6414661526435241346, guid: 67c4ba55240bbab48bc35b34ef1542b8, type: 2}
     value: {fileID: 1670555163}
+  - key: {fileID: 1519424500776411272, guid: bc7133376809e5446a2cf2355a65592c, type: 2}
+    value: {fileID: 873368754}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &159412841
@@ -1154,7 +1156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439919897168222396, guid: f83f07ae93c828949b7cf66e2afcef4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.44
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 6439919897168222396, guid: f83f07ae93c828949b7cf66e2afcef4b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1162,7 +1164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439919897168222396, guid: f83f07ae93c828949b7cf66e2afcef4b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.31
+      value: -3.42
       objectReference: {fileID: 0}
     - target: {fileID: 6439919897168222396, guid: f83f07ae93c828949b7cf66e2afcef4b, type: 3}
       propertyPath: m_LocalRotation.w
