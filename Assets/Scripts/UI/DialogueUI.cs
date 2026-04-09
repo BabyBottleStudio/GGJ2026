@@ -1,72 +1,64 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using TMPro;
 using UnityEngine.InputSystem;
-using UnityEngine.Playables;
 using UnityEngine.UI;
 using UnityEngine.Localization.Settings;
+using System.Text;
+using System.Linq;
 
 public class DialogueUI : MonoBehaviour
 {
+    [Header("Player Input")]
     public InputActionAsset inputActions;
     private InputAction fireAction;
-
-
+    [Header("UI Elements")]
     public GameObject dialogueUIRoot;
-    public GameObject nextPageButton;
+    public RectTransform backgroundImg;
 
     public Image npcProfilePicture;
     public TextMeshProUGUI dialogueText;
-
-    //Animator animator;
+    public GameObject nextPageButton;
+    Button nextPageButtonComponent;
 
     InteractiveObject npcData;
 
-    bool isTyping;
-    bool isAnimationInterupted;
+    private TypeWriter typeWriter;
 
-    Coroutine typeText;
-
-    public PlayableDirector playableDirector;
-    public PlayableAsset dialogOn;
-    public PlayableAsset dialogOff;
-
-    //string fullText;
-    int currentPage;
-    bool isDialogClosedByButton;
-
-    int currentPageCount;
+    Coroutine currentTyping;
 
     public Sprite nextPageIcon;
     public Sprite closeDialogIcon;
 
-    int dialogSessionId;
-    bool restartTypingAfterUpdate;
-    //bool shouldRestartTyping;
+    [Space(10)]
+    [Header("Scale Dialog Background")]
+    [SerializeField] AnimationCurve scaleXCurve;
+    [SerializeField] AnimationCurve scaleYCurve;
+    [Header("Scale NPC Image")]
+    [SerializeField] AnimationCurve scaleCurve;
 
-    //AudioSource audioSource;
-    //public AudioClip typingLettersSound;
+    Coroutine currentScalingAnimation;
+    Vector3 targetScale;
+    Vector3 startScale;
 
-    // treba nam event koji ce kao parametar da prosledi npc data skriptable objekat
+
     private void Awake()
     {
         fireAction = inputActions.FindActionMap("Player").FindAction("Fire");
     }
+
     private void Start()
     {
+        typeWriter = new TypeWriter(dialogueText);
+        typeWriter.Reset();
         nextPageButton.SetActive(false);
-        dialogueUIRoot.SetActive(false);
-        ResetText();
+        nextPageButtonComponent = nextPageButton.GetComponent<Button>();
+        backgroundImg.localScale = Vector3.zero;
     }
 
     private void OnEnable()
     {
-        //currentPage = 1;
-        //currentPageCount = 1;
-        //isTimelineStart = true;
-
         EventRepository.OnInteractionStart += ShowInteractionText;
         EventRepository.OnInteractionEnd += HideInteractionText;
         LocalizationSettings.SelectedLocaleChanged += OnLanguageChanged;
@@ -77,257 +69,335 @@ public class DialogueUI : MonoBehaviour
         EventRepository.OnInteractionStart -= ShowInteractionText;
         EventRepository.OnInteractionEnd -= HideInteractionText;
         LocalizationSettings.SelectedLocaleChanged -= OnLanguageChanged;
+    }
 
-        if (npcData != null)
+
+    void ShowInteractionText(object sender, InteractionEventArgs e)
+    {
+        ResetUIElements();
+        dialogueUIRoot.SetActive(true);
+
+        npcData = e.NPCData;
+        npcProfilePicture.sprite = npcData.Icon;
+
+
+        npcData.dialogue.RefreshString();
+
+        string txt = npcData.dialogue.GetLocalizedString();
+        typeWriter.BreakTextToPages(txt);
+
+
+        //fireAction.Disable();
+
+        bool hasMultiplePages = typeWriter.PagesCount > 1;
+        nextPageButton.SetActive(hasMultiplePages);
+        HandleNextPageButtonIcon();
+
+        if (hasMultiplePages)
         {
-            npcData.dialogue.StringChanged -= UpdateText;
+            fireAction?.Disable();
         }
+
+        //string test = typeWriter.TestPageBreak();
+        //Debug.Log(test);
+        StartTyping(true);
+        StartScaleUI(true);
+    }
+
+    void HideInteractionText()
+    {
+        StartScaleUI(false);
+        //dialogueUIRoot.SetActive(false);
+        typeWriter.Reset();
+    
+        if (!fireAction.enabled)
+            fireAction.Enable();
     }
 
     void OnLanguageChanged(UnityEngine.Localization.Locale locale)
     {
-        if (npcData == null || !dialogueUIRoot.activeInHierarchy)
-            return;
-
-        restartTypingAfterUpdate = true;
-    }
-
-    void ShowInteractionText(object sender, InteractionEventArgs e)
-    {
-        // 1. OBAVEZNO: Ako je ostala neka stara pretplata, ubij je odmah!
-        if (npcData != null)
-        {
-            npcData.dialogue.StringChanged -= UpdateText;
-        }
-
-        if (typeText != null)
-        {
-            StopCoroutine(typeText);
-            typeText = null;
-        }
-
-        dialogSessionId++;
-        int mySession = dialogSessionId;
-
-        isAnimationInterupted = true;
-        currentPage = 0;
-        //currentPageCount = 1;
-        npcData = e.NPCData;
-        playableDirector.playableAsset = dialogOn;
-        playableDirector.time = 0f;
-        
-        dialogueUIRoot.SetActive(true);
-
-        nextPageButton.GetComponent<Button>().image.sprite = nextPageIcon;
-        nextPageButton.SetActive(false);
-
-
-        playableDirector.Play();
-
-        npcProfilePicture.sprite = npcData.Icon;
-
-        npcData.dialogue.StringChanged += UpdateText;
-        //shouldRestartTyping = true;
+        typeWriter.Reset();
+        HandleNextPageButtonIcon();
         npcData.dialogue.RefreshString();
-
-        //fireAction.Disable();
+        string txt = npcData.dialogue.GetLocalizedString();
+        typeWriter.BreakTextToPages(txt);
+        //string test = typeWriter.TestPageBreak();
+        //Debug.Log(test);
+        StartTyping(false);
     }
 
-
-
-    void HideInteractionText()
+    public void StartTyping(bool startDelayed)
     {
-        if (isAnimationInterupted)
+        if (typeWriter.IsTyping)
         {
-            TurnOffDialogUI();
-            playableDirector.time = 0f;
-
-            return;
+            StopCoroutine(currentTyping);
+            //typeWriter.InteruptTyping();
+            //currentTyping = null;
         }
-
-        playableDirector.playableAsset = dialogOff;
-        playableDirector.time = 0f;
-        playableDirector.Play();
-    }
-
-
-    void UpdateText(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-            return;
-
-        dialogueText.text = value;
-        //Canvas.ForceUpdateCanvases();
-        //currentPageCount = dialogueText.textInfo.pageCount;
-        dialogueText.maxVisibleCharacters = 0; // dialogueText.text.Length;
-        dialogueText.ForceMeshUpdate();
-
-        if (restartTypingAfterUpdate && dialogueUIRoot.activeInHierarchy)
-        {
-            //shouldRestartTyping = false;
-            currentPage = 0;
-            StartTypingText(currentPage); // neki bolji sistem da ovo ne krene svakako
-            restartTypingAfterUpdate = false;
-            EventSystem.current.SetSelectedGameObject(nextPageButton);
-        }
-    }
-
-    public void EndOfScaleUpAnimationReached()
-    {
-        isAnimationInterupted = false; // ovo se okida iz timelinea, sluzi da ne baguje kad se brzo ulazi i izlazi iz collidera
-    }
-
-    public void StartTypingText(int pageIndex)
-    {
-        // ova metoda se prvi put okida iz unity timeline
-        // svaki naredni put se okdia preko dugmeta za next page, metoda dole. Tekst mesh pro iz nekog razloga ne prikazuje drugu stranu
-
-        if (typeText != null)
-            StopCoroutine(typeText);
-
-        dialogueText.maxVisibleCharacters = 0;
-
-        nextPageButton.SetActive(false);
-
-        typeText = StartCoroutine(TypeDialogText(pageIndex));
-
+        TextPage currentPageData = typeWriter.GetCurrentPage();
+        currentTyping = StartCoroutine(typeWriter.TypeText(currentPageData, startDelayed));
     }
 
     public void NextPage()
     {
-        Debug.Log($"NextPageActivated. Current page {currentPage}");
-        if (isTyping)
+        if (typeWriter.IsTyping)
         {
-            Debug.Log($"Typing interupted. Current page {currentPage}");
-            StopCoroutine(typeText);
-
-            var page = dialogueText.textInfo.pageInfo[currentPage];
-            dialogueText.maxVisibleCharacters = page.lastCharacterIndex;
-            isTyping = false;
-
+            StopCoroutine(currentTyping);
+            typeWriter.InteruptTyping();
             return;
         }
 
-        currentPage++;
-        dialogueText.ForceMeshUpdate();
 
-        if (currentPage >= dialogueText.textInfo.pageCount)
+        if (typeWriter.IsLastPage())
         {
-            isDialogClosedByButton = true;
             HideInteractionText();
-            //TurnOffDialogUI();
+            typeWriter.Reset();
             return;
-            //nextPageButton.SetActive(false);
         }
 
-        Debug.Log($"---- trebalo bi da kucam stranu sada");
-        StartTypingText(currentPage);
+        typeWriter.SetNextPage();
+        HandleNextPageButtonIcon();
+
+        StartTyping(false);
     }
 
-    IEnumerator TypeDialogText(int pageIndex)
+    void HandleNextPageButtonIcon()
     {
-        int mySession = dialogSessionId;
+        if (typeWriter.IsLastPage())
+        {
+            nextPageButtonComponent.image.sprite = closeDialogIcon;
+            return;
+        }
 
-        yield return null;
+        if (nextPageButtonComponent.image.sprite != nextPageIcon)
+            nextPageButtonComponent.image.sprite = nextPageIcon;
+    }
 
-        if (mySession != dialogSessionId)
-            yield break;
-        
+    void ResetUIElements()
+    {
+        nextPageButtonComponent.image.sprite = nextPageIcon;
+        npcProfilePicture.sprite = null;
+    }
+
+    void StartScaleUI(bool scaleUp)
+    {
+        if (currentScalingAnimation != null)
+            StopCoroutine(currentScalingAnimation);
+
+        startScale = backgroundImg.localScale;
+
+        if (scaleUp)
+            targetScale = Vector3.one;
+        else
+            targetScale = Vector3.zero;
+
+        currentScalingAnimation = StartCoroutine(ScaleUI());
+    }
+
+    IEnumerator ScaleUI()
+    {
+        if (targetScale == Vector3.one)
+            backgroundImg.gameObject.SetActive(true);
+
+        float timer = 0f;
+
+        float duration = 0.25f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float t = Mathf.Clamp01(timer / duration);
+            float curveXT = scaleXCurve.Evaluate(t);
+            float curveYT = scaleYCurve.Evaluate(t);
+            float cruveScale = scaleCurve.Evaluate(t);
+
+
+            var amtX = Mathf.Lerp(startScale.x, targetScale.x, curveXT);
+            var amtY = Mathf.Lerp(startScale.y, targetScale.y, curveYT);
+            //var profilePictureScale = Mathf.Lerp(startScale.x, targetScale.x, curveYT);
+
+            backgroundImg.localScale = new Vector3(amtX, amtY, amtY);
+            //npcProfilePicture.rectTransform.localScale = new Vector3(profilePictureScale, profilePictureScale, profilePictureScale);
+            yield return null;
+        }
+
+        backgroundImg.localScale = targetScale;
+        //npcProfilePicture.rectTransform.localScale = targetScale;
+        currentScalingAnimation = null;
+
+        if (targetScale == Vector3.zero)
+            backgroundImg.gameObject.SetActive(false);
+
+    }
+
+}
+
+// typewriter treba da se brine samo o ispisu teksta, a ne da resava sve ostale probleme
+
+public class TypeWriter
+{
+    public int PagesCount { get; private set; }
+    public int CurrentPageIndex { get; private set; }
+    public bool IsTyping { get; private set; }
+
+    // typing speed
+    const float maxTypeTime = 0.1f;
+    const float typeSpeed = 5f;
+    float _typingSpeed = maxTypeTime / typeSpeed;
+
+    List<TextPage> textPages;
+    TextMeshProUGUI _displayText;
+
+
+    // metoda koja konvertuje text u stranice
+    public TypeWriter(TextMeshProUGUI displayText)
+    {
+        if (displayText == null)
+        {
+            throw new System.ArgumentNullException(nameof(displayText));
+        }
+        _displayText = displayText;
+        textPages = new List<TextPage>();
+    }
+
+    public bool IsLastPage() => PagesCount - 1 == CurrentPageIndex;
+
+    public void Reset()
+    {
+        textPages.Clear();
+
+        PagesCount = 0;
+        CurrentPageIndex = 0;
+        _displayText.text = string.Empty;
+    }
+
+    public void BreakTextToPages(string inputText)
+    {
+        if (_displayText == null)
+            return;
+
+        if (textPages == null)
+        {
+            textPages = new List<TextPage>();
+        }
+
+        _displayText.text = inputText; // ovo mi se ne svidja sto je ovde
 
         Canvas.ForceUpdateCanvases();
-        dialogueText.ForceMeshUpdate();
-        currentPageCount = dialogueText.textInfo.pageCount;
+        _displayText.ForceMeshUpdate();
 
-        bool hasMorePages = currentPageCount > 1; // && pageIndex < (currentPageCount - 1);
+        var textInfo = _displayText.textInfo;
+        PagesCount = textInfo.pageCount;
 
-        if (hasMorePages)
+        for (int i = 0; i < PagesCount; i++)
         {
-            nextPageButton.GetComponent<Button>().image.sprite = nextPageIcon;
-            fireAction?.Disable();
+            var pageInfo = textInfo.pageInfo[i];
+
+            int _startIndex = pageInfo.firstCharacterIndex;
+            int _endIndex = pageInfo.lastCharacterIndex;
+            int _lenght = _endIndex - _startIndex + 1;
+
+            textPages.Add(new TextPage
+            {
+                startIndex = _startIndex,
+                endIndex = _endIndex,
+                pageText = _displayText.text.Substring(_startIndex, _lenght),
+                //pageCount = pagesCount,
+                //pageIndex = i
+            });
+        }
+    }
+
+    public TextPage GetPage(int index)
+    {
+        return textPages.ElementAtOrDefault(index);
+    }
+
+    public TextPage GetCurrentPage()
+    {
+        return textPages.ElementAtOrDefault(CurrentPageIndex);
+    }
+
+    public void InteruptTyping()
+    {
+        // prekini korutinu
+        IsTyping = false;
+        _displayText.maxVisibleCharacters = GetCurrentPage().endIndex;
+    }
+
+    public void SetNextPage()
+    {
+        CurrentPageIndex++;
+        CurrentPageIndex = Mathf.Min(CurrentPageIndex, PagesCount - 1);
+    }
+
+    public IEnumerator TypeText(TextPage textPage, bool startDelayed) // zameni za enum
+    {
+        if (startDelayed)
+        {
+            _displayText.maxVisibleCharacters = 0;
+            yield return new WaitForSeconds(0.25f); // hardkodovano!
         }
 
-        if (pageIndex == (currentPageCount - 1))
-        {
-            nextPageButton.GetComponent<Button>().image.sprite = closeDialogIcon;
-        }
+        IsTyping = true;
 
-        nextPageButton.SetActive(hasMorePages);
+        // treba uraditi test da li korutina radi nesto ili ne
 
-        //if (pageIndex < currentPageCount - 1)
-        //    nextPageButton.SetActive(false);
+        _displayText.pageToDisplay = CurrentPageIndex + 1;
+        int start = textPage.startIndex;
+        int end = textPage.endIndex;
 
-        dialogueText.pageToDisplay = pageIndex + 1;
-
-        // Debug.Log($"Usao sam u korutinu za ispis teksta {pageIndex}");
-
-
-        var txtInfo = dialogueText.textInfo;
-        var page = txtInfo.pageInfo[pageIndex];
-
-        float maxTypeTime = 0.1f;
-        float typeSpeed = 5f;
-        isTyping = true;
-
-        //int maxVisibleChars = 0;
-        //dialogueText.maxVisibleCharacters = maxVisibleChars;
-
-
-        int start = page.firstCharacterIndex;
-        int end = page.lastCharacterIndex;
-
-        //  Debug.Log($"Start: {start}, end {end}");
-        //char[] chars = dialogueDisplayText.text.ToCharArray();
-        dialogueText.maxVisibleCharacters = start;
+        _displayText.maxVisibleCharacters = start;
 
         float typeSpeedTime = maxTypeTime / typeSpeed;
 
         for (int i = start; i <= end; i++)
         {
-            dialogueText.maxVisibleCharacters = i;
+            _displayText.maxVisibleCharacters = i;
 
             yield return new WaitForSeconds(typeSpeedTime);
         }
 
-        dialogueText.ForceMeshUpdate();
-        isTyping = false;
+        _displayText.ForceMeshUpdate();
+        IsTyping = false;
     }
 
 
-    public void TurnOffDialogUI()
+    public string TestPageBreak()
     {
-        Debug.Log("TurnOffDialogUI Triggered");
+        if (textPages == null && textPages.Count == 0)
+            return null;
 
-        if (npcData != null)
+
+        StringBuilder sb = new StringBuilder();
+        int pageIndex = 0;
+
+        foreach (var textPage in textPages)
         {
-            npcData.dialogue.StringChanged -= UpdateText;
-            npcData = null;
+            sb.AppendLine($"PagesCount {textPages.Count}");
+            sb.AppendLine($"Page {pageIndex++}; Start index {textPage.startIndex}; End index {textPage.endIndex}");
+            sb.AppendLine($"Text: {textPage.pageText}");
         }
 
-        if (typeText != null)
-        {
-            StopCoroutine(typeText);
-            typeText = null;
-        }
+        return sb.ToString().Trim();
 
-        //npcData.dialogue.StringChanged -= UpdateText;
-        ResetText();
-
-        npcProfilePicture.sprite = null;
-        npcData = null;
-        //nextPageButton.SetActive(false);
-        dialogueUIRoot.SetActive(false);
-        isAnimationInterupted = true;
-        currentPageCount = 1;
-        isDialogClosedByButton = false;
-
-        if (!fireAction.enabled)
-            fireAction.Enable();
     }
+    // PRE KUCANJA TREBA DA SE UTVRDI
+    // string koji ce da otkuca
+    // broj strana
 
+    // šta se dešava kada se kucanje prekine -> ispise tekst do kraja odmah
+    // prebacivanje na sledecu stranu
+    // šta se dešava kada se promeni jezik -> krece ispocetka, resetuje current page na start i kuca ponovo
+}
 
-    void ResetText()
-    {
-        dialogueText.text = string.Empty;
-        dialogueText.maxVisibleCharacters = 0;
-    }
+public struct TextPage
+{
+    public int startIndex;
+    public int endIndex;
+    public string pageText;
+    // public int pageCount;
+    // public int pageIndex;
+
 }
