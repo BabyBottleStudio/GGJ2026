@@ -134,7 +134,7 @@ public class DialogueUI : MonoBehaviour
         if (interactionClosed)
             return;
 
-        Debug.Log("------------ CLOSE MENU ----------------");
+        //Debug.Log("------------ CLOSE MENU ----------------");
         // kako da ne okida dva puta???
         //StartScaleUI(false);
         //dialogueUIRoot.SetActive(false);
@@ -151,11 +151,15 @@ public class DialogueUI : MonoBehaviour
 
     void OnLanguageChanged(UnityEngine.Localization.Locale locale)
     {
+        if (interactionClosed || StateMachine.GetInteractionState() == Interaction.Done)
+            return;
+
         typeWriter.Reset();
         HandleNextPageButtonIcon();
         npcData.dialogue.RefreshString();
         string txt = npcData.dialogue.GetLocalizedString();
         typeWriter.BreakTextToPages(txt);
+        HandleNextPageButtonIcon();
         //string test = typeWriter.TestPageBreak();
         //Debug.Log(test);
         StartTyping(false);
