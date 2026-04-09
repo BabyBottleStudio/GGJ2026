@@ -18,6 +18,16 @@ public static class StateMachine
 
     public static HelpMenu GetHelpMenuState() => currentHelpMenuState;
 
+    public static Interaction currentInteraction = Interaction.Done;
+    public static Interaction GetInteractionState() => currentInteraction;
+
+    public static void SetInteractionState(Interaction newInteraction)
+    {
+        if (GetInteractionState() == newInteraction)
+            return;
+
+        currentInteraction = newInteraction;
+    }
 
     public static void SetCoinsState(AnyCoins newState)
     {

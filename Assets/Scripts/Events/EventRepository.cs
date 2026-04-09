@@ -72,6 +72,8 @@ public static class EventRepository
     public static Action OnHelpEnter;
     public static Action OnHelpExit;
 
+    public static Action OnInteractionMenuClose;
+
     public static event EventHandler<InteractionEventArgs> OnInteractionStart;
     public static Action OnInteractionEnd;
 
@@ -94,6 +96,11 @@ public static class EventRepository
     public static void InvokeOnHelpExit()
     {
         OnHelpExit?.Invoke();
+    }
+
+    public static void InvokeOnInteractionMenuClose()
+    {
+        OnInteractionMenuClose?.Invoke();
     }
 
     public static void InvokeOnInteractionStart(object sender, InteractiveObject npcData)

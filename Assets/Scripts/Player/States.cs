@@ -33,3 +33,9 @@ public enum HelpMenu
     Disabled,
     Enabled
 }
+
+public enum Interaction
+{
+    Done,
+    Ongoing
+}

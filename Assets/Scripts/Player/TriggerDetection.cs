@@ -36,6 +36,7 @@ public class TriggerDetection : MonoBehaviour
             if (other.TryGetComponent<IInteractable>(out var interactable))
             {
                 EventRepository.InvokeOnInteractionStart(other, interactable.OnPlayerEnter());
+                StateMachine.SetInteractionState(Interaction.Ongoing);
                 //Debug.Log("Interaction started. The text should be displayed on the screen.");
             }
         }
@@ -59,6 +60,7 @@ public class TriggerDetection : MonoBehaviour
         if (other.CompareTag("Interact"))
         {
             EventRepository.InvokeOnInteractionEnd();
+            StateMachine.SetInteractionState(Interaction.Done);
 
             //Debug.Log("Interaction ended. The text should be removed from the screen.");
         }

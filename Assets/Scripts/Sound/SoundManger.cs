@@ -11,8 +11,13 @@ public class SoundManger : MonoBehaviour
     public PlayerData playerData;
     public Pickup basicCoin;
 
+    public AudioClip openInteractionSound;
+    public AudioClip buttonClick;
+
     public AudioSource audioSourceOne;
     public AudioSource audioSourceTwo;
+
+    public AudioSource interactionDialogSound;
 
 
 
@@ -25,6 +30,8 @@ public class SoundManger : MonoBehaviour
         //EventRepository.OnActionKeyPressed += MaskSwap; // registrovan je dole u metodi
         EventRepository.OnThrowPressed += PlayThrowSound;
         //EventRepository.OnCoinHitFloor += PlayCoinHitFloor;
+        EventRepository.OnInteractionStart += PlayInteractionOpen;
+        EventRepository.OnInteractionMenuClose += PlayInteractionClose;
     }
 
     private void OnDisable()
@@ -35,6 +42,8 @@ public class SoundManger : MonoBehaviour
         EventRepository.OnActionKeyPressed -= MaskSwap;
         EventRepository.OnThrowPressed -= PlayThrowSound;
         //EventRepository.OnCoinHitFloor -= PlayCoinHitFloor;
+        EventRepository.OnInteractionStart -= PlayInteractionOpen;
+        EventRepository.OnInteractionMenuClose -= PlayInteractionClose;
     }
 
     private void CollectablePicked(object sender, PickupCollectedEventArgs e)
@@ -49,6 +58,17 @@ public class SoundManger : MonoBehaviour
         AudioClip onPickedSFX = coinGameObj.GetComponent<ICollectable>().GetOnCollectedSFX;
         audioSourceOne.PlayOneShot(onPickedSFX);
         EventRepository.OnActionKeyPressed += MaskSwap;
+    }
+
+    void PlayInteractionOpen(object sender, InteractionEventArgs e)
+    {
+        if (StateMachine.GetInteractionState() == Interaction.Done)
+            interactionDialogSound.PlayOneShot(openInteractionSound);
+    }
+
+    void PlayInteractionClose()
+    {
+        interactionDialogSound.PlayOneShot(openInteractionSound);
     }
 
     void PlayThrowSound()
@@ -73,6 +93,10 @@ public class SoundManger : MonoBehaviour
         // logika je prebacena na coin zarad testiranja laga na zvuku
     }
 
+    public void PlayButtonSound()
+    {
+        interactionDialogSound.PlayOneShot(buttonClick);
+    }
 
     void MaskSwap(bool maskOn)
     {

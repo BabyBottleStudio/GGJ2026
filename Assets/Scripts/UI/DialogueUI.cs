@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.Localization.Settings;
 using System.Text;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -31,27 +32,45 @@ public class DialogueUI : MonoBehaviour
     public Sprite nextPageIcon;
     public Sprite closeDialogIcon;
 
-    [Space(10)]
-    [Header("Scale Dialog Background")]
-    [SerializeField] AnimationCurve scaleXCurve;
-    [SerializeField] AnimationCurve scaleYCurve;
-    [Header("Scale NPC Image")]
-    [SerializeField] AnimationCurve scaleCurve;
+    public Animator animator;
 
-    Coroutine currentScalingAnimation;
-    Vector3 targetScale;
-    Vector3 startScale;
+    bool interactionClosed;
+   
+    //[Space(10)]
+    //[Header("Scale Dialog Background")]
+    //[SerializeField] AnimationCurve scaleXCurve;
+    //[SerializeField] AnimationCurve scaleYCurve;
+    //[Header("Scale NPC Image")]
+    //[SerializeField] AnimationCurve scaleCurve;
+
+    //Coroutine currentScalingAnimation;
+    //Vector3 targetScale;
+    //Vector3 startScale;
 
 
     private void Awake()
     {
         fireAction = inputActions.FindActionMap("Player").FindAction("Fire");
+
+        dialogueUIRoot.TryGetComponent<Animator>(out animator);
+        if (animator == null)
+            Debug.LogError("Animator is null");
+
+
+        interactionClosed = true;
+        /*
+        animator.SetTrigger("DialogOff");
+        animator.SetTrigger("DialogOn");
+        */
     }
+
 
     private void Start()
     {
+    
         typeWriter = new TypeWriter(dialogueText);
         typeWriter.Reset();
+        dialogueUIRoot.SetActive(false);
         nextPageButton.SetActive(false);
         nextPageButtonComponent = nextPageButton.GetComponent<Button>();
         backgroundImg.localScale = Vector3.zero;
@@ -59,23 +78,29 @@ public class DialogueUI : MonoBehaviour
 
     private void OnEnable()
     {
-        EventRepository.OnInteractionStart += ShowInteractionText;
-        EventRepository.OnInteractionEnd += HideInteractionText;
+        EventRepository.OnInteractionStart += ShowInteractionUI;
+        EventRepository.OnInteractionEnd += HideInteractionUI;
         LocalizationSettings.SelectedLocaleChanged += OnLanguageChanged;
     }
 
     private void OnDisable()
     {
-        EventRepository.OnInteractionStart -= ShowInteractionText;
-        EventRepository.OnInteractionEnd -= HideInteractionText;
+        EventRepository.OnInteractionStart -= ShowInteractionUI;
+        EventRepository.OnInteractionEnd -= HideInteractionUI;
         LocalizationSettings.SelectedLocaleChanged -= OnLanguageChanged;
     }
 
 
-    void ShowInteractionText(object sender, InteractionEventArgs e)
+    void ShowInteractionUI(object sender, InteractionEventArgs e)
     {
+        if (StateMachine.GetInteractionState() == Interaction.Ongoing)
+            return;
+
+        interactionClosed = false;
         ResetUIElements();
         dialogueUIRoot.SetActive(true);
+        animator.ResetTrigger("DialogOff");
+        animator.SetTrigger("DialogOn");
 
         npcData = e.NPCData;
         npcProfilePicture.sprite = npcData.Icon;
@@ -101,13 +126,23 @@ public class DialogueUI : MonoBehaviour
         //string test = typeWriter.TestPageBreak();
         //Debug.Log(test);
         StartTyping(true);
-        StartScaleUI(true);
+        //StartScaleUI(true);
     }
 
-    void HideInteractionText()
+    void HideInteractionUI()
     {
-        StartScaleUI(false);
+        if (interactionClosed)
+            return;
+
+        Debug.Log("------------ CLOSE MENU ----------------");
+        // kako da ne okida dva puta???
+        //StartScaleUI(false);
         //dialogueUIRoot.SetActive(false);
+        animator.SetTrigger("DialogOff");
+        animator.ResetTrigger("DialogOn");
+
+        EventRepository.InvokeOnInteractionMenuClose();
+
         typeWriter.Reset();
     
         if (!fireAction.enabled)
@@ -124,6 +159,7 @@ public class DialogueUI : MonoBehaviour
         //string test = typeWriter.TestPageBreak();
         //Debug.Log(test);
         StartTyping(false);
+        EventSystem.current.SetSelectedGameObject(nextPageButton);
     }
 
     public void StartTyping(bool startDelayed)
@@ -150,8 +186,10 @@ public class DialogueUI : MonoBehaviour
 
         if (typeWriter.IsLastPage())
         {
-            HideInteractionText();
+            HideInteractionUI();
             typeWriter.Reset();
+            interactionClosed = true;
+            nextPageButtonComponent.interactable = false;
             return;
         }
 
@@ -176,60 +214,61 @@ public class DialogueUI : MonoBehaviour
     void ResetUIElements()
     {
         nextPageButtonComponent.image.sprite = nextPageIcon;
+        nextPageButtonComponent.interactable = true;
         npcProfilePicture.sprite = null;
     }
 
-    void StartScaleUI(bool scaleUp)
-    {
-        if (currentScalingAnimation != null)
-            StopCoroutine(currentScalingAnimation);
+    //void StartScaleUI(bool scaleUp)
+    //{
+    //    if (currentScalingAnimation != null)
+    //        StopCoroutine(currentScalingAnimation);
 
-        startScale = backgroundImg.localScale;
+    //    startScale = backgroundImg.localScale;
 
-        if (scaleUp)
-            targetScale = Vector3.one;
-        else
-            targetScale = Vector3.zero;
+    //    if (scaleUp)
+    //        targetScale = Vector3.one;
+    //    else
+    //        targetScale = Vector3.zero;
 
-        currentScalingAnimation = StartCoroutine(ScaleUI());
-    }
+    //    currentScalingAnimation = StartCoroutine(ScaleUI());
+    //}
 
-    IEnumerator ScaleUI()
-    {
-        if (targetScale == Vector3.one)
-            backgroundImg.gameObject.SetActive(true);
+    //IEnumerator ScaleUI()
+    //{
+    //    if (targetScale == Vector3.one)
+    //        backgroundImg.gameObject.SetActive(true);
 
-        float timer = 0f;
+    //    float timer = 0f;
 
-        float duration = 0.25f;
+    //    float duration = 0.25f;
 
-        while (timer < duration)
-        {
-            timer += Time.deltaTime;
+    //    while (timer < duration)
+    //    {
+    //        timer += Time.deltaTime;
 
-            float t = Mathf.Clamp01(timer / duration);
-            float curveXT = scaleXCurve.Evaluate(t);
-            float curveYT = scaleYCurve.Evaluate(t);
-            float cruveScale = scaleCurve.Evaluate(t);
+    //        float t = Mathf.Clamp01(timer / duration);
+    //        float curveXT = scaleXCurve.Evaluate(t);
+    //        float curveYT = scaleYCurve.Evaluate(t);
+    //        float cruveScale = scaleCurve.Evaluate(t);
 
 
-            var amtX = Mathf.Lerp(startScale.x, targetScale.x, curveXT);
-            var amtY = Mathf.Lerp(startScale.y, targetScale.y, curveYT);
-            //var profilePictureScale = Mathf.Lerp(startScale.x, targetScale.x, curveYT);
+    //        var amtX = Mathf.Lerp(startScale.x, targetScale.x, curveXT);
+    //        var amtY = Mathf.Lerp(startScale.y, targetScale.y, curveYT);
+    //        //var profilePictureScale = Mathf.Lerp(startScale.x, targetScale.x, curveYT);
 
-            backgroundImg.localScale = new Vector3(amtX, amtY, amtY);
-            //npcProfilePicture.rectTransform.localScale = new Vector3(profilePictureScale, profilePictureScale, profilePictureScale);
-            yield return null;
-        }
+    //        backgroundImg.localScale = new Vector3(amtX, amtY, amtY);
+    //        //npcProfilePicture.rectTransform.localScale = new Vector3(profilePictureScale, profilePictureScale, profilePictureScale);
+    //        yield return null;
+    //    }
 
-        backgroundImg.localScale = targetScale;
-        //npcProfilePicture.rectTransform.localScale = targetScale;
-        currentScalingAnimation = null;
+    //    backgroundImg.localScale = targetScale;
+    //    //npcProfilePicture.rectTransform.localScale = targetScale;
+    //    currentScalingAnimation = null;
 
-        if (targetScale == Vector3.zero)
-            backgroundImg.gameObject.SetActive(false);
+    //    if (targetScale == Vector3.zero)
+    //        backgroundImg.gameObject.SetActive(false);
 
-    }
+    //}
 
 }
 
