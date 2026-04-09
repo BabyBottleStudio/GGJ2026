@@ -6761,7 +6761,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 919e767b1a1e6a544be5b4e0625f3388, type: 2}
   basicCoin: {fileID: 11400000, guid: 9b898850d1689e44baf6f7862cffd4af, type: 2}
   openInteractionSound: {fileID: 8300000, guid: 8367c9e2133846c4393b4a7832ce5d98, type: 3}
-  buttonClick: {fileID: 8300000, guid: 2021c24f3ef4e494fbc7935438506260, type: 3}
+  buttonClick: {fileID: 8300000, guid: 2dec6462bcc77c544b2d180f3f8dccf8, type: 3}
   audioSourceOne: {fileID: 1483406919}
   audioSourceTwo: {fileID: 1483406920}
   interactionDialogSound: {fileID: 150898965}
