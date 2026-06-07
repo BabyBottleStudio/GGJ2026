@@ -109,6 +109,7 @@ public class Breadcrumbs : MonoBehaviour
         spawnPosition += -transform.forward * 0.3f; // pomeranje da bude iza ledja
 
         currentBreadcrumb.transform.position = spawnPosition; // ovo ce da baguje jer ce odmah da ga instant pokupi
+        currentBreadcrumb.GetComponent<Rigidbody>().position = spawnPosition; // refaktorisati kasnije da radi bez get component
         // unhide
         coinValue.PrepareForPicking();
 

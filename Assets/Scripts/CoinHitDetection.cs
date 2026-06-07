@@ -43,7 +43,8 @@ public class CoinHitDetection : MonoBehaviour
         //Debug.Log("Coin sucsessfully fell");
         //EventRepository.InvokeOnCoinHitFloor();
         //audioSource.clip = pickupData.onGroundHitSFX;
-        audioSource.Play();
+        audioSource.PlayOneShot(audioSource.clip);
+        //gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
 
     }
 
