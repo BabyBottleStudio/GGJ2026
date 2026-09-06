@@ -20,6 +20,7 @@ public class LevelGemetry : ScriptableObject
     [Space(10)]
     [SerializeField] private List<GameObject> exitKeyGeometry;
     [SerializeField] private List<GameObject> exitKeyStandGeometry;
+    [SerializeField] private List<GameObject> maskHelpTotem;
     [Space(10)]
     [SerializeField] private List<GameObject> pickupGeometry;
     [Space(10)]
@@ -189,6 +190,15 @@ public class LevelGemetry : ScriptableObject
 
                 return null;
 
+            case "maskHelpTotem":
+                if (maskHelpTotem.Count == 1)
+                    return maskHelpTotem.FirstOrDefault();
+
+                if (maskHelpTotem.Count > 1)
+                    return maskHelpTotem.ElementAtOrDefault(Random.Range(0, maskHelpTotem.Count));
+
+                return null;
+
             case "pickup":
                 if (pickupGeometry.Count == 1)
                     return pickupGeometry.FirstOrDefault();
@@ -212,10 +222,5 @@ public class LevelGemetry : ScriptableObject
                 return null;
 
         }
-
-
     }
-
-
-
 }

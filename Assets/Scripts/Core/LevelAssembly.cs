@@ -123,7 +123,7 @@ public class LevelAssembly : MonoBehaviour
                     Instantiate(levelGeometry.GetRandomElement("exitKey"), pos + offset, Quaternion.identity);
 
                     Instantiate(levelGeometry.GetRandomElement("exitKeyStand"), pos + offset, Quaternion.identity);
-
+                    Instantiate(levelGeometry.GetRandomElement("maskHelpTotem"), pos + offset, Quaternion.identity);
 
                 }
                 else if (maze[i, j] == 'E')

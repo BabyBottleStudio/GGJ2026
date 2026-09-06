@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Localization Settings
   m_EditorClassIdentifier: 
   m_StartupSelectors:
+  - rid: 5544527776926138370
   - rid: 5544527776926138368
   - rid: 5544527776926138369
-  - rid: 5544527776926138370
   m_AvailableLocales:
     rid: 5544527776926138371
   m_AssetDatabase:
@@ -63,7 +63,7 @@ MonoBehaviour:
       type: {class: LocalizedStringDatabase, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_DefaultTableReference:
-          m_TableCollectionName: 
+          m_TableCollectionName: English (en)
         m_CustomTableProvider:
           rid: -2
         m_CustomTablePostprocessor:

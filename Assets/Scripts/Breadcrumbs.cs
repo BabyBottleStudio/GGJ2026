@@ -35,7 +35,6 @@ public class Breadcrumbs : MonoBehaviour
 
     public void PickBreadcrumb(object sender, PickupCollectedEventArgs e)
     {
-
         var newBreadcrumb = sender as GameObject;
 
         if (newBreadcrumb == null)
@@ -44,7 +43,6 @@ public class Breadcrumbs : MonoBehaviour
             return;
         }
 
-        
         // ako je obican, samo ga enqueue a ako je onaj vredniji, onda instanciraj u obj pool odgovarajuci broj komada
         Debug.Log($"Picked up {e.Value} value coin!");
 
@@ -72,14 +70,11 @@ public class Breadcrumbs : MonoBehaviour
                 breadcrumbs.AddToPool(obj);
                 obj.transform.parent = objPoolRoot;
 
-                var coinValue = obj.GetComponent<CoinValue>();
+                var coinValue = obj.GetComponent<CoinValue>(); 
                 //coinValue.SetReferences("Breadcrumbs");
                 coinValue.OnCollect();
-                
 
-               
                 obj.SetActive(false);
-
             }
         }
 

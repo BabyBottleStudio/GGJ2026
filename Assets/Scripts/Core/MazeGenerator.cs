@@ -37,9 +37,9 @@ public class MazeGenerator
 
         InitializeMazeData();
         GeneratePathways();
+        GeneratePickups();
         GeneratePlayer();
         //Console.WriteLine($"Deadends count: {deadEnds.Count}");
-        GeneratePickups();
         GenerateKeyAndExit();
     }
 
