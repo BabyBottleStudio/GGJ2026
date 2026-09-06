@@ -33,3 +33,10 @@ The latest build is compiled and playable on **[Itch.io](https://babybottlestudi
 *   **Engine:** Unity 6
 *   **Language:** C# (OOP, Events, Data Structures)
 *   **Version Control:** Git
+
+  
+## 📄 License & Copyright
+
+Copyright (c) 2026 Miljan Novčić. All rights reserved.
+
+This repository and its contents are strictly for portfolio demonstration and code review purposes. No part of this project (including code, architecture, or assets) may be downloaded, copied, modified, or distributed for personal, educational, or commercial use without explicit permission.
