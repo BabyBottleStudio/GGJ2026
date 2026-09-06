@@ -25,7 +25,7 @@ The goal of this project was to implement clean, scalable code, focus on archite
 ---
 
 ## 🕹️ Play the Game
-The latest build is compiled and playable on **[[Itch.io]([https://babybottlestudio.itch.io/in-the-forest)]**.
+The latest build is compiled and playable on **[Itch.io](https://babybottlestudio.itch.io/in-the-forest)**.
 
 ---
 
